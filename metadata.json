@@ -1,0 +1,6 @@
+{
+  "name": "Student Management System",
+  "description": "Enterprise-grade Student Management System with human-crafted UI, student records, course catalog, credit-weighted GPA engine, attendance tracker, and fee ledger.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

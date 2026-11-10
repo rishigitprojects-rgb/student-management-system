@@ -1,0 +1,114 @@
+{
+  "users": [
+    {
+      "id": "USR-ADMIN-1",
+      "username": "admin",
+      "displayName": "Dean of Academic Affairs",
+      "role": "ADMIN",
+      "department": "Office of the Registrar"
+    },
+    {
+      "id": "USR-FAC-1",
+      "username": "faculty",
+      "displayName": "Dr. Aisha Khan",
+      "role": "FACULTY",
+      "department": "Computer Science"
+    },
+    {
+      "id": "USR-STU-1",
+      "username": "student",
+      "displayName": "Ava Thompson",
+      "role": "STUDENT",
+      "studentId": "STU-2024-001",
+      "department": "Computer Science"
+    }
+  ],
+  "students": [
+    {
+      "studentId": "STU-2024-001",
+      "fullName": "Ava Thompson",
+      "email": "ava.thompson@campus.edu",
+      "phone": "+1-555-0181",
+      "dob": "2003-08-14",
+      "department": "Computer Science",
+      "batch": "2024",
+      "enrollmentDate": "2024-09-01",
+      "status": "Active",
+      "initialGpa": 3.82,
+      "address": "42 Maple Avenue, Boston",
+      "emergencyContact": "Mila Thompson - +1-555-0144",
+      "notes": "Strong in software engineering projects."
+    },
+    {
+      "studentId": "STU-2024-002",
+      "fullName": "Lucas Chen",
+      "email": "lucas.chen@campus.edu",
+      "phone": "+1-555-0187",
+      "dob": "2002-11-25",
+      "department": "Mechanical Engineering",
+      "batch": "2024",
+      "enrollmentDate": "2024-09-02",
+      "status": "Probation",
+      "initialGpa": 2.91,
+      "address": "18 River Street, Austin",
+      "emergencyContact": "Yun Chen - +1-555-0138",
+      "notes": "Needs academic coaching in applied math."
+    },
+    {
+      "studentId": "STU-2024-003",
+      "fullName": "Nora Patel",
+      "email": "nora.patel@campus.edu",
+      "phone": "+1-555-0190",
+      "dob": "2004-03-09",
+      "department": "Business Administration",
+      "batch": "2024",
+      "enrollmentDate": "2024-09-03",
+      "status": "Active",
+      "initialGpa": 3.56,
+      "address": "29 Cedar Lane, Chicago",
+      "emergencyContact": "Kiran Patel - +1-555-0112",
+      "notes": "Excellent leadership and presentation skills."
+    },
+    {
+      "{studentId:STU-2024-999,fullName:Sam Green,email:sam.green@campus.edu,phone: 1-555-7777,dob:2001-05-20,department:Data Science,batch:2024,enrollmentDate:2024-09-01,status:Active}": "",
+      "studentId": "STU-1794320037720"
+    },
+    {
+      "studentId": "STU-2024-1000",
+      "fullName": "Test Student",
+      "email": "test.student@campus.edu",
+      "phone": "+1-555-9000",
+      "dob": "2002-02-02",
+      "department": "Data Science",
+      "batch": "2024",
+      "enrollmentDate": "2024-09-01",
+      "status": "Active"
+    }
+  ],
+  "records": [
+    {
+      "id": "REC-101",
+      "userId": "USR-STU-1",
+      "studentId": "STU-2024-001",
+      "type": "student_profile",
+      "title": "Academic profile updated",
+      "createdAt": "2026-11-10T09:30:00.000Z"
+    },
+    {
+      "id": "REC-102",
+      "userId": "USR-FAC-1",
+      "studentId": "STU-2024-002",
+      "type": "attendance_alert",
+      "title": "Attendance warning logged",
+      "createdAt": "2026-11-10T10:05:00.000Z"
+    },
+    {
+      "id": "REC-103",
+      "userId": "USR-ADMIN-1",
+      "studentId": "STU-2024-003",
+      "type": "fee_record",
+      "title": "Fee ledger reviewed",
+      "createdAt": "2026-11-10T11:15:00.000Z"
+    }
+  ]
+}

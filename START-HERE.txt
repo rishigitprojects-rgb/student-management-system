@@ -1,0 +1,14 @@
+STUDENT MANAGEMENT SYSTEM - PORTABLE WINDOWS PACKAGE
+
+1. Extract the entire ZIP file to a folder.
+2. Double-click run-portable.bat.
+3. Your browser opens the app at http://127.0.0.1:3000.
+4. Keep the command window open while using the app. Close it to stop the local server.
+
+Node.js is bundled. No Node.js installation, npm install, or internet connection
+is needed to launch the prebuilt app.
+
+The src folder contains the editable application source. To rebuild from source,
+install Node.js and run npm install followed by npm run build.
+
+The bundled Node.js runtime is covered by NODE-LICENSE.txt.
