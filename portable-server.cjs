@@ -424,13 +424,13 @@ server.on('error', error => {
   process.exitCode = 1;
 });
 
-const host = process.env.HOST || '127.0.0.1';
+const host = process.env.HOST || '0.0.0.0';
 server.listen(port, host, () => {
   const displayHost = host === '0.0.0.0' ? 'localhost' : host;
   const url = `http://${displayHost}:${port}`;
   console.log(`Student Management System is running at ${url}`);
   console.log(`API endpoints available under ${url}/api`);
-  if (process.platform === 'win32' && host === '127.0.0.1') {
+  if (process.platform === 'win32') {
     const browser = spawn('cmd.exe', ['/d', '/c', 'start', '', url], {
       detached: true,
       stdio: 'ignore',
