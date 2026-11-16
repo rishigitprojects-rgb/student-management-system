@@ -49,12 +49,26 @@ Built by Development Team: **Rishi Aravindh**, **Sakthi Vignesh**, and **Rohith*
 
 ---
 
+## ☁️ Deploy to Render
+
+This repository includes a Render Blueprint at [`render.yaml`](./render.yaml). To deploy:
+
+1. Push the project to a GitHub repository.
+2. In Render, choose **New** > **Blueprint**, connect the repository, and approve the `student-management-system` web service.
+3. If you want the AI assistant enabled, add `OPENROUTER_API_KEY` in the Render service's environment settings. The app can be deployed without it; the assistant will report that it is not configured.
+4. Open the Render URL after the first deployment finishes.
+
+Render builds the Vite frontend and starts the bundled Node server, which serves both the app and its `/api` endpoints. The free service may sleep when idle, and its filesystem is ephemeral; server-side JSON changes may be lost after a restart or redeploy. The browser-side demo data remains in each user's browser.
+
+---
+
 ## 🛠 Available Scripts
 
 | Command | Action |
 | :--- | :--- |
 | `npm run dev` | Starts the Vite development server on `http://localhost:3000` |
 | `npm run build` | Builds optimized production static assets into the `dist/` directory |
+| `npm start` | Starts the production server (used by Render) |
 | `npm run preview` | Previews the production build locally |
 | `npm run api` | Starts the local API-enabled server that serves the app and exposes record/user endpoints |
 | `npm run lint` | Runs TypeScript compilation checks with zero emit errors |

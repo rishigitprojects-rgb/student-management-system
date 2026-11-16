@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
     "build": "vite build",
+    "start": "node portable-server.cjs",
     "preview": "vite preview",
     "api": "node portable-server.cjs",
     "clean": "rm -rf dist server.js",

@@ -174,9 +174,15 @@ function getProjectAssistantContext(input) {
 }
 
 async function handleProjectAssistant(request, response) {
-  const allowedOrigins = [`http://127.0.0.1:${port}`, `http://localhost:${port}`];
-  if (request.headers.origin && !allowedOrigins.includes(request.headers.origin)) {
-    sendJson(response, 403, { success: false, error: 'The project assistant only accepts requests from this local application.' });
+  const origin = request.headers.origin;
+  let originHost;
+  try {
+    originHost = origin ? new URL(origin).host : null;
+  } catch {
+    originHost = null;
+  }
+  if (origin && (!originHost || originHost !== request.headers.host)) {
+    sendJson(response, 403, { success: false, error: 'The project assistant only accepts requests from this application.' });
     return;
   }
 
@@ -418,15 +424,19 @@ server.on('error', error => {
   process.exitCode = 1;
 });
 
-server.listen(port, '127.0.0.1', () => {
-  const url = `http://127.0.0.1:${port}`;
+const host = process.env.HOST || '127.0.0.1';
+server.listen(port, host, () => {
+  const displayHost = host === '0.0.0.0' ? 'localhost' : host;
+  const url = `http://${displayHost}:${port}`;
   console.log(`Student Management System is running at ${url}`);
   console.log(`API endpoints available under ${url}/api`);
-  const browser = spawn('cmd.exe', ['/d', '/c', 'start', '', url], {
-    detached: true,
-    stdio: 'ignore',
-    windowsHide: true,
-  });
-  browser.on('error', error => console.warn('Could not open a browser automatically:', error.message));
-  browser.unref();
+  if (process.platform === 'win32' && host === '127.0.0.1') {
+    const browser = spawn('cmd.exe', ['/d', '/c', 'start', '', url], {
+      detached: true,
+      stdio: 'ignore',
+      windowsHide: true,
+    });
+    browser.on('error', error => console.warn('Could not open a browser automatically:', error.message));
+    browser.unref();
+  }
 });
