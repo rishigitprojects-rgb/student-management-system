@@ -4,7 +4,7 @@ const path = require('node:path');
 const { spawn } = require('node:child_process');
 
 const root = path.join(__dirname, 'dist');
-const port = Number(process.env.PORT || 3000);
+const PORT = Number(process.env.PORT || 3000);
 const dataFile = path.join(__dirname, 'server-data.json');
 const mimeTypes = {
   '.css': 'text/css; charset=utf-8',
@@ -240,7 +240,7 @@ async function handleProjectAssistant(request, response) {
       headers: {
         Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': `http://127.0.0.1:${port}`,
+        'HTTP-Referer': `http://127.0.0.1:${PORT}`,
         'X-Title': 'Student Management System ERP Assistant'
       },
       body: JSON.stringify({
@@ -420,14 +420,15 @@ const server = http.createServer(async (request, response) => {
 });
 
 server.on('error', error => {
-  console.error(`Unable to start the local server on port ${port}:`, error.message);
+  console.error(`Unable to start the local server on port ${PORT}:`, error.message);
   process.exitCode = 1;
 });
 
 const host = process.env.HOST || '0.0.0.0';
-server.listen(port, host, () => {
+server.listen(PORT, host, () => {
+  console.log(`Server running on port ${PORT}`);
   const displayHost = host === '0.0.0.0' ? 'localhost' : host;
-  const url = `http://${displayHost}:${port}`;
+  const url = `http://${displayHost}:${PORT}`;
   console.log(`Student Management System is running at ${url}`);
   console.log(`API endpoints available under ${url}/api`);
   if (process.platform === 'win32') {
