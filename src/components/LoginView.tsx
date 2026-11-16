@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { UserRole } from '../types';
 import { AuthService, AuthSession, DEMO_ACCOUNTS } from '../services/authService';
 import krceCollegeLogo from '../assets/images/krce_college_logo.webp';
+import hairlineEngineUrl from '../hairline/hairline-engine.js?url';
 import { 
   Lock, User, Eye, EyeOff, ArrowRight, CheckCircle2, 
   AlertCircle, Check, Info, Sparkles, Database, Layers
@@ -106,7 +107,7 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess }) => {
 
     if (!(window as any).Hairline) {
       const script = document.createElement('script');
-      script.src = '/assets/hairline-engine.js';
+      script.src = hairlineEngineUrl;
       script.async = true;
       script.onload = () => {
         if (!unmounted) mountTerrain();
