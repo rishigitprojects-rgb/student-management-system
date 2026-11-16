@@ -1,22 +1,17 @@
 const http = require('node:http');
-const { readFile, writeFile, stat } = require('node:fs/promises');
+const { readFile, writeFile } = require('node:fs/promises');
 const path = require('node:path');
 const { spawn } = require('node:child_process');
+const express = require('express');
 
 const root = path.join(__dirname, 'dist');
 const PORT = Number(process.env.PORT || 3000);
 const dataFile = path.join(__dirname, 'server-data.json');
-const mimeTypes = {
-  '.css': 'text/css; charset=utf-8',
-  '.html': 'text/html; charset=utf-8',
-  '.ico': 'image/x-icon',
-  '.jpg': 'image/jpeg',
-  '.js': 'text/javascript; charset=utf-8',
-  '.json': 'application/json; charset=utf-8',
-  '.png': 'image/png',
-  '.svg': 'image/svg+xml',
-  '.webp': 'image/webp',
-};
+const app = express();
+app.use(express.static(path.join(__dirname, 'dist')));
+app.get('*', (request, response) => {
+  response.sendFile(path.join(root, 'index.html'));
+});
 
 const seedData = {
   users: [
@@ -392,26 +387,7 @@ const server = http.createServer(async (request, response) => {
       return;
     }
 
-    const requestedPath = path.resolve(root, `.${pathname}`);
-    if (requestedPath !== root && !requestedPath.startsWith(`${root}${path.sep}`)) {
-      response.writeHead(403).end('Forbidden');
-      return;
-    }
-
-    let filePath = requestedPath;
-    try {
-      if (!(await stat(filePath)).isFile()) filePath = path.join(root, 'index.html');
-    } catch {
-      filePath = path.join(root, 'index.html');
-    }
-
-    const content = await readFile(filePath);
-    response.writeHead(200, {
-      'Content-Type': mimeTypes[path.extname(filePath).toLowerCase()] || 'application/octet-stream',
-      'Content-Length': content.length,
-      'X-Content-Type-Options': 'nosniff',
-    });
-    response.end(content);
+    app(request, response);
   } catch (error) {
     console.error('Unable to serve request:', error);
     if (!response.headersSent) response.writeHead(500);
