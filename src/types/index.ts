@@ -6,7 +6,7 @@
 export type StudentStatus = 'Active' | 'Probation' | 'Suspended' | 'Graduated';
 
 export interface Student {
-  studentId: string; // Primary Key (e.g. STU-2024-001)
+  studentId: string; // Primary Key (e.g. 8115U25AD064)
   fullName: string;
   email: string;
   phone: string;
@@ -25,6 +25,7 @@ export interface Course {
   courseCode: string; // Primary Key (e.g. CS-201)
   title: string;
   credits: number; // 1 to 4
+  semesterFee: number;
   department: string;
   faculty: string;
   capacity: number; // Seat cap

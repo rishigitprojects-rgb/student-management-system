@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Course, Enrollment, Student, AppUser } from '../types';
 import { BookOpen, UserPlus, Users, AlertCircle, Plus, Check, X, ShieldAlert } from 'lucide-react';
+import { formatINR } from '../utils/currency';
 
 interface CourseModuleProps {
   courses: Course[];
@@ -35,6 +36,7 @@ export const CourseModule: React.FC<CourseModuleProps> = ({
     courseCode: '',
     title: '',
     credits: 3,
+    semesterFee: 6000,
     department: 'Computer Science',
     faculty: '',
     capacity: 30,
@@ -82,8 +84,8 @@ export const CourseModule: React.FC<CourseModuleProps> = ({
     e.preventDefault();
     setCourseError(null);
 
-    if (!newCourse.courseCode.trim() || !newCourse.title.trim() || !newCourse.faculty.trim()) {
-      setCourseError('Please provide course code, title, and assigned faculty instructor.');
+    if (!newCourse.courseCode.trim() || !newCourse.title.trim() || !newCourse.faculty.trim() || newCourse.semesterFee < 0) {
+      setCourseError('Please provide course details, an assigned faculty instructor, and a valid semester fee.');
       return;
     }
 
@@ -96,6 +98,7 @@ export const CourseModule: React.FC<CourseModuleProps> = ({
         courseCode: '',
         title: '',
         credits: 3,
+        semesterFee: 6000,
         department: 'Computer Science',
         faculty: '',
         capacity: 30,
@@ -113,7 +116,7 @@ export const CourseModule: React.FC<CourseModuleProps> = ({
         <div>
           <h2 className="text-base font-semibold text-[#1E293B]">Course Catalog & Enrollment Engine</h2>
           <p className="text-xs text-slate-500">
-            Real-time seat cap validation and semester credit tracking
+            Indicative Tamil Nadu semester fees in INR with real-time seat cap validation
           </p>
         </div>
 
@@ -161,6 +164,9 @@ export const CourseModule: React.FC<CourseModuleProps> = ({
 
                   <h4 className="text-xs font-bold text-slate-900 leading-snug">{c.title}</h4>
                   <p className="text-[11px] text-slate-600 mt-0.5">{c.faculty} · {c.department}</p>
+                  <p className="text-[11px] font-semibold text-emerald-700 mt-1">
+                    Est. semester fee: {formatINR(c.semesterFee)}
+                  </p>
 
                   {/* Seat Cap Meter */}
                   <div className="mt-2.5 pt-2 border-t border-[#F1EFEA]">
@@ -200,6 +206,9 @@ export const CourseModule: React.FC<CourseModuleProps> = ({
                   <h3 className="text-sm font-bold text-slate-900 mt-0.5">{selectedCourse.title}</h3>
                   <p className="text-xs text-slate-600 mt-0.5">
                     Instructor: <span className="font-medium text-slate-800">{selectedCourse.faculty}</span> ({selectedCourse.department})
+                  </p>
+                  <p className="text-xs font-semibold text-emerald-700 mt-1">
+                    Estimated semester course fee: {formatINR(selectedCourse.semesterFee)}
                   </p>
                 </div>
 
@@ -465,23 +474,35 @@ export const CourseModule: React.FC<CourseModuleProps> = ({
                   </select>
                 </div>
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">Max Capacity (Seats)</label>
+                  <label className="block font-semibold text-slate-700 mb-1">Semester Fee (₹)</label>
                   <input
                     type="number"
-                    min={5}
-                    max={120}
-                    value={newCourse.capacity}
-                    onChange={(e) => setNewCourse({ ...newCourse, capacity: Number(e.target.value) })}
+                    min={0}
+                    step={100}
+                    value={newCourse.semesterFee}
+                    onChange={(e) => setNewCourse({ ...newCourse, semesterFee: Number(e.target.value) })}
                     className="w-full px-2.5 py-1.5 font-mono border border-[#E2E8F0] rounded-md"
                   />
                 </div>
               </div>
 
               <div>
+                <label className="block font-semibold text-slate-700 mb-1">Max Capacity (Seats)</label>
+                <input
+                  type="number"
+                  min={5}
+                  max={120}
+                  value={newCourse.capacity}
+                  onChange={(e) => setNewCourse({ ...newCourse, capacity: Number(e.target.value) })}
+                  className="w-full px-2.5 py-1.5 font-mono border border-[#E2E8F0] rounded-md"
+                />
+              </div>
+
+              <div>
                 <label className="block font-semibold text-slate-700 mb-1">Faculty Instructor</label>
                 <input
                   type="text"
-                  placeholder="e.g. Dr. Alan Turing"
+                  placeholder="e.g. Dr. Arulmozhi Selvan"
                   value={newCourse.faculty}
                   onChange={(e) => setNewCourse({ ...newCourse, faculty: e.target.value })}
                   className="w-full px-2.5 py-1.5 border border-[#E2E8F0] rounded-md"

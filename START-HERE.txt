@@ -4,6 +4,12 @@ STUDENT MANAGEMENT SYSTEM - PORTABLE WINDOWS PACKAGE
 2. Double-click run-portable.bat.
 3. Your browser opens the app at http://127.0.0.1:3000.
 4. Keep the command window open while using the app. Close it to stop the local server.
+5. To enable the ERP assistant, first rotate any API key shared in chat, then set
+   OPENROUTER_API_KEY in your Windows environment and restart the server. For example:
+   setx OPENROUTER_API_KEY "your-new-key"
+   Open a new command window after running setx. Do not put the key in source files.
+   The assistant sends chat text and an anonymous project summary to OpenRouter;
+   do not include student personal details or credentials in messages.
 
 Node.js is bundled. No Node.js installation, npm install, or internet connection
 is needed to launch the prebuilt app.

@@ -25,7 +25,7 @@ export const AttendanceTrendChart: React.FC<AttendanceTrendChartProps> = ({
 }) => {
   const [viewMode, setViewMode] = useState<ViewMode>('STUDENT');
   const [selectedStudentId, setSelectedStudentId] = useState<string>(
-    initialStudentId || (students[0]?.studentId ?? 'STU-2024-001')
+    initialStudentId || (students[0]?.studentId ?? '8115U25AD064')
   );
   const [selectedCourseCode, setSelectedCourseCode] = useState<string>(
     initialCourseCode || (courses[0]?.courseCode ?? 'CS-201')
@@ -170,11 +170,12 @@ export const AttendanceTrendChart: React.FC<AttendanceTrendChartProps> = ({
 
     // We track top representative students
     const keyStudents = [
-      { id: 'STU-2024-001', name: 'Eleanor Vance (CS)' },
-      { id: 'STU-2023-014', name: 'Amina Al-Mansoor (CS)' },
-      { id: 'STU-2024-002', name: 'Julian Hayes (ME)' },
-      { id: 'STU-2024-009', name: 'Devon Miller (EE)' },
-      { id: 'STU-2024-041', name: 'Mateo Morales (CS)' },
+      { id: '8115U25AD064', name: 'Kavin Rajendran (CS)' },
+      { id: '8115U25AD086', name: 'RISHI ARAVINDH L (CS)' },
+      { id: '8115U25AD088', name: 'ROHITH A (CS)' },
+      { id: '8115U25AD065', name: 'Nithya Ramesh (ME)' },
+      { id: '8115U25AD072', name: 'Santhosh Kumar (EE)' },
+      { id: '8115U25AD091', name: 'SAKTHI VIGNESH A (CS)' },
     ];
 
     // Build timeline points with cumulative rate up to each date
@@ -603,7 +604,7 @@ export const AttendanceTrendChart: React.FC<AttendanceTrendChartProps> = ({
 
               <Line
                 type="monotone"
-                dataKey="Eleanor Vance (CS)"
+                dataKey="Kavin Rajendran (CS)"
                 stroke="#1E293B"
                 strokeWidth={2}
                 dot={{ r: 3 }}
@@ -611,7 +612,7 @@ export const AttendanceTrendChart: React.FC<AttendanceTrendChartProps> = ({
               />
               <Line
                 type="monotone"
-                dataKey="Amina Al-Mansoor (CS)"
+                dataKey="RISHI ARAVINDH L (CS)"
                 stroke="#059669"
                 strokeWidth={2}
                 dot={{ r: 3 }}
@@ -619,7 +620,15 @@ export const AttendanceTrendChart: React.FC<AttendanceTrendChartProps> = ({
               />
               <Line
                 type="monotone"
-                dataKey="Julian Hayes (ME)"
+                dataKey="ROHITH A (CS)"
+                stroke="#7C3AED"
+                strokeWidth={2}
+                dot={{ r: 3 }}
+                connectNulls
+              />
+              <Line
+                type="monotone"
+                dataKey="Nithya Ramesh (ME)"
                 stroke="#2563EB"
                 strokeWidth={2}
                 dot={{ r: 3 }}
@@ -627,7 +636,7 @@ export const AttendanceTrendChart: React.FC<AttendanceTrendChartProps> = ({
               />
               <Line
                 type="monotone"
-                dataKey="Devon Miller (EE)"
+                dataKey="Santhosh Kumar (EE)"
                 stroke="#DC2626"
                 strokeWidth={2.5}
                 dot={{ r: 3.5 }}
@@ -635,7 +644,7 @@ export const AttendanceTrendChart: React.FC<AttendanceTrendChartProps> = ({
               />
               <Line
                 type="monotone"
-                dataKey="Mateo Morales (CS)"
+                dataKey="SAKTHI VIGNESH A (CS)"
                 stroke="#D97706"
                 strokeWidth={1.5}
                 strokeDasharray="4 2"

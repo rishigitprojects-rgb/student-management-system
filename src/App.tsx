@@ -10,6 +10,8 @@ import {
   Student, Course, Enrollment, Grade, AttendanceRecord, FeeLedgerEntry, 
   FeeReceipt, AppUser, StudentAcademicSummary, AcademicEvent 
 } from './types';
+import { AuthService, AuthSession } from './services/authService';
+import { LoginView } from './components/LoginView';
 import { Header } from './components/Header';
 import { QuickStats } from './components/QuickStats';
 import { StudentModule } from './components/StudentModule';
@@ -23,18 +25,23 @@ import { ReceiptModal } from './components/ReceiptModal';
 import { JavaArchitectureModal } from './components/JavaArchitectureModal';
 import { SqlConsoleModal } from './components/SqlConsoleModal';
 import { StudentPortalView } from './components/StudentPortalView';
+import { ProjectAssistant } from './components/ProjectAssistant';
 import { downloadProjectZip } from './utils/projectDownloader';
 
 export default function App() {
   const db = DatabaseService.getInstance();
+
+  // Authentication Session State
+  const [session, setSession] = useState<AuthSession | null>(() => AuthService.getCurrentSession());
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   // App Navigation & Search
   const [activeTab, setActiveTab] = useState<string>('students');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   // Domain Entity State
-  const [currentUser, setCurrentUser] = useState<AppUser>(db.getCurrentUser());
-  const [allUsers, setAllUsers] = useState<AppUser[]>(db.getUsers());
+  const [currentUser, setCurrentUser] = useState<AppUser>(() => session ? session.user : db.getCurrentUser());
+  const [allUsers, setAllUsers] = useState<AppUser[]>([]);
   const [students, setStudents] = useState<Student[]>([]);
   const [courses, setCourses] = useState<Course[]>([]);
   const [enrollments, setEnrollments] = useState<Enrollment[]>([]);
@@ -68,6 +75,29 @@ export default function App() {
   useEffect(() => {
     refreshData();
   }, [refreshData]);
+
+  // Handle successful login
+  const handleLoginSuccess = (newSession: AuthSession) => {
+    setIsLoggingOut(false);
+    setSession(newSession);
+    setCurrentUser(newSession.user);
+    db.setCurrentUser(newSession.user);
+    refreshData();
+    // Default to 'students' tab on login
+    setActiveTab('students');
+  };
+
+  // Handle logout
+  const handleLogout = () => {
+    if (isLoggingOut) return;
+    setIsLoggingOut(true);
+    const transitionDuration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 1 : 420;
+    window.setTimeout(() => {
+      AuthService.logout();
+      setSession(null);
+      setIsLoggingOut(false);
+    }, transitionDuration);
+  };
 
   // Handler Actions
   const handleAddStudent = (student: Student) => {
@@ -152,12 +182,26 @@ export default function App() {
   const handleUserSwitch = (user: AppUser) => {
     db.setCurrentUser(user);
     setCurrentUser(user);
+    if (session) {
+      const updatedSession: AuthSession = {
+        ...session,
+        user,
+        role: user.role
+      };
+      AuthService.setCurrentSession(updatedSession);
+      setSession(updatedSession);
+    }
   };
+
+  // If unauthenticated, display professional Login View
+  if (!session) {
+    return <LoginView onLoginSuccess={handleLoginSuccess} />;
+  }
 
   // Student portal active target
   const activeStudentProfile = currentUser.studentId
     ? students.find(s => s.studentId === currentUser.studentId) || students[0]
-    : null;
+    : students[0];
 
   // Selected student for transcript modal
   const transcriptStudent = transcriptStudentId ? students.find(s => s.studentId === transcriptStudentId) : null;
@@ -165,7 +209,8 @@ export default function App() {
   const transcriptAttendance = transcriptStudentId ? attendance.filter(a => a.studentId === transcriptStudentId) : [];
 
   return (
-    <div className="min-h-screen bg-[#F9F8F6] text-slate-800 flex flex-col font-sans">
+    <div className={`min-h-screen erp-grid-pattern text-slate-800 flex flex-col font-sans dashboard-shell${isLoggingOut ? ' dashboard-exit' : ''}`}>
+      
       {/* Top Navigation & Controls */}
       <Header
         activeTab={activeTab}
@@ -178,6 +223,7 @@ export default function App() {
         onOpenSqlConsole={() => setIsSqlConsoleOpen(true)}
         onOpenJavaArch={() => setIsJavaArchOpen(true)}
         onResetDb={handleResetDb}
+        onLogout={handleLogout}
       />
 
       {/* Main Viewport Container (Baseline 1440px desktop structure) */}
@@ -185,24 +231,26 @@ export default function App() {
         
         {/* If user switched to Student perspective and is on students profile tab */}
         {currentUser.role === 'STUDENT' && activeStudentProfile && activeTab === 'students' ? (
-          <StudentPortalView
-            currentUser={currentUser}
-            student={activeStudentProfile}
-            enrollments={enrollments.filter(e => e.studentId === activeStudentProfile.studentId && e.status === 'Enrolled')}
-            courses={courses}
-            grades={grades.filter(g => g.studentId === activeStudentProfile.studentId)}
-            attendance={attendance.filter(a => a.studentId === activeStudentProfile.studentId)}
-            feeLedger={feeLedgers.find(f => f.studentId === activeStudentProfile.studentId)}
-            receipts={receipts.filter(r => r.studentId === activeStudentProfile.studentId)}
-            cgpa={db.calculateStudentCGPA(activeStudentProfile.studentId).cgpa}
-            totalCredits={db.calculateStudentCGPA(activeStudentProfile.studentId).totalCredits}
-            attendanceRate={db.calculateStudentAttendanceRate(activeStudentProfile.studentId).rate}
-            onOpenTranscript={(id) => setTranscriptStudentId(id)}
-            onViewReceipt={(rcpt) => setSelectedReceipt(rcpt)}
-          />
+          <div key={activeTab} className="tab-content-enter">
+            <StudentPortalView
+              currentUser={currentUser}
+              student={activeStudentProfile}
+              enrollments={enrollments.filter(e => e.studentId === activeStudentProfile.studentId && e.status === 'Enrolled')}
+              courses={courses}
+              grades={grades.filter(g => g.studentId === activeStudentProfile.studentId)}
+              attendance={attendance.filter(a => a.studentId === activeStudentProfile.studentId)}
+              feeLedger={feeLedgers.find(f => f.studentId === activeStudentProfile.studentId)}
+              receipts={receipts.filter(r => r.studentId === activeStudentProfile.studentId)}
+              cgpa={db.calculateStudentCGPA(activeStudentProfile.studentId).cgpa}
+              totalCredits={db.calculateStudentCGPA(activeStudentProfile.studentId).totalCredits}
+              attendanceRate={db.calculateStudentAttendanceRate(activeStudentProfile.studentId).rate}
+              onOpenTranscript={(id) => setTranscriptStudentId(id)}
+              onViewReceipt={(rcpt) => setSelectedReceipt(rcpt)}
+            />
+          </div>
         ) : (
           <>
-            {/* Quick Stats Metric Cards Row */}
+            {/* Quick Stats Bento Metric Cards Row */}
             <QuickStats
               summaries={summaries}
               courses={courses}
@@ -210,72 +258,74 @@ export default function App() {
             />
 
             {/* Active Feature Module */}
-            {activeTab === 'students' && (
-              <StudentModule
-                summaries={summaries}
-                searchQuery={searchQuery}
-                currentUser={currentUser}
-                onAddStudent={handleAddStudent}
-                onUpdateStudent={handleUpdateStudent}
-                onDeleteStudent={handleDeleteStudent}
-                onOpenTranscript={(id) => setTranscriptStudentId(id)}
-              />
-            )}
+            <div key={activeTab} className="tab-content-enter">
+              {activeTab === 'students' && (
+                <StudentModule
+                  summaries={summaries}
+                  searchQuery={searchQuery}
+                  currentUser={currentUser}
+                  onAddStudent={handleAddStudent}
+                  onUpdateStudent={handleUpdateStudent}
+                  onDeleteStudent={handleDeleteStudent}
+                  onOpenTranscript={(id) => setTranscriptStudentId(id)}
+                />
+              )}
 
-            {activeTab === 'courses' && (
-              <CourseModule
-                courses={courses}
-                enrollments={enrollments}
-                students={students}
-                currentUser={currentUser}
-                onEnrollStudent={handleEnrollStudent}
-                onDropEnrollment={handleDropEnrollment}
-                onAddCourse={handleAddCourse}
-              />
-            )}
+              {activeTab === 'courses' && (
+                <CourseModule
+                  courses={courses}
+                  enrollments={enrollments}
+                  students={students}
+                  currentUser={currentUser}
+                  onEnrollStudent={handleEnrollStudent}
+                  onDropEnrollment={handleDropEnrollment}
+                  onAddCourse={handleAddCourse}
+                />
+              )}
 
-            {activeTab === 'grades' && (
-              <GradeModule
-                grades={grades}
-                students={students}
-                courses={courses}
-                currentUser={currentUser}
-                onSaveGrade={handleSaveGrade}
-                onOpenTranscript={(id) => setTranscriptStudentId(id)}
-              />
-            )}
+              {activeTab === 'grades' && (
+                <GradeModule
+                  grades={grades}
+                  students={students}
+                  courses={courses}
+                  currentUser={currentUser}
+                  onSaveGrade={handleSaveGrade}
+                  onOpenTranscript={(id) => setTranscriptStudentId(id)}
+                />
+              )}
 
-            {activeTab === 'attendance' && (
-              <AttendanceModule
-                attendanceRecords={attendance}
-                students={students}
-                courses={courses}
-                currentUser={currentUser}
-                onLogAttendance={handleLogAttendance}
-                onDeleteAttendance={handleDeleteAttendance}
-                calculateStudentRate={(studentId, courseCode) => db.calculateStudentAttendanceRate(studentId, courseCode)}
-              />
-            )}
+              {activeTab === 'attendance' && (
+                <AttendanceModule
+                  attendanceRecords={attendance}
+                  students={students}
+                  courses={courses}
+                  currentUser={currentUser}
+                  onLogAttendance={handleLogAttendance}
+                  onDeleteAttendance={handleDeleteAttendance}
+                  calculateStudentRate={(studentId, courseCode) => db.calculateStudentAttendanceRate(studentId, courseCode)}
+                />
+              )}
 
-            {activeTab === 'fees' && (
-              <FeeLedgerModule
-                feeLedgers={feeLedgers}
-                receipts={receipts}
-                students={students}
-                currentUser={currentUser}
-                onRecordPayment={handleRecordPayment}
-                onViewReceipt={(rcpt) => setSelectedReceipt(rcpt)}
-              />
-            )}
+              {activeTab === 'fees' && (
+                <FeeLedgerModule
+                  feeLedgers={feeLedgers}
+                  receipts={receipts}
+                  students={students}
+                  currentUser={currentUser}
+                  onRecordPayment={handleRecordPayment}
+                  onViewReceipt={(rcpt) => setSelectedReceipt(rcpt)}
+                />
+              )}
 
-            {activeTab === 'calendar' && (
-              <CalendarModule
-                events={academicEvents}
-                currentUser={currentUser}
-                onAddEvent={handleAddEvent}
-                onDeleteEvent={handleDeleteEvent}
-              />
-            )}
+              {activeTab === 'calendar' && (
+                <CalendarModule
+                  events={academicEvents}
+                  currentUser={currentUser}
+                  onAddEvent={handleAddEvent}
+                  onDeleteEvent={handleDeleteEvent}
+                />
+              )}
+            </div>
           </>
         )}
       </main>
@@ -313,13 +363,13 @@ export default function App() {
       {/* Fixed Corner Team Badge */}
       <aside 
         aria-label="Development Team"
-        className="no-print fixed bottom-3 right-3 z-40 bg-white/95 backdrop-blur-xs border border-[#CBD5E1] rounded-md px-3 py-1.5 shadow-sm text-xs text-slate-700 flex items-center gap-2 hover:border-slate-400 transition-colors"
+        className="no-print fixed bottom-3 right-3 z-40 bg-white/95 backdrop-blur-xs border border-[#CBD5E1] rounded-md px-3 py-1.5 shadow-2xs text-xs text-slate-700 flex items-center gap-2 hover:border-slate-400 transition-colors"
       >
-        <div className="flex items-center gap-1.5 font-semibold text-[#1E293B]">
+        <div className="flex items-center gap-1.5 font-semibold text-[#0F172A]">
           <Users className="w-3.5 h-3.5 text-slate-500" />
           <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500">Team:</span>
         </div>
-        <div className="flex items-center gap-1.5 text-slate-800 font-medium">
+        <div className="flex items-center gap-1.5 text-slate-800 font-medium font-sans">
           <span>Rishi Aravindh</span>
           <span className="text-slate-300">·</span>
           <span>Sakthi Vignesh</span>
@@ -329,10 +379,10 @@ export default function App() {
       </aside>
 
       {/* Quiet Footer */}
-      <footer className="no-print mt-auto border-t border-[#E2E8F0] py-4 bg-[#F9F8F6]">
+      <footer className="no-print mt-auto border-t border-[#E2E8F0] py-4 bg-white/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-2.5 text-xs text-slate-500">
           <div>
-            <span>Student Management System</span>
+            <span className="font-semibold text-slate-700">Student Management System ERP</span>
             <span aria-hidden="true" className="mx-2">·</span>
             <span>Principal Java Architecture & Relational H2 Engine</span>
           </div>
@@ -346,7 +396,7 @@ export default function App() {
             <span className="font-semibold text-slate-800">Rohith</span>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 font-mono text-[11px]">
             <button
               onClick={async () => {
                 try {
@@ -363,13 +413,13 @@ export default function App() {
             </button>
             <button
               onClick={() => setIsJavaArchOpen(true)}
-              className="hover:text-slate-800 transition-colors"
+              className="hover:text-slate-800 transition-colors cursor-pointer"
             >
-              JPA & Spring Specification
+              JPA &amp; Architecture
             </button>
             <button
               onClick={() => setIsSqlConsoleOpen(true)}
-              className="hover:text-slate-800 transition-colors"
+              className="hover:text-slate-800 transition-colors cursor-pointer"
             >
               H2 Console
             </button>
@@ -377,6 +427,21 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      <ProjectAssistant
+        context={{
+          activeSection: activeTab,
+          studentCount: students.length,
+          courseCatalog: courses.map(course => ({
+            title: course.title,
+            semesterFee: course.semesterFee
+          })),
+          averageAttendance: summaries.length
+            ? Math.round(summaries.reduce((total, summary) => total + summary.attendanceRate, 0) / summaries.length)
+            : 0,
+          outstandingBalanceINR: feeLedgers.reduce((total, ledger) => total + ledger.balanceAmount, 0)
+        }}
+      />
     </div>
   );
 }

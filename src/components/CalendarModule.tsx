@@ -364,7 +364,7 @@ export const CalendarModule: React.FC<CalendarModuleProps> = ({
 
       {/* Main Content Area */}
       {viewFormat === 'MONTH' ? (
-        <div className="bg-white border border-[#E2E8F0] rounded-md overflow-hidden">
+        <div key={viewFormat} className="calendar-view-enter bg-white border border-[#E2E8F0] rounded-md overflow-hidden">
           {/* Month Header & Controls */}
           <div className="p-4 border-b border-[#E2E8F0] flex items-center justify-between bg-[#FAF8F5]">
             <div className="flex items-center gap-3">
@@ -483,7 +483,7 @@ export const CalendarModule: React.FC<CalendarModuleProps> = ({
         </div>
       ) : (
         /* Agenda / Timeline Schedule View */
-        <div className="bg-white border border-[#E2E8F0] rounded-md overflow-hidden">
+        <div key={viewFormat} className="calendar-view-enter bg-white border border-[#E2E8F0] rounded-md overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs border-collapse">
               <thead>

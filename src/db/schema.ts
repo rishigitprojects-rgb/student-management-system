@@ -1,133 +1,32 @@
 import { Student, Course, Enrollment, Grade, AttendanceRecord, FeeLedgerEntry, FeeReceipt, AppUser, AcademicEvent } from '../types';
+import tamilStudentsCsv from '../../tamil_students.csv?raw';
 
-export const INITIAL_STUDENTS: Student[] = [
-  {
-    studentId: 'STU-2024-001',
-    fullName: 'Eleanor Vance',
-    email: 'e.vance@university.edu',
-    phone: '+1 (555) 234-8901',
-    dob: '2004-03-15',
-    department: 'Computer Science',
-    batch: '2024',
-    enrollmentDate: '2024-08-20',
-    status: 'Active',
-    address: '412 Academic Way, Suite 3B',
-    emergencyContact: 'Marcus Vance (+1 555-882-9901)',
-    notes: 'Dean\'s Honor Roll candidate. Department representative.'
-  },
-  {
-    studentId: 'STU-2024-002',
-    fullName: 'Julian Hayes',
-    email: 'j.hayes@university.edu',
-    phone: '+1 (555) 345-6712',
-    dob: '2003-11-22',
-    department: 'Mechanical Engineering',
-    batch: '2024',
-    enrollmentDate: '2024-08-20',
-    status: 'Active',
-    address: '89 Foundry Road, Apt 12',
-    emergencyContact: 'Claire Hayes (+1 555-492-3310)',
-    notes: 'SAE Formula Student lead designer.'
-  },
-  {
-    studentId: 'STU-2023-014',
-    fullName: 'Amina Al-Mansoor',
-    email: 'a.mansoor@university.edu',
-    phone: '+1 (555) 456-7823',
-    dob: '2003-07-09',
-    department: 'Computer Science',
-    batch: '2023',
-    enrollmentDate: '2023-08-15',
-    status: 'Active',
-    address: '704 Oakridge Terrace',
-    emergencyContact: 'Tariq Al-Mansoor (+1 555-321-9988)',
-    notes: 'Undergraduate research fellow in Distributed Systems.'
-  },
-  {
-    studentId: 'STU-2024-009',
-    fullName: 'Devon K. Miller',
-    email: 'd.miller@university.edu',
-    phone: '+1 (555) 567-8934',
-    dob: '2004-05-18',
-    department: 'Electrical Engineering',
-    batch: '2024',
-    enrollmentDate: '2024-08-20',
-    status: 'Probation',
-    address: '15 Beacon Hill Blvd',
-    emergencyContact: 'Robert Miller (+1 555-667-1122)',
-    notes: 'Academic counseling review scheduled for mid-term.'
-  },
-  {
-    studentId: 'STU-2023-028',
-    fullName: 'Siddharth Rao',
-    email: 's.rao@university.edu',
-    phone: '+1 (555) 678-9045',
-    dob: '2003-09-30',
-    department: 'Mathematics & Data',
-    batch: '2023',
-    enrollmentDate: '2023-08-15',
-    status: 'Active',
-    address: '22 Campus Common',
-    emergencyContact: 'Priya Rao (+1 555-778-9900)',
-    notes: 'Peer tutor for Linear Algebra.'
-  },
-  {
-    studentId: 'STU-2025-003',
-    fullName: 'Clara Montgomery',
-    email: 'c.montgomery@university.edu',
-    phone: '+1 (555) 789-0156',
-    dob: '2005-01-14',
-    department: 'Business Administration',
-    batch: '2025',
-    enrollmentDate: '2025-01-10',
-    status: 'Active',
-    address: '108 University Court',
-    emergencyContact: 'David Montgomery (+1 555-889-2233)',
-    notes: 'Student Government Treasurer.'
-  },
-  {
-    studentId: 'STU-2024-041',
-    fullName: 'Mateo Morales',
-    email: 'm.morales@university.edu',
-    phone: '+1 (555) 890-1267',
-    dob: '2004-08-04',
-    department: 'Computer Science',
-    batch: '2024',
-    enrollmentDate: '2024-08-20',
-    status: 'Active',
-    address: '331 West Pine Ave',
-    emergencyContact: 'Elena Morales (+1 555-990-4455)',
-    notes: 'Cybersecurity club president.'
-  },
-  {
-    studentId: 'STU-2023-055',
-    fullName: 'Fiona Gallagher-Reid',
-    email: 'f.reid@university.edu',
-    phone: '+1 (555) 901-2378',
-    dob: '2003-04-12',
-    department: 'Electrical Engineering',
-    batch: '2023',
-    enrollmentDate: '2023-08-15',
-    status: 'Suspended',
-    address: '614 Harbor Light St',
-    emergencyContact: 'Grace Reid (+1 555-112-3344)',
-    notes: 'Administrative leave of absence for semester.'
-  },
-  {
-    studentId: 'STU-2022-005',
-    fullName: 'Liam Chen',
-    email: 'l.chen@university.edu',
-    phone: '+1 (555) 012-3489',
-    dob: '2002-12-05',
-    department: 'Mathematics & Data',
-    batch: '2022',
-    enrollmentDate: '2022-08-18',
-    status: 'Graduated',
-    address: '50 Riverside Walk',
-    emergencyContact: 'Wei Chen (+1 555-223-4455)',
-    notes: 'Summa Cum Laude honors. Admitted to MS program.'
-  }
-];
+export const INITIAL_STUDENTS: Student[] = tamilStudentsCsv
+  .trim()
+  .split(/\r?\n/)
+  .slice(1)
+  .map(line => {
+    const [
+      studentId, fullName, email, phone, dob, department, batch, enrollmentDate,
+      status, initialGpa, address, emergencyContact, notes
+    ] = line.split(',');
+
+    return {
+      studentId,
+      fullName,
+      email,
+      phone,
+      dob,
+      department,
+      batch,
+      enrollmentDate,
+      status: status as Student['status'],
+      initialGpa: Number(initialGpa),
+      address,
+      emergencyContact,
+      notes
+    };
+  });
 
 export const INITIAL_COURSES: Course[] = [
   {
@@ -135,7 +34,8 @@ export const INITIAL_COURSES: Course[] = [
     title: 'Data Structures & Algorithms',
     credits: 4,
     department: 'Computer Science',
-    faculty: 'Dr. Arthur Pendelton',
+    faculty: 'Dr. Arulmozhi Selvan',
+    semesterFee: 8000,
     capacity: 35,
     enrolledCount: 3,
     semester: 'Fall 2024',
@@ -146,7 +46,8 @@ export const INITIAL_COURSES: Course[] = [
     title: 'Database Management Systems',
     credits: 3,
     department: 'Computer Science',
-    faculty: 'Prof. Margaret Lin',
+    faculty: 'Prof. Revathi Srinivasan',
+    semesterFee: 6000,
     capacity: 30,
     enrolledCount: 3,
     semester: 'Fall 2024',
@@ -157,7 +58,8 @@ export const INITIAL_COURSES: Course[] = [
     title: 'Thermodynamics & Heat Transfer',
     credits: 4,
     department: 'Mechanical Engineering',
-    faculty: 'Dr. Robert Stirling',
+    faculty: 'Dr. Saravanan Murugan',
+    semesterFee: 8000,
     capacity: 25,
     enrolledCount: 1,
     semester: 'Fall 2024',
@@ -168,7 +70,8 @@ export const INITIAL_COURSES: Course[] = [
     title: 'Circuits, Signals & Systems',
     credits: 4,
     department: 'Electrical Engineering',
-    faculty: 'Prof. Harold Nyquist',
+    faculty: 'Prof. Ilango Vetrivel',
+    semesterFee: 8000,
     capacity: 28,
     enrolledCount: 2,
     semester: 'Fall 2024',
@@ -179,7 +82,8 @@ export const INITIAL_COURSES: Course[] = [
     title: 'Linear Algebra & Numerical Methods',
     credits: 3,
     department: 'Mathematics & Data',
-    faculty: 'Dr. Katherine Gödel',
+    faculty: 'Dr. Nandhini Kannan',
+    semesterFee: 6000,
     capacity: 40,
     enrolledCount: 2,
     semester: 'Fall 2024',
@@ -190,7 +94,8 @@ export const INITIAL_COURSES: Course[] = [
     title: 'Financial Accounting & Reporting',
     credits: 3,
     department: 'Business Administration',
-    faculty: 'Prof. Evelyn Keynes',
+    faculty: 'Prof. Kavitha Rajan',
+    semesterFee: 6000,
     capacity: 35,
     enrolledCount: 1,
     semester: 'Fall 2024',
@@ -201,7 +106,8 @@ export const INITIAL_COURSES: Course[] = [
     title: 'Software Architecture & Design Patterns',
     credits: 3,
     department: 'Computer Science',
-    faculty: 'Dr. Diane Knuth',
+    faculty: 'Dr. Meena Balasubramanian',
+    semesterFee: 6000,
     capacity: 25,
     enrolledCount: 2,
     semester: 'Fall 2024',
@@ -212,7 +118,7 @@ export const INITIAL_COURSES: Course[] = [
 export const INITIAL_ENROLLMENTS: Enrollment[] = [
   {
     enrollmentId: 'ENR-1001',
-    studentId: 'STU-2024-001',
+    studentId: '8115U25AD064',
     courseCode: 'CS-201',
     semester: 'Fall 2024',
     enrollmentDate: '2024-08-25',
@@ -220,7 +126,7 @@ export const INITIAL_ENROLLMENTS: Enrollment[] = [
   },
   {
     enrollmentId: 'ENR-1002',
-    studentId: 'STU-2024-001',
+    studentId: '8115U25AD064',
     courseCode: 'CS-304',
     semester: 'Fall 2024',
     enrollmentDate: '2024-08-25',
@@ -228,7 +134,7 @@ export const INITIAL_ENROLLMENTS: Enrollment[] = [
   },
   {
     enrollmentId: 'ENR-1003',
-    studentId: 'STU-2024-001',
+    studentId: '8115U25AD064',
     courseCode: 'MATH-240',
     semester: 'Fall 2024',
     enrollmentDate: '2024-08-26',
@@ -236,7 +142,7 @@ export const INITIAL_ENROLLMENTS: Enrollment[] = [
   },
   {
     enrollmentId: 'ENR-1004',
-    studentId: 'STU-2024-002',
+    studentId: '8115U25AD065',
     courseCode: 'ME-210',
     semester: 'Fall 2024',
     enrollmentDate: '2024-08-25',
@@ -244,7 +150,7 @@ export const INITIAL_ENROLLMENTS: Enrollment[] = [
   },
   {
     enrollmentId: 'ENR-1005',
-    studentId: 'STU-2023-014',
+    studentId: '8115U25AD088',
     courseCode: 'CS-201',
     semester: 'Fall 2024',
     enrollmentDate: '2024-08-24',
@@ -252,7 +158,7 @@ export const INITIAL_ENROLLMENTS: Enrollment[] = [
   },
   {
     enrollmentId: 'ENR-1006',
-    studentId: 'STU-2023-014',
+    studentId: '8115U25AD088',
     courseCode: 'CS-304',
     semester: 'Fall 2024',
     enrollmentDate: '2024-08-24',
@@ -260,7 +166,7 @@ export const INITIAL_ENROLLMENTS: Enrollment[] = [
   },
   {
     enrollmentId: 'ENR-1007',
-    studentId: 'STU-2023-014',
+    studentId: '8115U25AD088',
     courseCode: 'CS-480',
     semester: 'Fall 2024',
     enrollmentDate: '2024-08-24',
@@ -268,7 +174,7 @@ export const INITIAL_ENROLLMENTS: Enrollment[] = [
   },
   {
     enrollmentId: 'ENR-1008',
-    studentId: 'STU-2024-009',
+    studentId: '8115U25AD072',
     courseCode: 'EE-215',
     semester: 'Fall 2024',
     enrollmentDate: '2024-08-25',
@@ -276,7 +182,7 @@ export const INITIAL_ENROLLMENTS: Enrollment[] = [
   },
   {
     enrollmentId: 'ENR-1009',
-    studentId: 'STU-2023-028',
+    studentId: '8115U25AD089',
     courseCode: 'MATH-240',
     semester: 'Fall 2024',
     enrollmentDate: '2024-08-25',
@@ -284,7 +190,7 @@ export const INITIAL_ENROLLMENTS: Enrollment[] = [
   },
   {
     enrollmentId: 'ENR-1010',
-    studentId: 'STU-2025-003',
+    studentId: '8115U25AD090',
     courseCode: 'BA-105',
     semester: 'Fall 2024',
     enrollmentDate: '2025-01-12',
@@ -292,7 +198,7 @@ export const INITIAL_ENROLLMENTS: Enrollment[] = [
   },
   {
     enrollmentId: 'ENR-1011',
-    studentId: 'STU-2024-041',
+    studentId: '8115U25AD091',
     courseCode: 'CS-201',
     semester: 'Fall 2024',
     enrollmentDate: '2024-08-25',
@@ -300,7 +206,7 @@ export const INITIAL_ENROLLMENTS: Enrollment[] = [
   },
   {
     enrollmentId: 'ENR-1012',
-    studentId: 'STU-2024-041',
+    studentId: '8115U25AD091',
     courseCode: 'CS-304',
     semester: 'Fall 2024',
     enrollmentDate: '2024-08-25',
@@ -308,7 +214,7 @@ export const INITIAL_ENROLLMENTS: Enrollment[] = [
   },
   {
     enrollmentId: 'ENR-1013',
-    studentId: 'STU-2023-055',
+    studentId: '8115U25AD092',
     courseCode: 'EE-215',
     semester: 'Fall 2024',
     enrollmentDate: '2024-08-25',
@@ -319,7 +225,7 @@ export const INITIAL_ENROLLMENTS: Enrollment[] = [
 export const INITIAL_GRADES: Grade[] = [
   {
     gradeId: 'GRD-5001',
-    studentId: 'STU-2024-001',
+    studentId: '8115U25AD064',
     courseCode: 'CS-201',
     semester: 'Fall 2024',
     assignmentScore: 94,
@@ -332,7 +238,7 @@ export const INITIAL_GRADES: Grade[] = [
   },
   {
     gradeId: 'GRD-5002',
-    studentId: 'STU-2024-001',
+    studentId: '8115U25AD064',
     courseCode: 'CS-304',
     semester: 'Fall 2024',
     assignmentScore: 90,
@@ -345,7 +251,7 @@ export const INITIAL_GRADES: Grade[] = [
   },
   {
     gradeId: 'GRD-5003',
-    studentId: 'STU-2024-001',
+    studentId: '8115U25AD064',
     courseCode: 'MATH-240',
     semester: 'Fall 2024',
     assignmentScore: 96,
@@ -358,7 +264,7 @@ export const INITIAL_GRADES: Grade[] = [
   },
   {
     gradeId: 'GRD-5004',
-    studentId: 'STU-2024-002',
+    studentId: '8115U25AD065',
     courseCode: 'ME-210',
     semester: 'Fall 2024',
     assignmentScore: 84,
@@ -371,7 +277,7 @@ export const INITIAL_GRADES: Grade[] = [
   },
   {
     gradeId: 'GRD-5005',
-    studentId: 'STU-2023-014',
+    studentId: '8115U25AD088',
     courseCode: 'CS-201',
     semester: 'Fall 2024',
     assignmentScore: 98,
@@ -384,7 +290,7 @@ export const INITIAL_GRADES: Grade[] = [
   },
   {
     gradeId: 'GRD-5006',
-    studentId: 'STU-2023-014',
+    studentId: '8115U25AD088',
     courseCode: 'CS-304',
     semester: 'Fall 2024',
     assignmentScore: 95,
@@ -397,7 +303,7 @@ export const INITIAL_GRADES: Grade[] = [
   },
   {
     gradeId: 'GRD-5007',
-    studentId: 'STU-2023-014',
+    studentId: '8115U25AD088',
     courseCode: 'CS-480',
     semester: 'Fall 2024',
     assignmentScore: 92,
@@ -410,7 +316,7 @@ export const INITIAL_GRADES: Grade[] = [
   },
   {
     gradeId: 'GRD-5008',
-    studentId: 'STU-2024-009',
+    studentId: '8115U25AD072',
     courseCode: 'EE-215',
     semester: 'Fall 2024',
     assignmentScore: 68,
@@ -423,7 +329,7 @@ export const INITIAL_GRADES: Grade[] = [
   },
   {
     gradeId: 'GRD-5009',
-    studentId: 'STU-2023-028',
+    studentId: '8115U25AD089',
     courseCode: 'MATH-240',
     semester: 'Fall 2024',
     assignmentScore: 95,
@@ -436,7 +342,7 @@ export const INITIAL_GRADES: Grade[] = [
   },
   {
     gradeId: 'GRD-5010',
-    studentId: 'STU-2025-003',
+    studentId: '8115U25AD090',
     courseCode: 'BA-105',
     semester: 'Fall 2024',
     assignmentScore: 88,
@@ -449,7 +355,7 @@ export const INITIAL_GRADES: Grade[] = [
   },
   {
     gradeId: 'GRD-5011',
-    studentId: 'STU-2024-041',
+    studentId: '8115U25AD091',
     courseCode: 'CS-201',
     semester: 'Fall 2024',
     assignmentScore: 85,
@@ -462,7 +368,7 @@ export const INITIAL_GRADES: Grade[] = [
   },
   {
     gradeId: 'GRD-5012',
-    studentId: 'STU-2024-041',
+    studentId: '8115U25AD091',
     courseCode: 'CS-304',
     semester: 'Fall 2024',
     assignmentScore: 82,
@@ -476,85 +382,85 @@ export const INITIAL_GRADES: Grade[] = [
 ];
 
 export const INITIAL_ATTENDANCE: AttendanceRecord[] = [
-  // STU-2024-001 Eleanor Vance (Consistent high attendance: 95%)
-  { attendanceId: 'ATT-001', studentId: 'STU-2024-001', courseCode: 'CS-201', date: '2024-09-09', status: 'Present', topic: 'Course Orientation & Complexity Analysis' },
-  { attendanceId: 'ATT-002', studentId: 'STU-2024-001', courseCode: 'CS-201', date: '2024-09-23', status: 'Present', topic: 'Linked Lists & Dynamic Array Amortization' },
-  { attendanceId: 'ATT-003', studentId: 'STU-2024-001', courseCode: 'CS-201', date: '2024-10-07', status: 'Present', topic: 'Stacks, Queues & Deques' },
-  { attendanceId: 'ATT-004', studentId: 'STU-2024-001', courseCode: 'CS-201', date: '2024-10-21', status: 'Present', topic: 'Binary Search Trees & Treaps' },
-  { attendanceId: 'ATT-005', studentId: 'STU-2024-001', courseCode: 'CS-201', date: '2024-11-04', status: 'Present', topic: 'Balanced Binary Search Trees' },
-  { attendanceId: 'ATT-006', studentId: 'STU-2024-001', courseCode: 'CS-201', date: '2024-11-06', status: 'Present', topic: 'AVL Tree Rotations' },
-  { attendanceId: 'ATT-007', studentId: 'STU-2024-001', courseCode: 'CS-201', date: '2024-11-11', status: 'Present', topic: 'Red-Black Tree Invariants' },
-  { attendanceId: 'ATT-008', studentId: 'STU-2024-001', courseCode: 'CS-201', date: '2024-11-13', status: 'Late', topic: 'Heaps & Priority Queues' },
-  { attendanceId: 'ATT-009', studentId: 'STU-2024-001', courseCode: 'CS-201', date: '2024-11-18', status: 'Present', topic: 'Dijkstra Shortest Path' },
-  { attendanceId: 'ATT-010', studentId: 'STU-2024-001', courseCode: 'CS-201', date: '2024-11-25', status: 'Present', topic: 'Dynamic Programming & Memoization' },
-  { attendanceId: 'ATT-011', studentId: 'STU-2024-001', courseCode: 'CS-304', date: '2024-09-10', status: 'Present', topic: 'Database Architecture & ER Modeling' },
-  { attendanceId: 'ATT-012', studentId: 'STU-2024-001', courseCode: 'CS-304', date: '2024-10-08', status: 'Present', topic: 'Relational Calculus & SQL Engines' },
-  { attendanceId: 'ATT-013', studentId: 'STU-2024-001', courseCode: 'CS-304', date: '2024-11-05', status: 'Present', topic: 'Relational Algebra & Tuple Calculus' },
-  { attendanceId: 'ATT-014', studentId: 'STU-2024-001', courseCode: 'CS-304', date: '2024-11-07', status: 'Present', topic: 'Normal Forms (1NF through BCNF)' },
-  { attendanceId: 'ATT-015', studentId: 'STU-2024-001', courseCode: 'CS-304', date: '2024-11-12', status: 'Late', topic: 'B+ Tree Indexing Structures' },
-  { attendanceId: 'ATT-016', studentId: 'STU-2024-001', courseCode: 'MATH-240', date: '2024-09-16', status: 'Present', topic: 'Matrix Spaces & Gaussian Elimination' },
-  { attendanceId: 'ATT-017', studentId: 'STU-2024-001', courseCode: 'MATH-240', date: '2024-10-14', status: 'Present', topic: 'Gram-Schmidt & QR Factorization' },
-  { attendanceId: 'ATT-018', studentId: 'STU-2024-001', courseCode: 'MATH-240', date: '2024-11-04', status: 'Present', topic: 'Eigenvalues & Diagonalization' },
-  { attendanceId: 'ATT-019', studentId: 'STU-2024-001', courseCode: 'MATH-240', date: '2024-11-08', status: 'Present', topic: 'Singular Value Decomposition' },
+  // 8115U25AD064 Kavin Rajendran (Consistent high attendance: 95%)
+  { attendanceId: 'ATT-001', studentId: '8115U25AD064', courseCode: 'CS-201', date: '2024-09-09', status: 'Present', topic: 'Course Orientation & Complexity Analysis' },
+  { attendanceId: 'ATT-002', studentId: '8115U25AD064', courseCode: 'CS-201', date: '2024-09-23', status: 'Present', topic: 'Linked Lists & Dynamic Array Amortization' },
+  { attendanceId: 'ATT-003', studentId: '8115U25AD064', courseCode: 'CS-201', date: '2024-10-07', status: 'Present', topic: 'Stacks, Queues & Deques' },
+  { attendanceId: 'ATT-004', studentId: '8115U25AD064', courseCode: 'CS-201', date: '2024-10-21', status: 'Present', topic: 'Binary Search Trees & Treaps' },
+  { attendanceId: 'ATT-005', studentId: '8115U25AD064', courseCode: 'CS-201', date: '2024-11-04', status: 'Present', topic: 'Balanced Binary Search Trees' },
+  { attendanceId: 'ATT-006', studentId: '8115U25AD064', courseCode: 'CS-201', date: '2024-11-06', status: 'Present', topic: 'AVL Tree Rotations' },
+  { attendanceId: 'ATT-007', studentId: '8115U25AD064', courseCode: 'CS-201', date: '2024-11-11', status: 'Present', topic: 'Red-Black Tree Invariants' },
+  { attendanceId: 'ATT-008', studentId: '8115U25AD064', courseCode: 'CS-201', date: '2024-11-13', status: 'Late', topic: 'Heaps & Priority Queues' },
+  { attendanceId: 'ATT-009', studentId: '8115U25AD064', courseCode: 'CS-201', date: '2024-11-18', status: 'Present', topic: 'Dijkstra Shortest Path' },
+  { attendanceId: 'ATT-010', studentId: '8115U25AD064', courseCode: 'CS-201', date: '2024-11-25', status: 'Present', topic: 'Dynamic Programming & Memoization' },
+  { attendanceId: 'ATT-011', studentId: '8115U25AD064', courseCode: 'CS-304', date: '2024-09-10', status: 'Present', topic: 'Database Architecture & ER Modeling' },
+  { attendanceId: 'ATT-012', studentId: '8115U25AD064', courseCode: 'CS-304', date: '2024-10-08', status: 'Present', topic: 'Relational Calculus & SQL Engines' },
+  { attendanceId: 'ATT-013', studentId: '8115U25AD064', courseCode: 'CS-304', date: '2024-11-05', status: 'Present', topic: 'Relational Algebra & Tuple Calculus' },
+  { attendanceId: 'ATT-014', studentId: '8115U25AD064', courseCode: 'CS-304', date: '2024-11-07', status: 'Present', topic: 'Normal Forms (1NF through BCNF)' },
+  { attendanceId: 'ATT-015', studentId: '8115U25AD064', courseCode: 'CS-304', date: '2024-11-12', status: 'Late', topic: 'B+ Tree Indexing Structures' },
+  { attendanceId: 'ATT-016', studentId: '8115U25AD064', courseCode: 'MATH-240', date: '2024-09-16', status: 'Present', topic: 'Matrix Spaces & Gaussian Elimination' },
+  { attendanceId: 'ATT-017', studentId: '8115U25AD064', courseCode: 'MATH-240', date: '2024-10-14', status: 'Present', topic: 'Gram-Schmidt & QR Factorization' },
+  { attendanceId: 'ATT-018', studentId: '8115U25AD064', courseCode: 'MATH-240', date: '2024-11-04', status: 'Present', topic: 'Eigenvalues & Diagonalization' },
+  { attendanceId: 'ATT-019', studentId: '8115U25AD064', courseCode: 'MATH-240', date: '2024-11-08', status: 'Present', topic: 'Singular Value Decomposition' },
 
-  // STU-2024-009 Devon Miller (Declining attendance: Drops below 75% regulatory warning)
-  { attendanceId: 'ATT-020', studentId: 'STU-2024-009', courseCode: 'EE-215', date: '2024-09-09', status: 'Present', topic: 'Intro to Circuit Models' },
-  { attendanceId: 'ATT-021', studentId: 'STU-2024-009', courseCode: 'EE-215', date: '2024-09-23', status: 'Present', topic: 'Kirchhoff Laws & Nodal Analysis' },
-  { attendanceId: 'ATT-022', studentId: 'STU-2024-009', courseCode: 'EE-215', date: '2024-10-07', status: 'Absent', topic: 'Thevenin & Norton Equivalents' },
-  { attendanceId: 'ATT-023', studentId: 'STU-2024-009', courseCode: 'EE-215', date: '2024-10-14', status: 'Late', topic: 'Operational Amplifiers' },
-  { attendanceId: 'ATT-024', studentId: 'STU-2024-009', courseCode: 'EE-215', date: '2024-10-21', status: 'Absent', topic: 'RLC Transients & Differential Equations' },
-  { attendanceId: 'ATT-025', studentId: 'STU-2024-009', courseCode: 'EE-215', date: '2024-11-04', status: 'Absent', topic: 'Fourier Series Harmonics' },
-  { attendanceId: 'ATT-026', studentId: 'STU-2024-009', courseCode: 'EE-215', date: '2024-11-06', status: 'Present', topic: 'Continuous-Time Convolution' },
-  { attendanceId: 'ATT-027', studentId: 'STU-2024-009', courseCode: 'EE-215', date: '2024-11-11', status: 'Absent', topic: 'Laplace Transform Convergence' },
-  { attendanceId: 'ATT-028', studentId: 'STU-2024-009', courseCode: 'EE-215', date: '2024-11-13', status: 'Late', topic: 'Transfer Function Poles & Zeros' },
-  { attendanceId: 'ATT-029', studentId: 'STU-2024-009', courseCode: 'EE-215', date: '2024-11-18', status: 'Absent', topic: 'Bode Plots & Stability' },
-  { attendanceId: 'ATT-030', studentId: 'STU-2024-009', courseCode: 'EE-215', date: '2024-11-20', status: 'Excused', topic: 'RLC Network Transients' },
-  { attendanceId: 'ATT-031', studentId: 'STU-2024-009', courseCode: 'EE-215', date: '2024-11-27', status: 'Absent', topic: 'State-Space Representations' },
+  // 8115U25AD072 Santhosh Kumar (Declining attendance: Drops below 75% regulatory warning)
+  { attendanceId: 'ATT-020', studentId: '8115U25AD072', courseCode: 'EE-215', date: '2024-09-09', status: 'Present', topic: 'Intro to Circuit Models' },
+  { attendanceId: 'ATT-021', studentId: '8115U25AD072', courseCode: 'EE-215', date: '2024-09-23', status: 'Present', topic: 'Kirchhoff Laws & Nodal Analysis' },
+  { attendanceId: 'ATT-022', studentId: '8115U25AD072', courseCode: 'EE-215', date: '2024-10-07', status: 'Absent', topic: 'Thevenin & Norton Equivalents' },
+  { attendanceId: 'ATT-023', studentId: '8115U25AD072', courseCode: 'EE-215', date: '2024-10-14', status: 'Late', topic: 'Operational Amplifiers' },
+  { attendanceId: 'ATT-024', studentId: '8115U25AD072', courseCode: 'EE-215', date: '2024-10-21', status: 'Absent', topic: 'RLC Transients & Differential Equations' },
+  { attendanceId: 'ATT-025', studentId: '8115U25AD072', courseCode: 'EE-215', date: '2024-11-04', status: 'Absent', topic: 'Fourier Series Harmonics' },
+  { attendanceId: 'ATT-026', studentId: '8115U25AD072', courseCode: 'EE-215', date: '2024-11-06', status: 'Present', topic: 'Continuous-Time Convolution' },
+  { attendanceId: 'ATT-027', studentId: '8115U25AD072', courseCode: 'EE-215', date: '2024-11-11', status: 'Absent', topic: 'Laplace Transform Convergence' },
+  { attendanceId: 'ATT-028', studentId: '8115U25AD072', courseCode: 'EE-215', date: '2024-11-13', status: 'Late', topic: 'Transfer Function Poles & Zeros' },
+  { attendanceId: 'ATT-029', studentId: '8115U25AD072', courseCode: 'EE-215', date: '2024-11-18', status: 'Absent', topic: 'Bode Plots & Stability' },
+  { attendanceId: 'ATT-030', studentId: '8115U25AD072', courseCode: 'EE-215', date: '2024-11-20', status: 'Excused', topic: 'RLC Network Transients' },
+  { attendanceId: 'ATT-031', studentId: '8115U25AD072', courseCode: 'EE-215', date: '2024-11-27', status: 'Absent', topic: 'State-Space Representations' },
 
-  // STU-2024-002 Julian Hayes (Moderate attendance: ~80-85%)
-  { attendanceId: 'ATT-040', studentId: 'STU-2024-002', courseCode: 'ME-210', date: '2024-09-10', status: 'Present', topic: 'Thermodynamics Fundamentals' },
-  { attendanceId: 'ATT-041', studentId: 'STU-2024-002', courseCode: 'ME-210', date: '2024-09-24', status: 'Present', topic: 'First Law for Closed Systems' },
-  { attendanceId: 'ATT-042', studentId: 'STU-2024-002', courseCode: 'ME-210', date: '2024-10-08', status: 'Present', topic: 'Control Volume Energy Analysis' },
-  { attendanceId: 'ATT-043', studentId: 'STU-2024-002', courseCode: 'ME-210', date: '2024-10-22', status: 'Absent', topic: 'Second Law & Carnot Heat Engines' },
-  { attendanceId: 'ATT-044', studentId: 'STU-2024-002', courseCode: 'ME-210', date: '2024-11-05', status: 'Present', topic: 'Rankine Cycle Efficiency' },
-  { attendanceId: 'ATT-045', studentId: 'STU-2024-002', courseCode: 'ME-210', date: '2024-11-07', status: 'Present', topic: 'Brayton Cycle Gas Turbines' },
-  { attendanceId: 'ATT-046', studentId: 'STU-2024-002', courseCode: 'ME-210', date: '2024-11-12', status: 'Late', topic: 'Refrigeration Vapor Compression' },
-  { attendanceId: 'ATT-047', studentId: 'STU-2024-002', courseCode: 'ME-210', date: '2024-11-14', status: 'Present', topic: 'Conduction Fourier Law' },
-  { attendanceId: 'ATT-048', studentId: 'STU-2024-002', courseCode: 'ME-210', date: '2024-11-19', status: 'Present', topic: 'Convective Heat Transfer Nusselt' },
-  { attendanceId: 'ATT-049', studentId: 'STU-2024-002', courseCode: 'ME-210', date: '2024-11-21', status: 'Absent', topic: 'Radiation Stefan-Boltzmann' },
+  // 8115U25AD065 Nithya Ramesh (Moderate attendance: ~80-85%)
+  { attendanceId: 'ATT-040', studentId: '8115U25AD065', courseCode: 'ME-210', date: '2024-09-10', status: 'Present', topic: 'Thermodynamics Fundamentals' },
+  { attendanceId: 'ATT-041', studentId: '8115U25AD065', courseCode: 'ME-210', date: '2024-09-24', status: 'Present', topic: 'First Law for Closed Systems' },
+  { attendanceId: 'ATT-042', studentId: '8115U25AD065', courseCode: 'ME-210', date: '2024-10-08', status: 'Present', topic: 'Control Volume Energy Analysis' },
+  { attendanceId: 'ATT-043', studentId: '8115U25AD065', courseCode: 'ME-210', date: '2024-10-22', status: 'Absent', topic: 'Second Law & Carnot Heat Engines' },
+  { attendanceId: 'ATT-044', studentId: '8115U25AD065', courseCode: 'ME-210', date: '2024-11-05', status: 'Present', topic: 'Rankine Cycle Efficiency' },
+  { attendanceId: 'ATT-045', studentId: '8115U25AD065', courseCode: 'ME-210', date: '2024-11-07', status: 'Present', topic: 'Brayton Cycle Gas Turbines' },
+  { attendanceId: 'ATT-046', studentId: '8115U25AD065', courseCode: 'ME-210', date: '2024-11-12', status: 'Late', topic: 'Refrigeration Vapor Compression' },
+  { attendanceId: 'ATT-047', studentId: '8115U25AD065', courseCode: 'ME-210', date: '2024-11-14', status: 'Present', topic: 'Conduction Fourier Law' },
+  { attendanceId: 'ATT-048', studentId: '8115U25AD065', courseCode: 'ME-210', date: '2024-11-19', status: 'Present', topic: 'Convective Heat Transfer Nusselt' },
+  { attendanceId: 'ATT-049', studentId: '8115U25AD065', courseCode: 'ME-210', date: '2024-11-21', status: 'Absent', topic: 'Radiation Stefan-Boltzmann' },
 
-  // STU-2023-014 Amina Al-Mansoor (Flawless attendance: 100%)
-  { attendanceId: 'ATT-050', studentId: 'STU-2023-014', courseCode: 'CS-201', date: '2024-09-09', status: 'Present', topic: 'Course Orientation & Complexity Analysis' },
-  { attendanceId: 'ATT-051', studentId: 'STU-2023-014', courseCode: 'CS-201', date: '2024-09-23', status: 'Present', topic: 'Linked Lists & Dynamic Array Amortization' },
-  { attendanceId: 'ATT-052', studentId: 'STU-2023-014', courseCode: 'CS-201', date: '2024-10-07', status: 'Present', topic: 'Stacks, Queues & Deques' },
-  { attendanceId: 'ATT-053', studentId: 'STU-2023-014', courseCode: 'CS-201', date: '2024-10-21', status: 'Present', topic: 'Binary Search Trees & Treaps' },
-  { attendanceId: 'ATT-054', studentId: 'STU-2023-014', courseCode: 'CS-201', date: '2024-11-04', status: 'Present', topic: 'Balanced Binary Search Trees' },
-  { attendanceId: 'ATT-055', studentId: 'STU-2023-014', courseCode: 'CS-201', date: '2024-11-06', status: 'Present', topic: 'AVL Tree Rotations' },
-  { attendanceId: 'ATT-056', studentId: 'STU-2023-014', courseCode: 'CS-304', date: '2024-09-10', status: 'Present', topic: 'Database Architecture & ER Modeling' },
-  { attendanceId: 'ATT-057', studentId: 'STU-2023-014', courseCode: 'CS-304', date: '2024-10-08', status: 'Present', topic: 'Relational Calculus & SQL Engines' },
-  { attendanceId: 'ATT-058', studentId: 'STU-2023-014', courseCode: 'CS-304', date: '2024-11-05', status: 'Present', topic: 'Relational Algebra & Tuple Calculus' },
-  { attendanceId: 'ATT-059', studentId: 'STU-2023-014', courseCode: 'CS-304', date: '2024-11-07', status: 'Present', topic: 'Normal Forms (1NF through BCNF)' },
-  { attendanceId: 'ATT-060', studentId: 'STU-2023-014', courseCode: 'CS-480', date: '2024-10-18', status: 'Present', topic: 'Domain-Driven Design Tactical Patterns' },
-  { attendanceId: 'ATT-061', studentId: 'STU-2023-014', courseCode: 'CS-480', date: '2024-11-08', status: 'Present', topic: 'Clean Architecture Boundaries' },
-  { attendanceId: 'ATT-062', studentId: 'STU-2023-014', courseCode: 'CS-480', date: '2024-11-15', status: 'Present', topic: 'Event-Driven CQRS Systems' },
+  // 8115U25AD088 Rohith A (Flawless attendance: 100%)
+  { attendanceId: 'ATT-050', studentId: '8115U25AD088', courseCode: 'CS-201', date: '2024-09-09', status: 'Present', topic: 'Course Orientation & Complexity Analysis' },
+  { attendanceId: 'ATT-051', studentId: '8115U25AD088', courseCode: 'CS-201', date: '2024-09-23', status: 'Present', topic: 'Linked Lists & Dynamic Array Amortization' },
+  { attendanceId: 'ATT-052', studentId: '8115U25AD088', courseCode: 'CS-201', date: '2024-10-07', status: 'Present', topic: 'Stacks, Queues & Deques' },
+  { attendanceId: 'ATT-053', studentId: '8115U25AD088', courseCode: 'CS-201', date: '2024-10-21', status: 'Present', topic: 'Binary Search Trees & Treaps' },
+  { attendanceId: 'ATT-054', studentId: '8115U25AD088', courseCode: 'CS-201', date: '2024-11-04', status: 'Present', topic: 'Balanced Binary Search Trees' },
+  { attendanceId: 'ATT-055', studentId: '8115U25AD088', courseCode: 'CS-201', date: '2024-11-06', status: 'Present', topic: 'AVL Tree Rotations' },
+  { attendanceId: 'ATT-056', studentId: '8115U25AD088', courseCode: 'CS-304', date: '2024-09-10', status: 'Present', topic: 'Database Architecture & ER Modeling' },
+  { attendanceId: 'ATT-057', studentId: '8115U25AD088', courseCode: 'CS-304', date: '2024-10-08', status: 'Present', topic: 'Relational Calculus & SQL Engines' },
+  { attendanceId: 'ATT-058', studentId: '8115U25AD088', courseCode: 'CS-304', date: '2024-11-05', status: 'Present', topic: 'Relational Algebra & Tuple Calculus' },
+  { attendanceId: 'ATT-059', studentId: '8115U25AD088', courseCode: 'CS-304', date: '2024-11-07', status: 'Present', topic: 'Normal Forms (1NF through BCNF)' },
+  { attendanceId: 'ATT-060', studentId: '8115U25AD088', courseCode: 'CS-480', date: '2024-10-18', status: 'Present', topic: 'Domain-Driven Design Tactical Patterns' },
+  { attendanceId: 'ATT-061', studentId: '8115U25AD088', courseCode: 'CS-480', date: '2024-11-08', status: 'Present', topic: 'Clean Architecture Boundaries' },
+  { attendanceId: 'ATT-062', studentId: '8115U25AD088', courseCode: 'CS-480', date: '2024-11-15', status: 'Present', topic: 'Event-Driven CQRS Systems' },
 
-  // STU-2024-041 Mateo Morales (80%)
-  { attendanceId: 'ATT-070', studentId: 'STU-2024-041', courseCode: 'CS-201', date: '2024-09-09', status: 'Present', topic: 'Course Orientation & Complexity Analysis' },
-  { attendanceId: 'ATT-071', studentId: 'STU-2024-041', courseCode: 'CS-201', date: '2024-09-23', status: 'Late', topic: 'Linked Lists & Dynamic Array Amortization' },
-  { attendanceId: 'ATT-072', studentId: 'STU-2024-041', courseCode: 'CS-201', date: '2024-10-07', status: 'Present', topic: 'Stacks, Queues & Deques' },
-  { attendanceId: 'ATT-073', studentId: 'STU-2024-041', courseCode: 'CS-201', date: '2024-10-21', status: 'Absent', topic: 'Binary Search Trees & Treaps' },
-  { attendanceId: 'ATT-074', studentId: 'STU-2024-041', courseCode: 'CS-201', date: '2024-11-04', status: 'Present', topic: 'Balanced Binary Search Trees' },
-  { attendanceId: 'ATT-075', studentId: 'STU-2024-041', courseCode: 'CS-201', date: '2024-11-06', status: 'Present', topic: 'AVL Tree Rotations' }
+  // 8115U25AD091 Sakthi Vignesh A (80%)
+  { attendanceId: 'ATT-070', studentId: '8115U25AD091', courseCode: 'CS-201', date: '2024-09-09', status: 'Present', topic: 'Course Orientation & Complexity Analysis' },
+  { attendanceId: 'ATT-071', studentId: '8115U25AD091', courseCode: 'CS-201', date: '2024-09-23', status: 'Late', topic: 'Linked Lists & Dynamic Array Amortization' },
+  { attendanceId: 'ATT-072', studentId: '8115U25AD091', courseCode: 'CS-201', date: '2024-10-07', status: 'Present', topic: 'Stacks, Queues & Deques' },
+  { attendanceId: 'ATT-073', studentId: '8115U25AD091', courseCode: 'CS-201', date: '2024-10-21', status: 'Absent', topic: 'Binary Search Trees & Treaps' },
+  { attendanceId: 'ATT-074', studentId: '8115U25AD091', courseCode: 'CS-201', date: '2024-11-04', status: 'Present', topic: 'Balanced Binary Search Trees' },
+  { attendanceId: 'ATT-075', studentId: '8115U25AD091', courseCode: 'CS-201', date: '2024-11-06', status: 'Present', topic: 'AVL Tree Rotations' }
 ];
 
 export const INITIAL_FEE_LEDGER: FeeLedgerEntry[] = [
   {
     ledgerId: 'FEE-2024-01',
-    studentId: 'STU-2024-001',
+    studentId: '8115U25AD064',
     semester: 'Fall 2024',
     academicYear: '2024-2025',
-    totalFees: 4850.00,
-    paidAmount: 4850.00,
+    totalFees: 48500.00,
+    paidAmount: 48500.00,
     balanceAmount: 0.00,
     dueDate: '2024-09-15',
     status: 'Paid',
@@ -562,23 +468,23 @@ export const INITIAL_FEE_LEDGER: FeeLedgerEntry[] = [
   },
   {
     ledgerId: 'FEE-2024-02',
-    studentId: 'STU-2024-002',
+    studentId: '8115U25AD065',
     semester: 'Fall 2024',
     academicYear: '2024-2025',
-    totalFees: 4850.00,
-    paidAmount: 2425.00,
-    balanceAmount: 2425.00,
+    totalFees: 48500.00,
+    paidAmount: 24250.00,
+    balanceAmount: 24250.00,
     dueDate: '2024-10-15',
     status: 'Partial',
     lastPaymentDate: '2024-09-10'
   },
   {
     ledgerId: 'FEE-2024-03',
-    studentId: 'STU-2023-014',
+    studentId: '8115U25AD088',
     semester: 'Fall 2024',
     academicYear: '2024-2025',
-    totalFees: 5200.00,
-    paidAmount: 5200.00,
+    totalFees: 52000.00,
+    paidAmount: 52000.00,
     balanceAmount: 0.00,
     dueDate: '2024-09-15',
     status: 'Paid',
@@ -586,23 +492,23 @@ export const INITIAL_FEE_LEDGER: FeeLedgerEntry[] = [
   },
   {
     ledgerId: 'FEE-2024-04',
-    studentId: 'STU-2024-009',
+    studentId: '8115U25AD072',
     semester: 'Fall 2024',
     academicYear: '2024-2025',
-    totalFees: 4850.00,
-    paidAmount: 1000.00,
-    balanceAmount: 3850.00,
+    totalFees: 48500.00,
+    paidAmount: 10000.00,
+    balanceAmount: 38500.00,
     dueDate: '2024-10-01',
     status: 'Overdue',
     lastPaymentDate: '2024-09-05'
   },
   {
     ledgerId: 'FEE-2024-05',
-    studentId: 'STU-2023-028',
+    studentId: '8115U25AD089',
     semester: 'Fall 2024',
     academicYear: '2024-2025',
-    totalFees: 4600.00,
-    paidAmount: 4600.00,
+    totalFees: 46000.00,
+    paidAmount: 46000.00,
     balanceAmount: 0.00,
     dueDate: '2024-09-15',
     status: 'Paid',
@@ -610,51 +516,72 @@ export const INITIAL_FEE_LEDGER: FeeLedgerEntry[] = [
   },
   {
     ledgerId: 'FEE-2024-06',
-    studentId: 'STU-2025-003',
+    studentId: '8115U25AD090',
     semester: 'Spring 2025',
     academicYear: '2024-2025',
-    totalFees: 4500.00,
-    paidAmount: 2000.00,
-    balanceAmount: 2500.00,
+    totalFees: 45000.00,
+    paidAmount: 20000.00,
+    balanceAmount: 25000.00,
     dueDate: '2025-02-15',
     status: 'Partial',
     lastPaymentDate: '2025-01-15'
   },
   {
     ledgerId: 'FEE-2024-07',
-    studentId: 'STU-2024-041',
+    studentId: '8115U25AD091',
     semester: 'Fall 2024',
     academicYear: '2024-2025',
-    totalFees: 4850.00,
+    totalFees: 48500.00,
     paidAmount: 0.00,
-    balanceAmount: 4850.00,
+    balanceAmount: 48500.00,
     dueDate: '2024-09-15',
     status: 'Overdue',
     lastPaymentDate: undefined
   },
   {
     ledgerId: 'FEE-2024-08',
-    studentId: 'STU-2023-055',
+    studentId: '8115U25AD092',
     semester: 'Fall 2024',
     academicYear: '2024-2025',
-    totalFees: 2400.00,
+    totalFees: 24000.00,
     paidAmount: 0.00,
-    balanceAmount: 2400.00,
+    balanceAmount: 24000.00,
     dueDate: '2024-09-15',
     status: 'Overdue',
     lastPaymentDate: undefined
-  }
+  },
+  ...INITIAL_STUDENTS
+    .filter(student => ![
+      '8115U25AD064', '8115U25AD065', '8115U25AD088', '8115U25AD072',
+      '8115U25AD089', '8115U25AD090', '8115U25AD091', '8115U25AD092'
+    ].includes(student.studentId))
+    .map((student, index): FeeLedgerEntry => {
+      const status = index % 3 === 0 ? 'Paid' : index % 3 === 1 ? 'Partial' : 'Overdue';
+      const paidAmount = status === 'Paid' ? 48500 : status === 'Partial' ? 24250 : 0;
+      return {
+        ledgerId: `FEE-2024-${String(index + 9).padStart(2, '0')}`,
+        studentId: student.studentId,
+        semester: 'Fall 2024',
+        academicYear: '2024-2025',
+        totalFees: 48500,
+        paidAmount,
+        balanceAmount: 48500 - paidAmount,
+        dueDate: '2024-10-15',
+        status,
+        lastPaymentDate: paidAmount > 0 ? '2024-09-10' : undefined
+      };
+    })
 ];
 
 export const INITIAL_RECEIPTS: FeeReceipt[] = [
   {
     receiptId: 'RCPT-2024-8801',
     ledgerId: 'FEE-2024-01',
-    studentId: 'STU-2024-001',
-    studentName: 'Eleanor Vance',
-    amount: 4850.00,
+    studentId: '8115U25AD064',
+    studentName: 'Kavin Rajendran',
+    amount: 48500.00,
     paymentMethod: 'Bank Transfer',
-    transactionRef: 'WIRE-992381-CHASE',
+    transactionRef: 'NEFT-992381-KRCE',
     issuedAt: '2024-09-02 11:24:00',
     receivedBy: 'Office of the Bursar',
     notes: 'Full tuition & laboratory surcharge payment.'
@@ -662,11 +589,11 @@ export const INITIAL_RECEIPTS: FeeReceipt[] = [
   {
     receiptId: 'RCPT-2024-8802',
     ledgerId: 'FEE-2024-02',
-    studentId: 'STU-2024-002',
-    studentName: 'Julian Hayes',
-    amount: 2425.00,
+    studentId: '8115U25AD065',
+    studentName: 'Nithya Ramesh',
+    amount: 24250.00,
     paymentMethod: 'Credit Card',
-    transactionRef: 'CC-AUTH-771290',
+    transactionRef: 'UPI-771290-KRCE',
     issuedAt: '2024-09-10 14:15:30',
     receivedBy: 'Office of the Bursar',
     notes: '50% installment term payment.'
@@ -674,9 +601,9 @@ export const INITIAL_RECEIPTS: FeeReceipt[] = [
   {
     receiptId: 'RCPT-2024-8803',
     ledgerId: 'FEE-2024-03',
-    studentId: 'STU-2023-014',
-    studentName: 'Amina Al-Mansoor',
-    amount: 5200.00,
+    studentId: '8115U25AD088',
+    studentName: 'ROHITH A',
+    amount: 52000.00,
     paymentMethod: 'Scholarship Voucher',
     transactionRef: 'DEPT-SCHOL-FALL-14',
     issuedAt: '2024-08-28 09:30:12',
@@ -686,11 +613,11 @@ export const INITIAL_RECEIPTS: FeeReceipt[] = [
   {
     receiptId: 'RCPT-2024-8804',
     ledgerId: 'FEE-2024-04',
-    studentId: 'STU-2024-009',
-    studentName: 'Devon K. Miller',
-    amount: 1000.00,
+    studentId: '8115U25AD072',
+    studentName: 'Santhosh Kumar',
+    amount: 10000.00,
     paymentMethod: 'Bank Transfer',
-    transactionRef: 'ACH-481920-BOA',
+    transactionRef: 'NEFT-481920-KRCE',
     issuedAt: '2024-09-05 16:42:19',
     receivedBy: 'Office of the Bursar',
     notes: 'Initial deposit.'
@@ -701,31 +628,31 @@ export const INITIAL_USERS: AppUser[] = [
   {
     id: 'USR-ADMIN-1',
     username: 'admin',
-    displayName: 'Dean of Academic Affairs',
+    displayName: 'Dr. K. Muthusamy',
     role: 'ADMIN',
     department: 'Office of the Registrar'
   },
   {
     id: 'USR-FAC-1',
-    username: 'pendelton',
-    displayName: 'Dr. Arthur Pendelton',
+    username: 'faculty',
+    displayName: 'Dr. Arulmozhi Selvan',
     role: 'FACULTY',
     department: 'Computer Science'
   },
   {
     id: 'USR-STU-1',
-    username: 'STU-2024-001',
-    displayName: 'Eleanor Vance',
+    username: '8115U25AD064',
+    displayName: 'Kavin Rajendran',
     role: 'STUDENT',
-    studentId: 'STU-2024-001',
+    studentId: '8115U25AD064',
     department: 'Computer Science'
   },
   {
     id: 'USR-STU-2',
-    username: 'STU-2024-009',
-    displayName: 'Devon K. Miller',
+    username: '8115U25AD072',
+    displayName: 'Santhosh Kumar',
     role: 'STUDENT',
-    studentId: 'STU-2024-009',
+    studentId: '8115U25AD072',
     department: 'Electrical Engineering'
   }
 ];
@@ -925,6 +852,7 @@ CREATE TABLE IF NOT EXISTS courses (
     course_code VARCHAR(16) NOT NULL PRIMARY KEY,
     title VARCHAR(128) NOT NULL,
     credits INT NOT NULL CHECK (credits BETWEEN 1 AND 4),
+    semester_fee DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
     department VARCHAR(64) NOT NULL,
     faculty VARCHAR(128) NOT NULL,
     capacity INT NOT NULL DEFAULT 30,

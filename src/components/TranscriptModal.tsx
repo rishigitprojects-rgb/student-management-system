@@ -259,7 +259,7 @@ export const TranscriptModal: React.FC<TranscriptModalProps> = ({
 
             <div className="text-center sm:text-right">
               <div className="w-48 border-b border-slate-400 mb-1 mx-auto sm:ml-auto"></div>
-              <span className="font-bold text-slate-900 block font-serif">Dr. Harold S. Pemberton, Ph.D.</span>
+              <span className="font-bold text-slate-900 block font-serif">Dr. K. Muthusamy, Ph.D.</span>
               <span className="text-[10px] text-slate-500 block">Registrar & Vice-Chancellor of Academic Affairs</span>
             </div>
           </div>

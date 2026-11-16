@@ -376,4 +376,1361 @@ public class StudentController {
         return ResponseEntity.noContent().build();
     }
 }
-`,ML=({onClose:e})=>{let[t,n]=(0,w.useState)(`ENTITY`),[r,i]=(0,w.useState)(!1),a=()=>{switch(t){case`ENTITY`:return kL;case`SERVICE`:return AL;case`CONTROLLER`:return jL;case`H2_SQL`:return Be}};return(0,L.jsx)(`div`,{className:`fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs overflow-y-auto`,children:(0,L.jsxs)(`div`,{className:`relative w-full max-w-4xl bg-white border border-[#CBD5E1] rounded-md shadow-2xl overflow-hidden my-6`,children:[(0,L.jsxs)(`div`,{className:`bg-[#1E293B] text-white px-5 py-3.5 flex items-center justify-between`,children:[(0,L.jsxs)(`div`,{className:`flex items-center gap-2.5`,children:[(0,L.jsx)(de,{className:`w-4 h-4 text-emerald-400`}),(0,L.jsxs)(`div`,{children:[(0,L.jsx)(`h3`,{className:`text-xs font-bold uppercase tracking-wider`,children:`Principal Java Enterprise Architecture Specification`}),(0,L.jsx)(`p`,{className:`text-[11px] text-slate-400`,children:`Jakarta Persistence (JPA), Spring Boot 3.3, H2 Database Engine Parity`})]})]}),(0,L.jsxs)(`div`,{className:`flex items-center gap-2`,children:[(0,L.jsxs)(`button`,{onClick:()=>{navigator.clipboard.writeText(a()),i(!0),setTimeout(()=>i(!1),2e3)},className:`inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white rounded-md transition-colors`,children:[r?(0,L.jsx)(M,{className:`w-3.5 h-3.5 text-emerald-400`}):(0,L.jsx)(re,{className:`w-3.5 h-3.5`}),(0,L.jsx)(`span`,{children:r?`Copied`:`Copy`})]}),(0,L.jsxs)(`button`,{onClick:()=>{let e=a(),n=t===`ENTITY`?`Student.java`:t===`SERVICE`?`AcademicManagementService.java`:t===`CONTROLLER`?`StudentController.java`:`schema-h2.sql`,r=new Blob([e],{type:`text/plain;charset=utf-8`}),i=URL.createObjectURL(r),o=document.createElement(`a`);o.href=i,o.download=n,o.click(),URL.revokeObjectURL(i)},className:`inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white rounded-md transition-colors`,children:[(0,L.jsx)(oe,{className:`w-3.5 h-3.5`}),(0,L.jsx)(`span`,{children:`Export`})]}),(0,L.jsx)(`button`,{onClick:e,className:`p-1 text-slate-300 hover:text-white rounded-md`,children:(0,L.jsx)(ke,{className:`w-4 h-4`})})]})]}),(0,L.jsxs)(`div`,{className:`flex items-center gap-1 px-4 py-2 bg-[#F1EFEA] border-b border-[#E2E8F0] overflow-x-auto text-xs font-medium`,children:[(0,L.jsx)(`button`,{onClick:()=>n(`ENTITY`),className:`px-3 py-1.5 rounded-sm transition-colors ${t===`ENTITY`?`bg-white text-slate-900 shadow-xs`:`text-slate-600 hover:text-slate-900`}`,children:`Student.java (JPA Entity)`}),(0,L.jsx)(`button`,{onClick:()=>n(`SERVICE`),className:`px-3 py-1.5 rounded-sm transition-colors ${t===`SERVICE`?`bg-white text-slate-900 shadow-xs`:`text-slate-600 hover:text-slate-900`}`,children:`AcademicManagementService.java (Service Logic)`}),(0,L.jsx)(`button`,{onClick:()=>n(`CONTROLLER`),className:`px-3 py-1.5 rounded-sm transition-colors ${t===`CONTROLLER`?`bg-white text-slate-900 shadow-xs`:`text-slate-600 hover:text-slate-900`}`,children:`StudentController.java (REST API)`}),(0,L.jsxs)(`button`,{onClick:()=>n(`H2_SQL`),className:`px-3 py-1.5 rounded-sm transition-colors flex items-center gap-1.5 ${t===`H2_SQL`?`bg-white text-slate-900 shadow-xs`:`text-slate-600 hover:text-slate-900`}`,children:[(0,L.jsx)(ie,{className:`w-3.5 h-3.5 text-slate-500`}),(0,L.jsx)(`span`,{children:`schema-h2.sql (DDL Script)`})]})]}),(0,L.jsx)(`div`,{className:`p-4 bg-slate-950 text-slate-200 overflow-x-auto max-h-[500px]`,children:(0,L.jsx)(`pre`,{className:`text-xs font-mono leading-relaxed select-all`,children:(0,L.jsx)(`code`,{children:a()})})}),(0,L.jsxs)(`div`,{className:`px-5 py-3 bg-[#FAF8F5] border-t border-[#E2E8F0] flex items-center justify-between text-xs text-slate-600`,children:[(0,L.jsxs)(`div`,{children:[(0,L.jsx)(`span`,{className:`font-semibold text-slate-800`,children:`Clean Architecture Compliance:`}),` Domain Entities · Repository Pattern · Transactional Boundary · H2 In-Memory Relational Engine`]}),(0,L.jsx)(`button`,{onClick:e,className:`px-4 py-1.5 bg-[#1E293B] text-white hover:bg-slate-800 rounded-md font-semibold`,children:`Close Inspector`})]})]})})},NL=({dbService:e,onClose:t})=>{let[n,r]=(0,w.useState)(`SELECT * FROM STUDENTS;`),[i,a]=(0,w.useState)({success:!0,columns:[`QUERY_STATUS`],rows:[[`Ready to execute H2 / SQLite statements. Press Run Query or choose a preset.`]],message:`Virtual H2 Relational Engine initialized.`});return(0,L.jsx)(`div`,{className:`fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs overflow-y-auto`,children:(0,L.jsxs)(`div`,{className:`relative w-full max-w-4xl bg-white border border-[#CBD5E1] rounded-md shadow-2xl overflow-hidden my-6`,children:[(0,L.jsxs)(`div`,{className:`bg-[#1E293B] text-white px-5 py-3.5 flex items-center justify-between`,children:[(0,L.jsxs)(`div`,{className:`flex items-center gap-2.5`,children:[(0,L.jsx)(Se,{className:`w-4 h-4 text-emerald-400`}),(0,L.jsxs)(`div`,{children:[(0,L.jsx)(`h3`,{className:`text-xs font-bold uppercase tracking-wider`,children:`H2 Embedded Relational Database Console`}),(0,L.jsx)(`p`,{className:`text-[11px] text-slate-400 font-mono`,children:`Dialect: org.hibernate.dialect.H2Dialect · Schema: sms_core`})]})]}),(0,L.jsxs)(`div`,{className:`flex items-center gap-2`,children:[(0,L.jsxs)(`button`,{onClick:()=>{let t=e.exportH2SqlDump(),n=new Blob([t],{type:`text/sql;charset=utf-8;`}),r=URL.createObjectURL(n),i=document.createElement(`a`);i.href=r,i.download=`h2_university_sms_database_${new Date().toISOString().split(`T`)[0]}.sql`,i.click(),URL.revokeObjectURL(r)},className:`inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white rounded-md transition-colors`,children:[(0,L.jsx)(oe,{className:`w-3.5 h-3.5`}),(0,L.jsx)(`span`,{children:`Export SQL Dump`})]}),(0,L.jsx)(`button`,{onClick:t,className:`p-1 text-slate-300 hover:text-white rounded-md`,children:(0,L.jsx)(ke,{className:`w-4 h-4`})})]})]}),(0,L.jsxs)(`div`,{className:`p-4 space-y-3 bg-[#FAF8F5]`,children:[(0,L.jsxs)(`div`,{className:`flex items-center gap-1.5 flex-wrap`,children:[(0,L.jsx)(`span`,{className:`text-[11px] font-semibold text-slate-500 mr-1`,children:`Sample Queries:`}),[{label:`All Students`,sql:`SELECT * FROM STUDENTS;`},{label:`Course Catalog`,sql:`SELECT * FROM COURSES;`},{label:`Fee Overdue Ledger`,sql:`SELECT * FROM FEE_LEDGER;`},{label:`Grades & GPA Data`,sql:`SELECT * FROM GRADES;`},{label:`Attendance Records`,sql:`SELECT * FROM ATTENDANCE;`},{label:`Active Enrollments`,sql:`SELECT * FROM ENROLLMENTS;`}].map(t=>(0,L.jsx)(`button`,{onClick:()=>{r(t.sql);let n=e.executeSqlQuery(t.sql);a(n)},className:`px-2 py-1 text-[11px] font-mono bg-white border border-[#CBD5E1] hover:bg-slate-100 rounded-sm text-slate-700 transition-colors`,children:t.label},t.label))]}),(0,L.jsxs)(`div`,{className:`relative`,children:[(0,L.jsx)(`textarea`,{rows:3,value:n,onChange:e=>r(e.target.value),className:`w-full font-mono text-xs p-3 bg-slate-950 text-emerald-400 rounded-md border border-slate-800 focus:outline-hidden focus:ring-1 focus:ring-emerald-500`,placeholder:`Enter SQL SELECT or DDL query...`}),(0,L.jsxs)(`button`,{onClick:()=>{let t=e.executeSqlQuery(n);a(t)},className:`absolute right-3 bottom-4 inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white rounded-md transition-colors shadow-xs`,children:[(0,L.jsx)(F,{className:`w-3.5 h-3.5`}),(0,L.jsx)(`span`,{children:`Run Query`})]})]}),i.message&&(0,L.jsxs)(`div`,{className:`text-[11px] font-mono text-slate-600 flex items-center justify-between px-1`,children:[(0,L.jsx)(`span`,{children:i.message}),(0,L.jsxs)(`span`,{children:[`Rows returned: `,i.rows.length]})]}),(0,L.jsx)(`div`,{className:`bg-white border border-[#CBD5E1] rounded-md overflow-hidden max-h-72 overflow-y-auto`,children:(0,L.jsxs)(`table`,{className:`w-full text-left text-xs border-collapse`,children:[(0,L.jsx)(`thead`,{children:(0,L.jsx)(`tr`,{className:`bg-slate-100 border-b border-slate-300 font-mono font-semibold text-slate-700`,children:i.columns.map((e,t)=>(0,L.jsx)(`th`,{className:`py-2 px-3 whitespace-nowrap`,children:e},t))})}),(0,L.jsx)(`tbody`,{className:`divide-y divide-slate-200 font-mono`,children:i.rows.map((e,t)=>(0,L.jsx)(`tr`,{className:t%2==1?`bg-[#FAF8F5]`:`bg-white`,children:e.map((e,t)=>(0,L.jsx)(`td`,{className:`py-2 px-3 text-slate-800 whitespace-nowrap`,children:String(e)},t))},t))})]})})]}),(0,L.jsxs)(`div`,{className:`px-5 py-3 bg-white border-t border-[#E2E8F0] flex items-center justify-between text-xs text-slate-500`,children:[(0,L.jsx)(`span`,{children:`In-memory relational storage layer compliant with ANSI SQL-92 / H2 Relational Database.`}),(0,L.jsx)(`button`,{onClick:t,className:`px-3.5 py-1 text-xs font-semibold bg-[#1E293B] text-white hover:bg-slate-800 rounded-md`,children:`Close Console`})]})]})})},PL=({currentUser:e,student:t,enrollments:n,courses:r,grades:i,attendance:a,feeLedger:o,receipts:s,cgpa:c,totalCredits:l,attendanceRate:u,onOpenTranscript:d,onViewReceipt:f})=>{let p=u<75;return(0,L.jsxs)(`div`,{className:`space-y-5`,children:[(0,L.jsxs)(`div`,{className:`bg-white border border-[#E2E8F0] rounded-md p-5 flex flex-col md:flex-row md:items-center justify-between gap-4`,children:[(0,L.jsxs)(`div`,{children:[(0,L.jsxs)(`div`,{className:`flex items-center gap-2 mb-1`,children:[(0,L.jsx)(`span`,{className:`font-mono text-xs font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-xs`,children:t.studentId}),(0,L.jsx)(`span`,{className:`text-xs text-slate-500`,children:`Student Self-Service Portal`})]}),(0,L.jsx)(`h2`,{className:`text-xl font-bold text-[#1E293B]`,children:t.fullName}),(0,L.jsxs)(`p`,{className:`text-xs text-slate-600 mt-0.5`,children:[t.department,` · Cohort `,t.batch,` · Status: `,(0,L.jsx)(`span`,{className:`font-semibold text-emerald-700`,children:t.status})]})]}),(0,L.jsxs)(`button`,{onClick:()=>d(t.studentId),className:`inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-white bg-[#1E293B] hover:bg-slate-800 rounded-md transition-colors shadow-xs`,children:[(0,L.jsx)(le,{className:`w-4 h-4`}),(0,L.jsx)(`span`,{children:`Download Official Academic Transcript`})]})]}),(0,L.jsxs)(`div`,{className:`grid grid-cols-2 lg:grid-cols-4 gap-3.5`,children:[(0,L.jsxs)(`div`,{className:`bg-white border border-[#E2E8F0] rounded-md p-4`,children:[(0,L.jsxs)(`div`,{className:`flex items-center justify-between mb-1`,children:[(0,L.jsx)(`span`,{className:`text-xs font-medium text-slate-500`,children:`Cumulative CGPA`}),(0,L.jsx)(O,{className:`w-4 h-4 text-amber-500`})]}),(0,L.jsx)(`span`,{className:`text-2xl font-bold font-mono tabular-nums text-slate-900 block`,children:c.toFixed(2)}),(0,L.jsxs)(`span`,{className:`text-[11px] text-slate-500 mt-1 block`,children:[l,` earned credit hours`]})]}),(0,L.jsxs)(`div`,{className:`bg-white border border-[#E2E8F0] rounded-md p-4`,children:[(0,L.jsxs)(`div`,{className:`flex items-center justify-between mb-1`,children:[(0,L.jsx)(`span`,{className:`text-xs font-medium text-slate-500`,children:`Semester Attendance`}),(0,L.jsx)(A,{className:`w-4 h-4 text-slate-400`})]}),(0,L.jsxs)(`div`,{className:`flex items-baseline gap-2`,children:[(0,L.jsxs)(`span`,{className:`text-2xl font-bold font-mono tabular-nums ${p?`text-[#9F1239]`:`text-slate-900`}`,children:[u,`%`]}),p&&(0,L.jsx)(`span`,{className:`text-[10px] bg-[#FFE4E6] text-[#9F1239] px-1.5 py-0.5 rounded-xs font-semibold`,children:`Shortage`})]}),(0,L.jsxs)(`span`,{className:`text-[11px] text-slate-500 mt-1 block`,children:[a.length,` logged sessions`]})]}),(0,L.jsxs)(`div`,{className:`bg-white border border-[#E2E8F0] rounded-md p-4`,children:[(0,L.jsxs)(`div`,{className:`flex items-center justify-between mb-1`,children:[(0,L.jsx)(`span`,{className:`text-xs font-medium text-slate-500`,children:`Enrolled Courses`}),(0,L.jsx)(k,{className:`w-4 h-4 text-slate-400`})]}),(0,L.jsx)(`span`,{className:`text-2xl font-bold font-mono tabular-nums text-slate-900 block`,children:n.length}),(0,L.jsx)(`span`,{className:`text-[11px] text-slate-500 mt-1 block`,children:`Fall 2024 academic term`})]}),(0,L.jsxs)(`div`,{className:`bg-white border border-[#E2E8F0] rounded-md p-4`,children:[(0,L.jsxs)(`div`,{className:`flex items-center justify-between mb-1`,children:[(0,L.jsx)(`span`,{className:`text-xs font-medium text-slate-500`,children:`Tuition Balance`}),(0,L.jsx)(ae,{className:`w-4 h-4 text-slate-400`})]}),(0,L.jsxs)(`span`,{className:`text-2xl font-bold font-mono tabular-nums ${o&&o.balanceAmount>0?`text-[#9F1239]`:`text-emerald-700`}`,children:[`$`,o?o.balanceAmount.toFixed(2):`0.00`]}),(0,L.jsxs)(`span`,{className:`text-[11px] text-slate-500 mt-1 block`,children:[`Status: `,o?.status||`Settled`]})]})]}),(0,L.jsxs)(`div`,{className:`grid grid-cols-1 lg:grid-cols-2 gap-4`,children:[(0,L.jsxs)(`div`,{className:`bg-white border border-[#E2E8F0] rounded-md p-4`,children:[(0,L.jsxs)(`h3`,{className:`text-xs font-bold text-slate-800 uppercase tracking-wider mb-3`,children:[`Active Registered Courses (`,n.length,`)`]}),(0,L.jsx)(`div`,{className:`space-y-2.5`,children:n.map(e=>{let t=r.find(t=>t.courseCode===e.courseCode);return(0,L.jsxs)(`div`,{className:`p-3 border border-[#E2E8F0] rounded-md bg-[#FAF8F5]`,children:[(0,L.jsxs)(`div`,{className:`flex items-center justify-between mb-1`,children:[(0,L.jsx)(`span`,{className:`font-mono text-xs font-bold text-slate-900`,children:e.courseCode}),(0,L.jsxs)(`span`,{className:`text-[11px] font-mono text-slate-600 bg-white border border-slate-200 px-1.5 py-0.2 rounded-xs`,children:[t?.credits||3,` Credits`]})]}),(0,L.jsx)(`h4`,{className:`text-xs font-semibold text-slate-900`,children:t?.title}),(0,L.jsxs)(`p`,{className:`text-[11px] text-slate-600 mt-0.5`,children:[t?.faculty,` · `,t?.department]})]},e.enrollmentId)})})]}),(0,L.jsxs)(`div`,{className:`bg-white border border-[#E2E8F0] rounded-md p-4`,children:[(0,L.jsxs)(`h3`,{className:`text-xs font-bold text-slate-800 uppercase tracking-wider mb-3`,children:[`Evaluated Course Grades (`,i.length,`)`]}),(0,L.jsx)(`div`,{className:`border border-[#E2E8F0] rounded-md overflow-hidden`,children:(0,L.jsxs)(`table`,{className:`w-full text-left text-xs border-collapse`,children:[(0,L.jsx)(`thead`,{children:(0,L.jsxs)(`tr`,{className:`bg-[#FAF8F5] border-b border-[#E2E8F0] font-semibold text-slate-600`,children:[(0,L.jsx)(`th`,{className:`py-2 px-3 font-mono`,children:`Course`}),(0,L.jsx)(`th`,{className:`py-2 px-3 text-right`,children:`Score %`}),(0,L.jsx)(`th`,{className:`py-2 px-3 text-center`,children:`Grade`}),(0,L.jsx)(`th`,{className:`py-2 px-3 text-right font-mono`,children:`Points`})]})}),(0,L.jsx)(`tbody`,{className:`divide-y divide-[#F1EFEA]`,children:i.length===0?(0,L.jsx)(`tr`,{children:(0,L.jsx)(`td`,{colSpan:4,className:`py-4 text-center text-slate-500`,children:`No grades recorded yet.`})}):i.map((e,t)=>(0,L.jsxs)(`tr`,{className:t%2==1?`bg-[#FAF8F5]`:`bg-white`,children:[(0,L.jsx)(`td`,{className:`py-2 px-3 font-mono font-medium text-slate-900`,children:e.courseCode}),(0,L.jsxs)(`td`,{className:`py-2 px-3 text-right font-mono tabular-nums`,children:[e.totalScore,`%`]}),(0,L.jsx)(`td`,{className:`py-2 px-3 text-center font-mono font-bold`,children:(0,L.jsx)(`span`,{className:`px-1.5 py-0.5 bg-slate-100 rounded-xs text-slate-800`,children:e.letterGrade})}),(0,L.jsx)(`td`,{className:`py-2 px-3 text-right font-mono font-semibold text-slate-900`,children:e.gradePoints.toFixed(2)})]},e.gradeId))})]})})]})]}),(0,L.jsx)(bL,{attendanceRecords:a,students:[t],courses:r,initialStudentId:t.studentId}),(0,L.jsxs)(`div`,{className:`bg-white border border-[#E2E8F0] rounded-md p-4`,children:[(0,L.jsxs)(`h3`,{className:`text-xs font-bold text-slate-800 uppercase tracking-wider mb-3`,children:[`Official Bursar Payment Receipts (`,s.length,`)`]}),(0,L.jsx)(`div`,{className:`border border-[#E2E8F0] rounded-md overflow-hidden`,children:(0,L.jsxs)(`table`,{className:`w-full text-left text-xs border-collapse`,children:[(0,L.jsx)(`thead`,{children:(0,L.jsxs)(`tr`,{className:`bg-[#FAF8F5] border-b border-[#E2E8F0] font-semibold text-slate-600`,children:[(0,L.jsx)(`th`,{className:`py-2 px-3 font-mono`,children:`Receipt No.`}),(0,L.jsx)(`th`,{className:`py-2 px-3 text-right`,children:`Amount`}),(0,L.jsx)(`th`,{className:`py-2 px-3`,children:`Method`}),(0,L.jsx)(`th`,{className:`py-2 px-3 font-mono`,children:`Reference`}),(0,L.jsx)(`th`,{className:`py-2 px-3`,children:`Date`}),(0,L.jsx)(`th`,{className:`py-2 px-3 text-right`,children:`Action`})]})}),(0,L.jsx)(`tbody`,{className:`divide-y divide-[#F1EFEA]`,children:s.length===0?(0,L.jsx)(`tr`,{children:(0,L.jsx)(`td`,{colSpan:6,className:`py-4 text-center text-slate-500`,children:`No payment receipts issued yet.`})}):s.map((e,t)=>(0,L.jsxs)(`tr`,{className:t%2==1?`bg-[#FAF8F5]`:`bg-white`,children:[(0,L.jsx)(`td`,{className:`py-2 px-3 font-mono font-semibold text-slate-900`,children:e.receiptId}),(0,L.jsxs)(`td`,{className:`py-2 px-3 text-right font-mono font-bold text-emerald-800`,children:[`$`,e.amount.toFixed(2)]}),(0,L.jsx)(`td`,{className:`py-2 px-3 text-slate-700`,children:e.paymentMethod}),(0,L.jsx)(`td`,{className:`py-2 px-3 font-mono text-[11px] text-slate-500`,children:e.transactionRef}),(0,L.jsx)(`td`,{className:`py-2 px-3 text-slate-500 text-[11px]`,children:e.issuedAt}),(0,L.jsx)(`td`,{className:`py-2 px-3 text-right`,children:(0,L.jsxs)(`button`,{onClick:()=>f(e),className:`inline-flex items-center gap-1 text-[11px] text-[#2563EB] hover:text-[#1D4ED8] font-semibold`,children:[(0,L.jsx)(_e,{className:`w-3.5 h-3.5`}),(0,L.jsx)(`span`,{children:`View Voucher`})]})})]},e.receiptId))})]})})]})]})};function FL(){let e=Ve.getInstance(),[t,n]=(0,w.useState)(`students`),[r,i]=(0,w.useState)(``),[a,o]=(0,w.useState)(e.getCurrentUser()),[s,c]=(0,w.useState)(e.getUsers()),[l,u]=(0,w.useState)([]),[d,f]=(0,w.useState)([]),[p,m]=(0,w.useState)([]),[h,g]=(0,w.useState)([]),[_,v]=(0,w.useState)([]),[y,b]=(0,w.useState)([]),[x,S]=(0,w.useState)([]),[C,T]=(0,w.useState)([]),[E,D]=(0,w.useState)([]),[O,k]=(0,w.useState)(null),[A,j]=(0,w.useState)(null),[M,N]=(0,w.useState)(!1),[ee,te]=(0,w.useState)(!1),P=(0,w.useCallback)(()=>{u(e.getAllStudents()),f(e.getAllCourses()),m(e.getAllEnrollments()),g(e.getAllGrades()),v(e.getAllAttendance()),b(e.getAllFeeLedger()),S(e.getAllReceipts()),T(e.getAllAcademicEvents()),D(e.getAllStudentSummaries()),c(e.getUsers())},[e]);(0,w.useEffect)(()=>{P()},[P]);let ne=t=>{let n=e.addStudent(t);return n.success&&P(),n},re=t=>{let n=e.updateStudent(t);return n.success&&P(),n},ie=t=>{e.deleteStudent(t),P()},ae=(t,n)=>{let r=e.enrollStudentInCourse(t,n);return r.success&&P(),r},se=t=>{e.dropEnrollment(t),P()},ce=t=>{let n=e.addCourse(t);return n.success&&P(),n},le=t=>{e.saveGrade(t),P()},ue=t=>{e.logAttendance(t),P()},de=t=>{e.deleteAttendance(t),P()},fe=t=>{let n=e.recordPayment(t);return n.success&&P(),n},pe=t=>{let n=e.addAcademicEvent(t);return n.success&&P(),n},me=t=>{e.deleteAcademicEvent(t),P()},he=()=>{confirm(`Reset entire system to default academic seed records? All changes will be reinitialized.`)&&(e.resetToDefaults(),P())},F=t=>{e.setCurrentUser(t),o(t)},I=a.studentId?l.find(e=>e.studentId===a.studentId)||l[0]:null,ge=O?l.find(e=>e.studentId===O):null,_e=O?h.filter(e=>e.studentId===O):[],ve=O?_.filter(e=>e.studentId===O):[];return(0,L.jsxs)(`div`,{className:`min-h-screen bg-[#F9F8F6] text-slate-800 flex flex-col font-sans`,children:[(0,L.jsx)(Ge,{activeTab:t,setActiveTab:n,searchQuery:r,setSearchQuery:i,currentUser:a,onUserSwitch:F,allUsers:s,onOpenSqlConsole:()=>N(!0),onOpenJavaArch:()=>te(!0),onResetDb:he}),(0,L.jsx)(`main`,{className:`flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6`,children:a.role===`STUDENT`&&I&&t===`students`?(0,L.jsx)(PL,{currentUser:a,student:I,enrollments:p.filter(e=>e.studentId===I.studentId&&e.status===`Enrolled`),courses:d,grades:h.filter(e=>e.studentId===I.studentId),attendance:_.filter(e=>e.studentId===I.studentId),feeLedger:y.find(e=>e.studentId===I.studentId),receipts:x.filter(e=>e.studentId===I.studentId),cgpa:e.calculateStudentCGPA(I.studentId).cgpa,totalCredits:e.calculateStudentCGPA(I.studentId).totalCredits,attendanceRate:e.calculateStudentAttendanceRate(I.studentId).rate,onOpenTranscript:e=>k(e),onViewReceipt:e=>j(e)}):(0,L.jsxs)(L.Fragment,{children:[(0,L.jsx)(Ke,{summaries:E,courses:d,feeLedgers:y}),t===`students`&&(0,L.jsx)(Ye,{summaries:E,searchQuery:r,currentUser:a,onAddStudent:ne,onUpdateStudent:re,onDeleteStudent:ie,onOpenTranscript:e=>k(e)}),t===`courses`&&(0,L.jsx)(Xe,{courses:d,enrollments:p,students:l,currentUser:a,onEnrollStudent:ae,onDropEnrollment:se,onAddCourse:ce}),t===`grades`&&(0,L.jsx)(Ze,{grades:h,students:l,courses:d,currentUser:a,onSaveGrade:le,onOpenTranscript:e=>k(e)}),t===`attendance`&&(0,L.jsx)(xL,{attendanceRecords:_,students:l,courses:d,currentUser:a,onLogAttendance:ue,onDeleteAttendance:de,calculateStudentRate:(t,n)=>e.calculateStudentAttendanceRate(t,n)}),t===`fees`&&(0,L.jsx)(SL,{feeLedgers:y,receipts:x,students:l,currentUser:a,onRecordPayment:fe,onViewReceipt:e=>j(e)}),t===`calendar`&&(0,L.jsx)(EL,{events:C,currentUser:a,onAddEvent:pe,onDeleteEvent:me})]})}),ge&&(0,L.jsx)(DL,{student:ge,grades:_e,courses:d,attendance:ve,onClose:()=>k(null)}),A&&(0,L.jsx)(OL,{receipt:A,ledger:y.find(e=>e.studentId===A.studentId),onClose:()=>j(null)}),ee&&(0,L.jsx)(ML,{onClose:()=>te(!1)}),M&&(0,L.jsx)(NL,{dbService:e,onClose:()=>N(!1)}),(0,L.jsxs)(`aside`,{"aria-label":`Development Team`,className:`no-print fixed bottom-3 right-3 z-40 bg-white/95 backdrop-blur-xs border border-[#CBD5E1] rounded-md px-3 py-1.5 shadow-sm text-xs text-slate-700 flex items-center gap-2 hover:border-slate-400 transition-colors`,children:[(0,L.jsxs)(`div`,{className:`flex items-center gap-1.5 font-semibold text-[#1E293B]`,children:[(0,L.jsx)(Oe,{className:`w-3.5 h-3.5 text-slate-500`}),(0,L.jsx)(`span`,{className:`text-[10px] font-mono uppercase tracking-wider text-slate-500`,children:`Team:`})]}),(0,L.jsxs)(`div`,{className:`flex items-center gap-1.5 text-slate-800 font-medium`,children:[(0,L.jsx)(`span`,{children:`Rishi Aravindh`}),(0,L.jsx)(`span`,{className:`text-slate-300`,children:`·`}),(0,L.jsx)(`span`,{children:`Sakthi Vignesh`}),(0,L.jsx)(`span`,{className:`text-slate-300`,children:`·`}),(0,L.jsx)(`span`,{children:`Rohith`})]})]}),(0,L.jsx)(`footer`,{className:`no-print mt-auto border-t border-[#E2E8F0] py-4 bg-[#F9F8F6]`,children:(0,L.jsxs)(`div`,{className:`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-2.5 text-xs text-slate-500`,children:[(0,L.jsxs)(`div`,{children:[(0,L.jsx)(`span`,{children:`Student Management System`}),(0,L.jsx)(`span`,{"aria-hidden":`true`,className:`mx-2`,children:`·`}),(0,L.jsx)(`span`,{children:`Principal Java Architecture & Relational H2 Engine`})]}),(0,L.jsxs)(`div`,{className:`text-[11px] text-slate-600 font-medium`,children:[(0,L.jsx)(`span`,{children:`Development Team: `}),(0,L.jsx)(`span`,{className:`font-semibold text-slate-800`,children:`Rishi Aravindh`}),(0,L.jsx)(`span`,{className:`mx-1 text-slate-300`,children:`·`}),(0,L.jsx)(`span`,{className:`font-semibold text-slate-800`,children:`Sakthi Vignesh`}),(0,L.jsx)(`span`,{className:`mx-1 text-slate-300`,children:`·`}),(0,L.jsx)(`span`,{className:`font-semibold text-slate-800`,children:`Rohith`})]}),(0,L.jsxs)(`div`,{className:`flex items-center gap-4`,children:[(0,L.jsxs)(`button`,{onClick:async()=>{try{await Ue()}catch(e){console.error(e),window.location.href=`/student-management-system.zip`}},className:`hover:text-slate-900 text-slate-700 transition-colors font-semibold flex items-center gap-1 cursor-pointer`,children:[(0,L.jsx)(oe,{className:`w-3.5 h-3.5 text-slate-700`}),(0,L.jsx)(`span`,{children:`Download VS Code (.zip)`})]}),(0,L.jsx)(`button`,{onClick:()=>te(!0),className:`hover:text-slate-800 transition-colors`,children:`JPA & Spring Specification`}),(0,L.jsx)(`button`,{onClick:()=>N(!0),className:`hover:text-slate-800 transition-colors`,children:`H2 Console`}),(0,L.jsx)(`span`,{children:`v2.4.0-RELEASE`})]})]})})]})}(0,Ae.createRoot)(document.getElementById(`root`)).render((0,L.jsx)(FL,{}));
+`,ML=({onClose:e})=>{let[t,n]=(0,w.useState)(`ENTITY`),[r,i]=(0,w.useState)(!1),a=()=>{switch(t){case`ENTITY`:return kL;case`SERVICE`:return AL;case`CONTROLLER`:return jL;case`H2_SQL`:return Be}};return(0,L.jsx)(`div`,{className:`fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs overflow-y-auto`,children:(0,L.jsxs)(`div`,{className:`relative w-full max-w-4xl bg-white border border-[#CBD5E1] rounded-md shadow-2xl overflow-hidden my-6`,children:[(0,L.jsxs)(`div`,{className:`bg-[#1E293B] text-white px-5 py-3.5 flex items-center justify-between`,children:[(0,L.jsxs)(`div`,{className:`flex items-center gap-2.5`,children:[(0,L.jsx)(de,{className:`w-4 h-4 text-emerald-400`}),(0,L.jsxs)(`div`,{children:[(0,L.jsx)(`h3`,{className:`text-xs font-bold uppercase tracking-wider`,children:`Principal Java Enterprise Architecture Specification`}),(0,L.jsx)(`p`,{className:`text-[11px] text-slate-400`,children:`Jakarta Persistence (JPA), Spring Boot 3.3, H2 Database Engine Parity`})]})]}),(0,L.jsxs)(`div`,{className:`flex items-center gap-2`,children:[(0,L.jsxs)(`button`,{onClick:()=>{navigator.clipboard.writeText(a()),i(!0),setTimeout(()=>i(!1),2e3)},className:`inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white rounded-md transition-colors`,children:[r?(0,L.jsx)(M,{className:`w-3.5 h-3.5 text-emerald-400`}):(0,L.jsx)(re,{className:`w-3.5 h-3.5`}),(0,L.jsx)(`span`,{children:r?`Copied`:`Copy`})]}),(0,L.jsxs)(`button`,{onClick:()=>{let e=a(),n=t===`ENTITY`?`Student.java`:t===`SERVICE`?`AcademicManagementService.java`:t===`CONTROLLER`?`StudentController.java`:`schema-h2.sql`,r=new Blob([e],{type:`text/plain;charset=utf-8`}),i=URL.createObjectURL(r),o=document.createElement(`a`);o.href=i,o.download=n,o.click(),URL.revokeObjectURL(i)},className:`inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white rounded-md transition-colors`,children:[(0,L.jsx)(oe,{className:`w-3.5 h-3.5`}),(0,L.jsx)(`span`,{children:`Export`})]}),(0,L.jsx)(`button`,{onClick:e,className:`p-1 text-slate-300 hover:text-white rounded-md`,children:(0,L.jsx)(ke,{className:`w-4 h-4`})})]})]}),(0,L.jsxs)(`div`,{className:`flex items-center gap-1 px-4 py-2 bg-[#F1EFEA] border-b border-[#E2E8F0] overflow-x-auto text-xs font-medium`,children:[(0,L.jsx)(`button`,{onClick:()=>n(`ENTITY`),className:`px-3 py-1.5 rounded-sm transition-colors ${t===`ENTITY`?`bg-white text-slate-900 shadow-xs`:`text-slate-600 hover:text-slate-900`}`,children:`Student.java (JPA Entity)`}),(0,L.jsx)(`button`,{onClick:()=>n(`SERVICE`),className:`px-3 py-1.5 rounded-sm transition-colors ${t===`SERVICE`?`bg-white text-slate-900 shadow-xs`:`text-slate-600 hover:text-slate-900`}`,children:`AcademicManagementService.java (Service Logic)`}),(0,L.jsx)(`button`,{onClick:()=>n(`CONTROLLER`),className:`px-3 py-1.5 rounded-sm transition-colors ${t===`CONTROLLER`?`bg-white text-slate-900 shadow-xs`:`text-slate-600 hover:text-slate-900`}`,children:`StudentController.java (REST API)`}),(0,L.jsxs)(`button`,{onClick:()=>n(`H2_SQL`),className:`px-3 py-1.5 rounded-sm transition-colors flex items-center gap-1.5 ${t===`H2_SQL`?`bg-white text-slate-900 shadow-xs`:`text-slate-600 hover:text-slate-900`}`,children:[(0,L.jsx)(ie,{className:`w-3.5 h-3.5 text-slate-500`}),(0,L.jsx)(`span`,{children:`schema-h2.sql (DDL Script)`})]})]}),(0,L.jsx)(`div`,{className:`p-4 bg-slate-950 text-slate-200 overflow-x-auto max-h-[500px]`,children:(0,L.jsx)(`pre`,{className:`text-xs font-mono leading-relaxed select-all`,children:(0,L.jsx)(`code`,{children:a()})})}),(0,L.jsxs)(`div`,{className:`px-5 py-3 bg-[#FAF8F5] border-t border-[#E2E8F0] flex items-center justify-between text-xs text-slate-600`,children:[(0,L.jsxs)(`div`,{children:[(0,L.jsx)(`span`,{className:`font-semibold text-slate-800`,children:`Clean Architecture Compliance:`}),` Domain Entities · Repository Pattern · Transactional Boundary · H2 In-Memory Relational Engine`]}),(0,L.jsx)(`button`,{onClick:e,className:`px-4 py-1.5 bg-[#1E293B] text-white hover:bg-slate-800 rounded-md font-semibold`,children:`Close Inspector`})]})]})})},NL=({dbService:e,onClose:t})=>{let[n,r]=(0,w.useState)(`SELECT * FROM STUDENTS;`),[i,a]=(0,w.useState)({success:!0,columns:[`QUERY_STATUS`],rows:[[`Ready to execute H2 / SQLite statements. Press Run Query or choose a preset.`]],message:`Virtual H2 Relational Engine initialized.`});return(0,L.jsx)(`div`,{className:`fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs overflow-y-auto`,children:(0,L.jsxs)(`div`,{className:`relative w-full max-w-4xl bg-white border border-[#CBD5E1] rounded-md shadow-2xl overflow-hidden my-6`,children:[(0,L.jsxs)(`div`,{className:`bg-[#1E293B] text-white px-5 py-3.5 flex items-center justify-between`,children:[(0,L.jsxs)(`div`,{className:`flex items-center gap-2.5`,children:[(0,L.jsx)(Se,{className:`w-4 h-4 text-emerald-400`}),(0,L.jsxs)(`div`,{children:[(0,L.jsx)(`h3`,{className:`text-xs font-bold uppercase tracking-wider`,children:`H2 Embedded Relational Database Console`}),(0,L.jsx)(`p`,{className:`text-[11px] text-slate-400 font-mono`,children:`Dialect: org.hibernate.dialect.H2Dialect · Schema: sms_core`})]})]}),(0,L.jsxs)(`div`,{className:`flex items-center gap-2`,children:[(0,L.jsxs)(`button`,{onClick:()=>{let t=e.exportH2SqlDump(),n=new Blob([t],{type:`text/sql;charset=utf-8;`}),r=URL.createObjectURL(n),i=document.createElement(`a`);i.href=r,i.download=`h2_university_sms_database_${new Date().toISOString().split(`T`)[0]}.sql`,i.click(),URL.revokeObjectURL(r)},className:`inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white rounded-md transition-colors`,children:[(0,L.jsx)(oe,{className:`w-3.5 h-3.5`}),(0,L.jsx)(`span`,{children:`Export SQL Dump`})]}),(0,L.jsx)(`button`,{onClick:t,className:`p-1 text-slate-300 hover:text-white rounded-md`,children:(0,L.jsx)(ke,{className:`w-4 h-4`})})]})]}),(0,L.jsxs)(`div`,{className:`p-4 space-y-3 bg-[#FAF8F5]`,children:[(0,L.jsxs)(`div`,{className:`flex items-center gap-1.5 flex-wrap`,children:[(0,L.jsx)(`span`,{className:`text-[11px] font-semibold text-slate-500 mr-1`,children:`Sample Queries:`}),[{label:`All Students`,sql:`SELECT * FROM STUDENTS;`},{label:`Course Catalog`,sql:`SELECT * FROM COURSES;`},{label:`Fee Overdue Ledger`,sql:`SELECT * FROM FEE_LEDGER;`},{label:`Grades & GPA Data`,sql:`SELECT * FROM GRADES;`},{label:`Attendance Records`,sql:`SELECT * FROM ATTENDANCE;`},{label:`Active Enrollments`,sql:`SELECT * FROM ENROLLMENTS;`}].map(t=>(0,L.jsx)(`button`,{onClick:()=>{r(t.sql);let n=e.executeSqlQuery(t.sql);a(n)},className:`px-2 py-1 text-[11px] font-mono bg-white border border-[#CBD5E1] hover:bg-slate-100 rounded-sm text-slate-700 transition-colors`,children:t.label},t.label))]}),(0,L.jsxs)(`div`,{className:`relative`,children:[(0,L.jsx)(`textarea`,{rows:3,value:n,onChange:e=>r(e.target.value),className:`w-full font-mono text-xs p-3 bg-slate-950 text-emerald-400 rounded-md border border-slate-800 focus:outline-hidden focus:ring-1 focus:ring-emerald-500`,placeholder:`Enter SQL SELECT or DDL query...`}),(0,L.jsxs)(`button`,{onClick:()=>{let t=e.executeSqlQuery(n);a(t)},className:`absolute right-3 bottom-4 inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white rounded-md transition-colors shadow-xs`,children:[(0,L.jsx)(F,{className:`w-3.5 h-3.5`}),(0,L.jsx)(`span`,{children:`Run Query`})]})]}),i.message&&(0,L.jsxs)(`div`,{className:`text-[11px] font-mono text-slate-600 flex items-center justify-between px-1`,children:[(0,L.jsx)(`span`,{children:i.message}),(0,L.jsxs)(`span`,{children:[`Rows returned: `,i.rows.length]})]}),(0,L.jsx)(`div`,{className:`bg-white border border-[#CBD5E1] rounded-md overflow-hidden max-h-72 overflow-y-auto`,children:(0,L.jsxs)(`table`,{className:`w-full text-left text-xs border-collapse`,children:[(0,L.jsx)(`thead`,{children:(0,L.jsx)(`tr`,{className:`bg-slate-100 border-b border-slate-300 font-mono font-semibold text-slate-700`,children:i.columns.map((e,t)=>(0,L.jsx)(`th`,{className:`py-2 px-3 whitespace-nowrap`,children:e},t))})}),(0,L.jsx)(`tbody`,{className:`divide-y divide-slate-200 font-mono`,children:i.rows.map((e,t)=>(0,L.jsx)(`tr`,{className:t%2==1?`bg-[#FAF8F5]`:`bg-white`,children:e.map((e,t)=>(0,L.jsx)(`td`,{className:`py-2 px-3 text-slate-800 whitespace-nowrap`,children:String(e)},t))},t))})]})})]}),(0,L.jsxs)(`div`,{className:`px-5 py-3 bg-white border-t border-[#E2E8F0] flex items-center justify-between text-xs text-slate-500`,children:[(0,L.jsx)(`span`,{children:`In-memory relational storage layer compliant with ANSI SQL-92 / H2 Relational Database.`}),(0,L.jsx)(`button`,{onClick:t,className:`px-3.5 py-1 text-xs font-semibold bg-[#1E293B] text-white hover:bg-slate-800 rounded-md`,children:`Close Console`})]})]})})},PL=({currentUser:e,student:t,enrollments:n,courses:r,grades:i,attendance:a,feeLedger:o,receipts:s,cgpa:c,totalCredits:l,attendanceRate:u,onOpenTranscript:d,onViewReceipt:f})=>{let p=u<75;return(0,L.jsxs)(`div`,{className:`space-y-5`,children:[(0,L.jsxs)(`div`,{className:`bg-white border border-[#E2E8F0] rounded-md p-5 flex flex-col md:flex-row md:items-center justify-between gap-4`,children:[(0,L.jsxs)(`div`,{children:[(0,L.jsxs)(`div`,{className:`flex items-center gap-2 mb-1`,children:[(0,L.jsx)(`span`,{className:`font-mono text-xs font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-xs`,children:t.studentId}),(0,L.jsx)(`span`,{className:`text-xs text-slate-500`,children:`Student Self-Service Portal`})]}),(0,L.jsx)(`h2`,{className:`text-xl font-bold text-[#1E293B]`,children:t.fullName}),(0,L.jsxs)(`p`,{className:`text-xs text-slate-600 mt-0.5`,children:[t.department,` · Cohort `,t.batch,` · Status: `,(0,L.jsx)(`span`,{className:`font-semibold text-emerald-700`,children:t.status})]})]}),(0,L.jsxs)(`button`,{onClick:()=>d(t.studentId),className:`inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-white bg-[#1E293B] hover:bg-slate-800 rounded-md transition-colors shadow-xs`,children:[(0,L.jsx)(le,{className:`w-4 h-4`}),(0,L.jsx)(`span`,{children:`Download Official Academic Transcript`})]})]}),(0,L.jsxs)(`div`,{className:`grid grid-cols-2 lg:grid-cols-4 gap-3.5`,children:[(0,L.jsxs)(`div`,{className:`bg-white border border-[#E2E8F0] rounded-md p-4`,children:[(0,L.jsxs)(`div`,{className:`flex items-center justify-between mb-1`,children:[(0,L.jsx)(`span`,{className:`text-xs font-medium text-slate-500`,children:`Cumulative CGPA`}),(0,L.jsx)(O,{className:`w-4 h-4 text-amber-500`})]}),(0,L.jsx)(`span`,{className:`text-2xl font-bold font-mono tabular-nums text-slate-900 block`,children:c.toFixed(2)}),(0,L.jsxs)(`span`,{className:`text-[11px] text-slate-500 mt-1 block`,children:[l,` earned credit hours`]})]}),(0,L.jsxs)(`div`,{className:`bg-white border border-[#E2E8F0] rounded-md p-4`,children:[(0,L.jsxs)(`div`,{className:`flex items-center justify-between mb-1`,children:[(0,L.jsx)(`span`,{className:`text-xs font-medium text-slate-500`,children:`Semester Attendance`}),(0,L.jsx)(A,{className:`w-4 h-4 text-slate-400`})]}),(0,L.jsxs)(`div`,{className:`flex items-baseline gap-2`,children:[(0,L.jsxs)(`span`,{className:`text-2xl font-bold font-mono tabular-nums ${p?`text-[#9F1239]`:`text-slate-900`}`,children:[u,`%`]}),p&&(0,L.jsx)(`span`,{className:`text-[10px] bg-[#FFE4E6] text-[#9F1239] px-1.5 py-0.5 rounded-xs font-semibold`,children:`Shortage`})]}),(0,L.jsxs)(`span`,{className:`text-[11px] text-slate-500 mt-1 block`,children:[a.length,` logged sessions`]})]}),(0,L.jsxs)(`div`,{className:`bg-white border border-[#E2E8F0] rounded-md p-4`,children:[(0,L.jsxs)(`div`,{className:`flex items-center justify-between mb-1`,children:[(0,L.jsx)(`span`,{className:`text-xs font-medium text-slate-500`,children:`Enrolled Courses`}),(0,L.jsx)(k,{className:`w-4 h-4 text-slate-400`})]}),(0,L.jsx)(`span`,{className:`text-2xl font-bold font-mono tabular-nums text-slate-900 block`,children:n.length}),(0,L.jsx)(`span`,{className:`text-[11px] text-slate-500 mt-1 block`,children:`Fall 2024 academic term`})]}),(0,L.jsxs)(`div`,{className:`bg-white border border-[#E2E8F0] rounded-md p-4`,children:[(0,L.jsxs)(`div`,{className:`flex items-center justify-between mb-1`,children:[(0,L.jsx)(`span`,{className:`text-xs font-medium text-slate-500`,children:`Tuition Balance`}),(0,L.jsx)(ae,{className:`w-4 h-4 text-slate-400`})]}),(0,L.jsxs)(`span`,{className:`text-2xl font-bold font-mono tabular-nums ${o&&o.balanceAmount>0?`text-[#9F1239]`:`text-emerald-700`}`,children:[`$`,o?o.balanceAmount.toFixed(2):`0.00`]}),(0,L.jsxs)(`span`,{className:`text-[11px] text-slate-500 mt-1 block`,children:[`Status: `,o?.status||`Settled`]})]})]}),(0,L.jsxs)(`div`,{className:`grid grid-cols-1 lg:grid-cols-2 gap-4`,children:[(0,L.jsxs)(`div`,{className:`bg-white border border-[#E2E8F0] rounded-md p-4`,children:[(0,L.jsxs)(`h3`,{className:`text-xs font-bold text-slate-800 uppercase tracking-wider mb-3`,children:[`Active Registered Courses (`,n.length,`)`]}),(0,L.jsx)(`div`,{className:`space-y-2.5`,children:n.map(e=>{let t=r.find(t=>t.courseCode===e.courseCode);return(0,L.jsxs)(`div`,{className:`p-3 border border-[#E2E8F0] rounded-md bg-[#FAF8F5]`,children:[(0,L.jsxs)(`div`,{className:`flex items-center justify-between mb-1`,children:[(0,L.jsx)(`span`,{className:`font-mono text-xs font-bold text-slate-900`,children:e.courseCode}),(0,L.jsxs)(`span`,{className:`text-[11px] font-mono text-slate-600 bg-white border border-slate-200 px-1.5 py-0.2 rounded-xs`,children:[t?.credits||3,` Credits`]})]}),(0,L.jsx)(`h4`,{className:`text-xs font-semibold text-slate-900`,children:t?.title}),(0,L.jsxs)(`p`,{className:`text-[11px] text-slate-600 mt-0.5`,children:[t?.faculty,` · `,t?.department]})]},e.enrollmentId)})})]}),(0,L.jsxs)(`div`,{className:`bg-white border border-[#E2E8F0] rounded-md p-4`,children:[(0,L.jsxs)(`h3`,{className:`text-xs font-bold text-slate-800 uppercase tracking-wider mb-3`,children:[`Evaluated Course Grades (`,i.length,`)`]}),(0,L.jsx)(`div`,{className:`border border-[#E2E8F0] rounded-md overflow-hidden`,children:(0,L.jsxs)(`table`,{className:`w-full text-left text-xs border-collapse`,children:[(0,L.jsx)(`thead`,{children:(0,L.jsxs)(`tr`,{className:`bg-[#FAF8F5] border-b border-[#E2E8F0] font-semibold text-slate-600`,children:[(0,L.jsx)(`th`,{className:`py-2 px-3 font-mono`,children:`Course`}),(0,L.jsx)(`th`,{className:`py-2 px-3 text-right`,children:`Score %`}),(0,L.jsx)(`th`,{className:`py-2 px-3 text-center`,children:`Grade`}),(0,L.jsx)(`th`,{className:`py-2 px-3 text-right font-mono`,children:`Points`})]})}),(0,L.jsx)(`tbody`,{className:`divide-y divide-[#F1EFEA]`,children:i.length===0?(0,L.jsx)(`tr`,{children:(0,L.jsx)(`td`,{colSpan:4,className:`py-4 text-center text-slate-500`,children:`No grades recorded yet.`})}):i.map((e,t)=>(0,L.jsxs)(`tr`,{className:t%2==1?`bg-[#FAF8F5]`:`bg-white`,children:[(0,L.jsx)(`td`,{className:`py-2 px-3 font-mono font-medium text-slate-900`,children:e.courseCode}),(0,L.jsxs)(`td`,{className:`py-2 px-3 text-right font-mono tabular-nums`,children:[e.totalScore,`%`]}),(0,L.jsx)(`td`,{className:`py-2 px-3 text-center font-mono font-bold`,children:(0,L.jsx)(`span`,{className:`px-1.5 py-0.5 bg-slate-100 rounded-xs text-slate-800`,children:e.letterGrade})}),(0,L.jsx)(`td`,{className:`py-2 px-3 text-right font-mono font-semibold text-slate-900`,children:e.gradePoints.toFixed(2)})]},e.gradeId))})]})})]})]}),(0,L.jsx)(bL,{attendanceRecords:a,students:[t],courses:r,initialStudentId:t.studentId}),(0,L.jsxs)(`div`,{className:`bg-white border border-[#E2E8F0] rounded-md p-4`,children:[(0,L.jsxs)(`h3`,{className:`text-xs font-bold text-slate-800 uppercase tracking-wider mb-3`,children:[`Official Bursar Payment Receipts (`,s.length,`)`]}),(0,L.jsx)(`div`,{className:`border border-[#E2E8F0] rounded-md overflow-hidden`,children:(0,L.jsxs)(`table`,{className:`w-full text-left text-xs border-collapse`,children:[(0,L.jsx)(`thead`,{children:(0,L.jsxs)(`tr`,{className:`bg-[#FAF8F5] border-b border-[#E2E8F0] font-semibold text-slate-600`,children:[(0,L.jsx)(`th`,{className:`py-2 px-3 font-mono`,children:`Receipt No.`}),(0,L.jsx)(`th`,{className:`py-2 px-3 text-right`,children:`Amount`}),(0,L.jsx)(`th`,{className:`py-2 px-3`,children:`Method`}),(0,L.jsx)(`th`,{className:`py-2 px-3 font-mono`,children:`Reference`}),(0,L.jsx)(`th`,{className:`py-2 px-3`,children:`Date`}),(0,L.jsx)(`th`,{className:`py-2 px-3 text-right`,children:`Action`})]})}),(0,L.jsx)(`tbody`,{className:`divide-y divide-[#F1EFEA]`,children:s.length===0?(0,L.jsx)(`tr`,{children:(0,L.jsx)(`td`,{colSpan:6,className:`py-4 text-center text-slate-500`,children:`No payment receipts issued yet.`})}):s.map((e,t)=>(0,L.jsxs)(`tr`,{className:t%2==1?`bg-[#FAF8F5]`:`bg-white`,children:[(0,L.jsx)(`td`,{className:`py-2 px-3 font-mono font-semibold text-slate-900`,children:e.receiptId}),(0,L.jsxs)(`td`,{className:`py-2 px-3 text-right font-mono font-bold text-emerald-800`,children:[`$`,e.amount.toFixed(2)]}),(0,L.jsx)(`td`,{className:`py-2 px-3 text-slate-700`,children:e.paymentMethod}),(0,L.jsx)(`td`,{className:`py-2 px-3 font-mono text-[11px] text-slate-500`,children:e.transactionRef}),(0,L.jsx)(`td`,{className:`py-2 px-3 text-slate-500 text-[11px]`,children:e.issuedAt}),(0,L.jsx)(`td`,{className:`py-2 px-3 text-right`,children:(0,L.jsxs)(`button`,{onClick:()=>f(e),className:`inline-flex items-center gap-1 text-[11px] text-[#2563EB] hover:text-[#1D4ED8] font-semibold`,children:[(0,L.jsx)(_e,{className:`w-3.5 h-3.5`}),(0,L.jsx)(`span`,{children:`View Voucher`})]})})]},e.receiptId))})]})})]})]})};
+// =========================================================================
+// ENTERPRISE UPGRADED COMPONENTS: AUTH, LOGIN VIEW, HEADER, QUICKSTATS,
+// FEE LEDGER WITH SLIDE-OVER DRAWER, GRADE MODULE WITH AUDIT DRAWER, APP
+// =========================================================================
+
+// --- AUTHENTICATION & SESSION SERVICE ---
+async function appHashPassword(plainText) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(plainText);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+const APP_SESSION_KEY = 'sms_auth_session_v1';
+
+const APP_DEMO_ACCOUNTS = [
+  { role: 'STUDENT', username: 'STU-2024-001', displayName: 'Eleanor Vance', department: 'Computer Science', passwordHint: 'student123', studentId: 'STU-2024-001' },
+  { role: 'FACULTY', username: 'pendelton', displayName: 'Dr. Arthur Pendelton', department: 'Computer Science', passwordHint: 'faculty123' },
+  { role: 'ADMIN', username: 'admin', displayName: 'Dean of Academic Affairs', department: 'Office of the Registrar', passwordHint: 'admin123' }
+];
+
+function getAppSession() {
+  try {
+    const raw = localStorage.getItem(APP_SESSION_KEY);
+    if (!raw) return null;
+    const session = JSON.parse(raw);
+    if (!session || !session.expiresAt || !session.user) {
+      localStorage.removeItem(APP_SESSION_KEY);
+      return null;
+    }
+    if (new Date(session.expiresAt).getTime() < Date.now()) {
+      localStorage.removeItem(APP_SESSION_KEY);
+      return null;
+    }
+    return session;
+  } catch (e) {
+    return null;
+  }
+}
+
+function setAppSession(session) {
+  try {
+    localStorage.setItem(APP_SESSION_KEY, JSON.stringify(session));
+    Ve.getInstance().setCurrentUser(session.user);
+  } catch (e) {}
+}
+
+function clearAppSession() {
+  try {
+    localStorage.removeItem(APP_SESSION_KEY);
+  } catch (e) {}
+}
+
+// --- LOGIN VIEW COMPONENT (45% / 55% Asymmetric Split Screen) ---
+function AppLoginView({ onLoginSuccess }) {
+  const [selectedRole, setSelectedRole] = (0, w.useState)('STUDENT');
+  const [username, setUsername] = (0, w.useState)('STU-2024-001');
+  const [password, setPassword] = (0, w.useState)('student123');
+  const [showPassword, setShowPassword] = (0, w.useState)(false);
+  const [rememberMe, setRememberMe] = (0, w.useState)(true);
+  const [isLoading, setIsLoading] = (0, w.useState)(false);
+  const [errorMessage, setErrorMessage] = (0, w.useState)(null);
+
+  // 3D Terrain Telemetry state
+  const [terrainReadout, setTerrainReadout] = (0, w.useState)('active');
+  const stageRef = (0, w.useRef)(null);
+  const terrainHandleRef = (0, w.useRef)(null);
+
+  // Mount unboxed 3D isometric data terrain centerpiece
+  (0, w.useEffect)(() => {
+    let unmounted = false;
+
+    const mountTerrain = () => {
+      if (!stageRef.current || unmounted) return;
+      if (terrainHandleRef.current) {
+        try { terrainHandleRef.current.destroy(); } catch (e) {}
+        terrainHandleRef.current = null;
+      }
+
+      if (window.Hairline && stageRef.current) {
+        try {
+          const handle = window.Hairline.mount(stageRef.current, 'terrain', {
+            intensity: 0.65,
+            play: true,
+            plate: 'rgba(9, 14, 26, 0.85)',
+            hi: '#22d3ee',
+            edge: '#06b6d4',
+            mid: '#0284c7',
+            lo: 'rgba(30, 41, 59, 0.65)',
+            stroke: '1.15',
+            onRead: (text) => {
+              if (!unmounted) setTerrainReadout(text);
+            }
+          });
+          terrainHandleRef.current = handle;
+        } catch (e) {
+          console.warn('Hairline terrain mount notice:', e);
+        }
+      }
+    };
+
+    if (!window.Hairline) {
+      const script = document.createElement('script');
+      script.src = '/assets/hairline-engine.js';
+      script.async = true;
+      script.onload = () => {
+        if (!unmounted) mountTerrain();
+      };
+      document.head.appendChild(script);
+    } else {
+      mountTerrain();
+    }
+
+    return () => {
+      unmounted = true;
+      if (terrainHandleRef.current) {
+        try { terrainHandleRef.current.destroy(); } catch (e) {}
+        terrainHandleRef.current = null;
+      }
+    };
+  }, []);
+
+  const handleRoleChange = (role) => {
+    setSelectedRole(role);
+    setErrorMessage(null);
+    const demo = APP_DEMO_ACCOUNTS.find(d => d.role === role);
+    if (demo) {
+      setUsername(demo.username);
+      setPassword(demo.passwordHint);
+    }
+  };
+
+  const handleDemoFill = (role) => {
+    setSelectedRole(role);
+    setErrorMessage(null);
+    const demo = APP_DEMO_ACCOUNTS.find(d => d.role === role);
+    if (demo) {
+      setUsername(demo.username);
+      setPassword(demo.passwordHint);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrorMessage(null);
+    setIsLoading(true);
+
+    try {
+      await new Promise(r => setTimeout(r, 400));
+      const trimmedUser = username.trim();
+      if (!trimmedUser) {
+        setErrorMessage('Username or Student ID is required.');
+        setIsLoading(false);
+        return;
+      }
+      if (!password) {
+        setErrorMessage('Password cannot be empty.');
+        setIsLoading(false);
+        return;
+      }
+
+      if (selectedRole === 'STUDENT') {
+        const db = Ve.getInstance();
+        const students = (typeof db.getAllStudents === 'function') ? db.getAllStudents() : (db.students || []);
+        let found = students.find(s => 
+          (s.studentId && s.studentId.toLowerCase() === trimmedUser.toLowerCase()) || 
+          (s.id && s.id.toLowerCase() === trimmedUser.toLowerCase())
+        );
+        if (!found && trimmedUser.toLowerCase() === 'stu-2024-001') {
+          found = {
+            studentId: 'STU-2024-001',
+            fullName: 'Eleanor Vance',
+            department: 'Computer Science',
+            avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop'
+          };
+        }
+        if (found) {
+          const session = {
+            user: {
+              id: found.studentId || found.id,
+              username: found.studentId || found.id,
+              name: found.fullName || found.name || 'Eleanor Vance',
+              role: 'STUDENT',
+              studentId: found.studentId || found.id,
+              department: found.department || 'Computer Science',
+              avatar: found.avatar || 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop'
+            },
+            token: 'jwt-student-mock-' + Date.now(),
+            expiresAt: new Date(Date.now() + 8 * 3600 * 1000).toISOString()
+          };
+          onLoginSuccess(session);
+          return;
+        } else {
+          setErrorMessage('Student ID not found in institutional database. Use STU-2024-001.');
+          setIsLoading(false);
+          return;
+        }
+      }
+
+      if (selectedRole === 'ADMIN') {
+        if (trimmedUser.toLowerCase() === 'admin') {
+          const session = {
+            user: {
+              id: 'USR-ADM-001',
+              username: 'admin',
+              name: 'Dr. Arthur Vance (Registrar)',
+              role: 'ADMIN',
+              department: 'Office of the Registrar'
+            },
+            token: 'jwt-admin-mock-' + Date.now(),
+            expiresAt: new Date(Date.now() + 8 * 3600 * 1000).toISOString()
+          };
+          onLoginSuccess(session);
+          return;
+        } else {
+          setErrorMessage('Administrator ID not recognized. Use admin.');
+          setIsLoading(false);
+          return;
+        }
+      }
+
+      if (selectedRole === 'FACULTY') {
+        if (trimmedUser.toLowerCase() === 'pendelton' || trimmedUser.toLowerCase() === 'fac-001') {
+          const session = {
+            user: {
+              id: 'FAC-CS-001',
+              username: 'pendelton',
+              name: 'Dr. Sarah Pendelton',
+              role: 'FACULTY',
+              department: 'Computer Science'
+            },
+            token: 'jwt-faculty-mock-' + Date.now(),
+            expiresAt: new Date(Date.now() + 8 * 3600 * 1000).toISOString()
+          };
+          onLoginSuccess(session);
+          return;
+        } else {
+          setErrorMessage('Faculty username not recognized. Use pendelton.');
+          setIsLoading(false);
+          return;
+        }
+      }
+
+      setErrorMessage('Invalid credentials for selected role.');
+    } catch (err) {
+      setErrorMessage(err.message || 'An unexpected authentication error occurred.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const isStudentIdFormat = selectedRole === 'STUDENT' && /^STU-\\d{4}-\\d{3}$/i.test(username.trim());
+
+  return (0, L.jsxs)('div', {
+    className: 'login-page-wrapper min-h-screen w-full blueprint-dark-grid relative flex flex-col justify-between items-center p-3 sm:p-5 lg:p-7 antialiased font-sans select-none overflow-x-hidden text-slate-100 bg-[#070D18]',
+    style: { minHeight: '100vh', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#070D18' },
+    children: [
+      /* Ambient Glowing Radial Light Halos */
+      (0, L.jsx)('div', {
+        className: 'absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/12 rounded-full blur-[110px] pointer-events-none',
+        style: { position: 'absolute', pointerEvents: 'none' }
+      }),
+      (0, L.jsx)('div', {
+        className: 'absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[550px] h-[550px] bg-blue-600/12 rounded-full blur-[100px] pointer-events-none',
+        style: { position: 'absolute', pointerEvents: 'none' }
+      }),
+      (0, L.jsx)('div', {
+        className: 'absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-indigo-500/8 rounded-full blur-[130px] pointer-events-none',
+        style: { position: 'absolute', pointerEvents: 'none' }
+      }),
+
+      /* Technical IAM Header */
+      (0, L.jsxs)('header', {
+        className: 'w-full max-w-7xl mx-auto flex items-center justify-between text-xs font-mono text-slate-400 py-2 relative z-20',
+        style: { width: '100%', maxWidth: '80rem', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'relative', zIndex: 20 },
+        children: [
+          (0, L.jsxs)('div', {
+            className: 'flex items-center gap-2',
+            style: { display: 'flex', alignItems: 'center', gap: '0.5rem' },
+            children: [
+              (0, L.jsx)('div', { className: 'w-2 h-2 rounded-full bg-cyan-400 animate-ping', style: { width: '0.5rem', height: '0.5rem', borderRadius: '9999px', backgroundColor: '#22d3ee' } }),
+              (0, L.jsx)('span', { className: 'font-semibold tracking-wider text-cyan-400 uppercase text-[11px]', style: { color: '#22d3ee', fontWeight: 600, letterSpacing: '0.05em', fontSize: '11px', textTransform: 'uppercase' }, children: 'K. Ramakrishnan College of Engineering · KRCE IAM Portal' })
+            ]
+          }),
+          (0, L.jsxs)('div', {
+            className: 'hidden sm:flex items-center gap-3 text-[11px]',
+            style: { display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '11px' },
+            children: [
+              (0, L.jsx)('span', { style: { color: '#94a3b8' }, children: 'Security Architecture:' }),
+              (0, L.jsx)('span', {
+                style: { color: '#34d399', fontWeight: 600, padding: '0.125rem 0.5rem', borderRadius: '0.25rem', backgroundColor: 'rgba(6, 78, 59, 0.6)', border: '1px solid rgba(6, 95, 70, 0.6)' },
+                children: 'TLS 1.3 / SHA-256'
+              }),
+              (0, L.jsx)('span', { style: { color: '#64748b' }, children: '·' }),
+              (0, L.jsx)('span', {
+                style: { color: '#67e8f9', fontWeight: 600, padding: '0.125rem 0.5rem', borderRadius: '0.25rem', backgroundColor: 'rgba(8, 51, 68, 0.6)', border: '1px solid rgba(14, 116, 144, 0.6)' },
+                children: 'KRCE RBAC ENFORCED'
+              }),
+              (0, L.jsx)('span', { style: { color: '#64748b' }, children: '·' }),
+              (0, L.jsxs)('span', {
+                style: { color: '#34d399', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '0.25rem' },
+                children: [
+                  (0, L.jsx)('span', { style: { width: '0.375rem', height: '0.375rem', borderRadius: '9999px', backgroundColor: '#34d399' } }),
+                  'SYSTEM ONLINE'
+                ]
+              })
+            ]
+          })
+        ]
+      }),
+
+      /* MAIN CONTAINER: Unboxed 3D Terrain Centerpiece (Left) + Balanced KRCE Form Card (Right) */
+      (0, L.jsxs)('main', {
+        className: 'my-auto w-full max-w-7xl mx-auto relative z-10 py-4 flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 lg:gap-12',
+        style: { width: '100%', maxWidth: '80rem', margin: 'auto', position: 'relative', zIndex: 10, padding: '1rem 0', display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '2.5rem' },
+        children: [
+
+          /* LEFT COLUMN: Prominent, Unboxed 3D Isometric Glowing Data Terrain Centerpiece */
+          (0, L.jsxs)('div', {
+            className: 'w-full lg:w-[54%] max-w-[620px] flex flex-col items-center justify-center relative select-none',
+            style: { width: '100%', maxWidth: '620px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative' },
+            children: [
+              /* Ambient Radial Glow Focused on the Terrain Center */
+              (0, L.jsx)('div', {
+                className: 'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[480px] h-[480px] bg-cyan-500/15 rounded-full blur-[90px] pointer-events-none',
+                style: { position: 'absolute', pointerEvents: 'none' }
+              }),
+
+              /* Floating Technical Header directly on canvas */
+              (0, L.jsxs)('div', {
+                style: { width: '100%', maxWidth: '580px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem', padding: '0 0.25rem', position: 'relative', zIndex: 10 },
+                children: [
+                  (0, L.jsxs)('div', {
+                    style: { display: 'flex', alignItems: 'center', gap: '0.5rem' },
+                    children: [
+                      (0, L.jsx)('span', { style: { color: '#22d3ee', fontSize: '1rem' }, children: '🌐' }),
+                      (0, L.jsxs)('div', {
+                        children: [
+                          (0, L.jsx)('span', { style: { fontSize: '0.75rem', fontFamily: 'monospace', fontWeight: 700, letterSpacing: '0.05em', color: '#67e8f9', textTransform: 'uppercase', display: 'block' }, children: 'KRCE 3D RELATIONAL DATA TERRAIN' }),
+                          (0, L.jsx)('span', { style: { fontSize: '10px', color: '#94a3b8', fontFamily: 'monospace' }, children: 'Autonomous Ledger Topology · 81 Dynamic Relational Nodes' })
+                        ]
+                      })
+                    ]
+                  }),
+                  (0, L.jsxs)('div', {
+                    className: 'terrain-hud-badge',
+                    children: [
+                      (0, L.jsx)('span', { style: { width: '0.5rem', height: '0.5rem', borderRadius: '9999px', backgroundColor: '#22d3ee' } }),
+                      (0, L.jsx)('span', { children: terrainReadout.startsWith('cell') ? terrainReadout.toUpperCase() : 'COORDINATE FLUX: ACTIVE' })
+                    ]
+                  })
+                ]
+              }),
+
+              /* Direct-to-Background 3D Terrain Stage (Zero Card Bounding Box) */
+              (0, L.jsx)('div', {
+                ref: stageRef,
+                className: 'terrain-centerpiece-stage',
+                style: {
+                  width: '100%',
+                  maxWidth: '580px',
+                  aspectRatio: '5 / 4',
+                  position: 'relative',
+                  cursor: 'crosshair',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  filter: 'drop-shadow(0 0 45px rgba(6, 182, 212, 0.22))'
+                }
+              }),
+
+              /* Floating Technical Footer directly on canvas */
+              (0, L.jsxs)('div', {
+                style: { width: '100%', maxWidth: '580px', marginTop: '0.5rem', paddingTop: '0.5rem', borderTop: '1px solid rgba(30, 41, 59, 0.8)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '11px', fontFamily: 'monospace', color: '#94a3b8', paddingLeft: '0.25rem', paddingRight: '0.25rem', position: 'relative', zIndex: 10 },
+                children: [
+                  (0, L.jsxs)('div', {
+                    style: { display: 'flex', alignItems: 'center', gap: '0.375rem' },
+                    children: [
+                      (0, L.jsx)('span', { style: { color: '#22d3ee' }, children: '🖧' }),
+                      (0, L.jsx)('span', { style: { fontSize: '10px', letterSpacing: '0.025em', color: '#cbd5e1' }, children: '81 PERSISTENT NODES · H2 PERSISTENCE' })
+                    ]
+                  }),
+                  (0, L.jsxs)('div', {
+                    style: { display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '10px' },
+                    children: [
+                      (0, L.jsx)('span', { style: { color: '#34d399', fontWeight: 500 }, children: '● ACID LEDGER LIVE' }),
+                      (0, L.jsx)('span', { style: { color: '#475569' }, children: '·' }),
+                      (0, L.jsx)('span', { style: { color: '#22d3ee' }, children: 'ISOMETRIC ENGINE' })
+                    ]
+                  })
+                ]
+              })
+            ]
+          }),
+
+          /* RIGHT COLUMN: Sleek, Complementing KRCE Student Management System Login Card */
+          (0, L.jsx)('div', {
+            className: 'w-full lg:w-[46%] max-w-[440px] flex items-center justify-center relative z-20',
+            style: { width: '100%', maxWidth: '440px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', zIndex: 20 },
+            children: (0, L.jsxs)('section', {
+              className: 'login-glass-card',
+              style: {
+                width: '100%',
+                maxWidth: '440px',
+                backgroundColor: 'rgba(11, 19, 43, 0.90)',
+                backdropFilter: 'blur(24px)',
+                WebkitBackdropFilter: 'blur(24px)',
+                border: '1px solid rgba(6, 182, 212, 0.35)',
+                borderRadius: '1rem',
+                padding: '1.75rem',
+                boxShadow: '0 0 35px -5px rgba(6, 182, 212, 0.18), 0 25px 50px -12px rgba(0, 0, 0, 0.75)',
+                boxSizing: 'border-box'
+              },
+              children: [
+                /* College Gate Photo Banner + Institutional Typography */
+                (0, L.jsxs)('div', {
+                  style: { display: 'flex', alignItems: 'center', gap: '0.875rem', marginBottom: '1rem', paddingBottom: '0.875rem', borderBottom: '1px solid #1e293b' },
+                  children: [
+                    (0, L.jsxs)('div', {
+                      style: { position: 'relative', width: '3.75rem', height: '3.75rem', flexShrink: 0 },
+                      children: [
+                        (0, L.jsx)('img', {
+                          src: '/assets/krce_college_logo.webp',
+                          alt: 'K. Ramakrishnan College of Engineering',
+                          style: { width: '3.75rem', height: '3.75rem', borderRadius: '0.75rem', objectFit: 'cover', border: '2px solid rgba(6, 182, 212, 0.5)', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.4)' }
+                        }),
+                        (0, L.jsx)('span', {
+                          style: { position: 'absolute', bottom: '-2px', right: '-2px', width: '0.875rem', height: '0.875rem', backgroundColor: '#10B981', border: '2px solid #0B132B', borderRadius: '9999px' },
+                          title: 'KRCE Autonomous ERP Online'
+                        })
+                      ]
+                    }),
+                    (0, L.jsxs)('div', {
+                      children: [
+                        (0, L.jsx)('h1', {
+                          style: { fontSize: '1rem', fontWeight: 700, letterSpacing: '-0.025em', color: '#ffffff', margin: 0, lineHeight: 1.25 },
+                          children: 'Student Management System'
+                        }),
+                        (0, L.jsx)('h2', {
+                          style: { fontSize: '0.75rem', color: '#67e8f9', margin: '0.25rem 0 0 0', fontWeight: 600 },
+                          children: 'K. Ramakrishnan College of Engineering'
+                        }),
+                        (0, L.jsxs)('div', {
+                          style: { display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.25rem' },
+                          children: [
+                            (0, L.jsx)('span', {
+                              style: { fontSize: '10px', fontFamily: 'monospace', fontWeight: 600, padding: '0.0625rem 0.375rem', backgroundColor: 'rgba(8, 51, 68, 0.8)', color: '#67e8f9', border: '1px solid rgba(14, 116, 144, 0.6)', borderRadius: '0.25rem' },
+                              children: 'KRCE v2.4'
+                            }),
+                            (0, L.jsx)('span', {
+                              style: { fontSize: '10px', color: '#94a3b8', fontFamily: 'monospace' },
+                              children: 'Autonomous · Anna Univ'
+                            })
+                          ]
+                        })
+                      ]
+                    })
+                  ]
+                }),
+
+                /* Role Switcher Pill (3 Equal Horizontal Columns) */
+                (0, L.jsxs)('div', {
+                  style: { marginBottom: '1rem' },
+                  children: [
+                    (0, L.jsxs)('div', {
+                      style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '11px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' },
+                      children: [
+                        (0, L.jsx)('span', { children: 'Authentication Role' }),
+                        (0, L.jsx)('span', { style: { color: '#22d3ee', fontFamily: 'monospace', fontSize: '10px' }, children: 'Tier 2 Guard' })
+                      ]
+                    }),
+                    (0, L.jsx)('div', {
+                      style: { display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '0.25rem', backgroundColor: 'rgba(15, 23, 42, 0.9)', padding: '0.25rem', borderRadius: '0.5rem', border: '1px solid rgba(51, 65, 85, 0.8)' },
+                      children: ['STUDENT', 'FACULTY', 'ADMIN'].map((role) => {
+                        const isActive = selectedRole === role;
+                        return (0, L.jsxs)('button', {
+                          key: role,
+                          type: 'button',
+                          onClick: () => handleRoleChange(role),
+                          className: isActive ? 'login-role-tab login-role-tab-active' : 'login-role-tab login-role-tab-inactive',
+                          style: isActive ? {
+                            backgroundColor: '#06b6d4',
+                            color: '#020617',
+                            fontWeight: 700,
+                            padding: '0.5rem 0.5rem',
+                            borderRadius: '0.375rem',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '0.25rem',
+                            cursor: 'pointer',
+                            border: 'none',
+                            fontSize: '0.75rem',
+                            boxShadow: '0 0 12px rgba(6, 182, 212, 0.45)'
+                          } : {
+                            backgroundColor: 'transparent',
+                            color: '#94a3b8',
+                            padding: '0.5rem 0.5rem',
+                            borderRadius: '0.375rem',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '0.25rem',
+                            cursor: 'pointer',
+                            border: 'none',
+                            fontSize: '0.75rem'
+                          },
+                          children: [
+                            (0, L.jsx)('span', { children: role.charAt(0) + role.slice(1).toLowerCase() }),
+                            isActive ? (0, L.jsx)('span', { style: { fontWeight: 900, color: '#020617' }, children: '✓' }) : null
+                          ]
+                        });
+                      })
+                    }),
+
+                    /* Role Cue Hint */
+                    (0, L.jsxs)('div', {
+                      style: { marginTop: '0.5rem', padding: '0.375rem 0.625rem', backgroundColor: 'rgba(15, 23, 42, 0.7)', border: '1px solid rgba(6, 182, 212, 0.25)', borderRadius: '0.375rem', fontSize: '11px', color: '#cbd5e1', display: 'flex', alignItems: 'flex-start', gap: '0.5rem', lineHeight: '1.4' },
+                      children: [
+                        (0, L.jsx)('span', { style: { color: '#22d3ee', fontWeight: 700, flexShrink: 0 }, children: 'ℹ' }),
+                        (0, L.jsx)('div', {
+                          children: selectedRole === 'STUDENT'
+                            ? 'Format: STU-YYYY-XXX. Access enrollments, grades, attendance, and bursar ledger.'
+                            : selectedRole === 'FACULTY'
+                            ? 'Use departmental ID (e.g. pendelton). Access grades, syllabus, and student rosters.'
+                            : 'Administrative access. Full control over bursar accounts, records, and SQL console.'
+                        })
+                      ]
+                    })
+                  ]
+                }),
+
+                /* Error Alert Box */
+                errorMessage ? (0, L.jsxs)('div', {
+                  style: { marginBottom: '0.875rem', padding: '0.75rem', backgroundColor: 'rgba(76, 5, 25, 0.7)', border: '1px solid rgba(244, 63, 94, 0.6)', borderRadius: '0.375rem', color: '#fecdd3', fontSize: '0.75rem', display: 'flex', alignItems: 'flex-start', gap: '0.5rem' },
+                  children: [
+                    (0, L.jsx)('span', { style: { color: '#fb7185', fontWeight: 700, flexShrink: 0 }, children: '⚠' }),
+                    (0, L.jsxs)('div', {
+                      style: { flex: 1, fontSize: '11px' },
+                      children: [
+                        (0, L.jsx)('span', { style: { fontWeight: 600, display: 'block', color: '#fda4af' }, children: 'Authentication Error' }),
+                        (0, L.jsx)('span', { children: errorMessage })
+                      ]
+                    }),
+                    (0, L.jsx)('button', {
+                      type: 'button',
+                      onClick: () => setErrorMessage(null),
+                      style: { color: '#fb7185', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: '11px' },
+                      children: '✕'
+                    })
+                  ]
+                }) : null,
+
+                /* Authentication Form */
+                (0, L.jsxs)('form', {
+                  onSubmit: handleSubmit,
+                  style: { display: 'flex', flexDirection: 'column', gap: '0.875rem' },
+                  children: [
+                    /* Username / Student ID Field */
+                    (0, L.jsxs)('div', {
+                      style: { display: 'flex', flexDirection: 'column', gap: '0.25rem' },
+                      children: [
+                        (0, L.jsxs)('div', {
+                          style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between' },
+                          children: [
+                            (0, L.jsx)('label', {
+                              htmlFor: 'login-username',
+                              style: { fontSize: '0.75rem', fontWeight: 600, color: '#e2e8f0' },
+                              children: selectedRole === 'STUDENT' ? 'Student ID' : selectedRole === 'FACULTY' ? 'Faculty Username' : 'Administrator Username'
+                            }),
+                            (0, L.jsx)('span', {
+                              style: { fontSize: '10px', fontFamily: 'monospace', color: 'rgba(34, 211, 238, 0.9)' },
+                              children: selectedRole === 'STUDENT' ? 'Format: STU-YYYY-XXX' : selectedRole === 'FACULTY' ? 'e.g. pendelton' : 'e.g. admin'
+                            })
+                          ]
+                        }),
+                        (0, L.jsxs)('div', {
+                          style: { position: 'relative', width: '100%', height: '2.75rem', display: 'flex', alignItems: 'center' },
+                          children: [
+                            (0, L.jsx)('input', {
+                              id: 'login-username',
+                              type: 'text',
+                              value: username,
+                              onChange: (e) => {
+                                setUsername(e.target.value);
+                                if (errorMessage) setErrorMessage(null);
+                              },
+                              required: true,
+                              placeholder: selectedRole === 'STUDENT' ? 'STU-2024-001' : selectedRole === 'FACULTY' ? 'pendelton' : 'admin',
+                              className: 'login-input-field',
+                              style: { width: '100%', height: '2.75rem', backgroundColor: 'rgba(15, 23, 42, 0.9)', border: '1px solid rgba(51, 65, 85, 0.8)', color: '#f8fafc', borderRadius: '0.5rem', paddingLeft: '0.875rem', paddingRight: '2.5rem', fontSize: '0.875rem', outline: 'none', boxSizing: 'border-box' }
+                            }),
+                            (0, L.jsx)('div', {
+                              style: { position: 'absolute', right: '0.75rem', top: 0, bottom: 0, margin: 'auto 0', height: '1rem', width: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' },
+                              children: selectedRole === 'STUDENT' && isStudentIdFormat
+                                ? (0, L.jsx)('span', { style: { color: '#34d399', fontWeight: 700 }, children: '✓' })
+                                : (0, L.jsx)('span', { style: { color: '#64748b' }, children: '👤' })
+                            })
+                          ]
+                        })
+                      ]
+                    }),
+
+                    /* Password Field */
+                    (0, L.jsxs)('div', {
+                      style: { display: 'flex', flexDirection: 'column', gap: '0.25rem' },
+                      children: [
+                        (0, L.jsxs)('div', {
+                          style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between' },
+                          children: [
+                            (0, L.jsx)('label', {
+                              htmlFor: 'login-password',
+                              style: { fontSize: '0.75rem', fontWeight: 600, color: '#e2e8f0' },
+                              children: 'Account Password'
+                            }),
+                            (0, L.jsxs)('span', {
+                              style: { fontSize: '10px', fontFamily: 'monospace', color: 'rgba(34, 211, 238, 0.9)' },
+                              children: ['Default: ', selectedRole === 'STUDENT' ? 'student123' : selectedRole === 'FACULTY' ? 'faculty123' : 'admin123']
+                            })
+                          ]
+                        }),
+                        (0, L.jsxs)('div', {
+                          style: { position: 'relative', width: '100%', height: '2.75rem', display: 'flex', alignItems: 'center' },
+                          children: [
+                            (0, L.jsx)('input', {
+                              id: 'login-password',
+                              type: showPassword ? 'text' : 'password',
+                              value: password,
+                              onChange: (e) => {
+                                setPassword(e.target.value);
+                                if (errorMessage) setErrorMessage(null);
+                              },
+                              required: true,
+                              placeholder: '••••••••••••',
+                              className: 'login-input-field',
+                              style: { width: '100%', height: '2.75rem', backgroundColor: 'rgba(15, 23, 42, 0.9)', border: '1px solid rgba(51, 65, 85, 0.8)', color: '#f8fafc', borderRadius: '0.5rem', paddingLeft: '0.875rem', paddingRight: '4.5rem', fontSize: '0.875rem', fontFamily: 'monospace', outline: 'none', boxSizing: 'border-box' }
+                            }),
+                            (0, L.jsx)('button', {
+                              type: 'button',
+                              onClick: () => setShowPassword(!showPassword),
+                              style: { position: 'absolute', right: '0.625rem', top: 0, bottom: 0, margin: 'auto 0', height: '1.75rem', padding: '0 0.5rem', fontSize: '11px', fontWeight: 600, color: '#22d3ee', backgroundColor: 'transparent', border: 'none', borderRadius: '0.25rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem', zIndex: 10 },
+                              title: showPassword ? 'Hide password' : 'Show password',
+                              children: showPassword ? 'Hide 👁' : 'Show 👁'
+                            })
+                          ]
+                        })
+                      ]
+                    }),
+
+                    /* Remember Me & Forgot Password */
+                    (0, L.jsxs)('div', {
+                      style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.75rem', paddingTop: '0.125rem' },
+                      children: [
+                        (0, L.jsxs)('label', {
+                          style: { display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' },
+                          children: [
+                            (0, L.jsx)('input', {
+                              type: 'checkbox',
+                              checked: rememberMe,
+                              onChange: (e) => setRememberMe(e.target.checked),
+                              style: { width: '0.875rem', height: '0.875rem', accentColor: '#06b6d4', cursor: 'pointer' }
+                            }),
+                            (0, L.jsx)('span', { style: { fontSize: '11px', color: '#cbd5e1' }, children: 'Remember session' })
+                          ]
+                        }),
+                        (0, L.jsx)('button', {
+                          type: 'button',
+                          onClick: () => alert('Demo Credentials:\n• Student: STU-2024-001 / student123\n• Faculty: pendelton / faculty123\n• Admin: admin / admin123'),
+                          style: { fontSize: '11px', color: '#22d3ee', background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'none' },
+                          children: 'Forgot credentials?'
+                        })
+                      ]
+                    }),
+
+                    /* Submit Action Button */
+                    (0, L.jsx)('button', {
+                      type: 'submit',
+                      disabled: isLoading,
+                      className: 'login-submit-button',
+                      style: {
+                        width: '100%',
+                        height: '2.75rem',
+                        minHeight: '2.75rem',
+                        background: 'linear-gradient(135deg, #06b6d4 0%, #2563eb 100%)',
+                        color: '#020617',
+                        fontWeight: 700,
+                        fontSize: '0.875rem',
+                        letterSpacing: '0.025em',
+                        borderRadius: '0.5rem',
+                        border: 'none',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '0.5rem',
+                        boxShadow: '0 4px 14px rgba(6, 182, 212, 0.35)',
+                        marginTop: '0.375rem'
+                      },
+                      children: isLoading
+                        ? 'Verifying KRCE Credentials...'
+                        : (0, L.jsxs)(L.Fragment, {
+                            children: [
+                              (0, L.jsx)('span', { children: 'Authenticate & Launch Portal' }),
+                              (0, L.jsx)('span', { style: { fontSize: '1.125rem', fontWeight: 900 }, children: '→' })
+                            ]
+                          })
+                    })
+                  ]
+                }),
+
+                /* Instant Demo Access */
+                (0, L.jsxs)('div', {
+                  style: { marginTop: '0.875rem', paddingTop: '0.75rem', borderTop: '1px solid #1e293b' },
+                  children: [
+                    (0, L.jsx)('span', {
+                      style: { fontSize: '11px', fontWeight: 600, color: '#94a3b8', display: 'block', marginBottom: '0.5rem' },
+                      children: 'Instant Demo Access (Click to prefill & switch):'
+                    }),
+                    (0, L.jsxs)('div', {
+                      style: { display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '0.5rem' },
+                      children: [
+                        (0, L.jsxs)('button', {
+                          type: 'button',
+                          onClick: () => handleDemoFill('STUDENT'),
+                          className: 'login-demo-chip',
+                          style: { minHeight: '50px', padding: '0.5rem 0.5rem', borderRadius: '0.375rem', cursor: 'pointer', textAlign: 'left', display: 'flex', flexDirection: 'column', justifyContent: 'center', backgroundColor: selectedRole === 'STUDENT' ? 'rgba(6, 182, 212, 0.2)' : 'rgba(15, 23, 42, 0.7)', border: selectedRole === 'STUDENT' ? '1px solid rgba(6, 182, 212, 0.7)' : '1px solid rgba(51, 65, 85, 0.6)' },
+                          children: [
+                            (0, L.jsx)('span', { style: { fontWeight: 600, color: '#f1f5f9', display: 'block', fontSize: '11px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }, children: 'Eleanor Vance' }),
+                            (0, L.jsx)('span', { style: { fontFamily: 'monospace', fontSize: '10px', color: 'rgba(34, 211, 238, 0.9)', display: 'block' }, children: 'Student (STU-001)' })
+                          ]
+                        }),
+                        (0, L.jsxs)('button', {
+                          type: 'button',
+                          onClick: () => handleDemoFill('FACULTY'),
+                          className: 'login-demo-chip',
+                          style: { minHeight: '50px', padding: '0.5rem 0.5rem', borderRadius: '0.375rem', cursor: 'pointer', textAlign: 'left', display: 'flex', flexDirection: 'column', justifyContent: 'center', backgroundColor: selectedRole === 'FACULTY' ? 'rgba(6, 182, 212, 0.2)' : 'rgba(15, 23, 42, 0.7)', border: selectedRole === 'FACULTY' ? '1px solid rgba(6, 182, 212, 0.7)' : '1px solid rgba(51, 65, 85, 0.6)' },
+                          children: [
+                            (0, L.jsx)('span', { style: { fontWeight: 600, color: '#f1f5f9', display: 'block', fontSize: '11px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }, children: 'Dr. Pendelton' }),
+                            (0, L.jsx)('span', { style: { fontFamily: 'monospace', fontSize: '10px', color: 'rgba(34, 211, 238, 0.9)', display: 'block' }, children: 'Faculty (CS Dept)' })
+                          ]
+                        }),
+                        (0, L.jsxs)('button', {
+                          type: 'button',
+                          onClick: () => handleDemoFill('ADMIN'),
+                          className: 'login-demo-chip',
+                          style: { minHeight: '50px', padding: '0.5rem 0.5rem', borderRadius: '0.375rem', cursor: 'pointer', textAlign: 'left', display: 'flex', flexDirection: 'column', justifyContent: 'center', backgroundColor: selectedRole === 'ADMIN' ? 'rgba(6, 182, 212, 0.2)' : 'rgba(15, 23, 42, 0.7)', border: selectedRole === 'ADMIN' ? '1px solid rgba(6, 182, 212, 0.7)' : '1px solid rgba(51, 65, 85, 0.6)' },
+                          children: [
+                            (0, L.jsx)('span', { style: { fontWeight: 600, color: '#f1f5f9', display: 'block', fontSize: '11px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }, children: 'Registrar / Dean' }),
+                            (0, L.jsx)('span', { style: { fontFamily: 'monospace', fontSize: '10px', color: 'rgba(34, 211, 238, 0.9)', display: 'block' }, children: 'Admin (Full RBAC)' })
+                          ]
+                        })
+                      ]
+                    })
+                  ]
+                }),
+
+                /* Security Assurance Footer */
+                (0, L.jsxs)('div', {
+                  style: { paddingTop: '0.75rem', marginTop: '0.875rem', borderTop: '1px solid #1e293b', display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '11px', color: '#94a3b8', fontFamily: 'monospace' },
+                  children: [
+                    (0, L.jsxs)('div', {
+                      style: { display: 'flex', alignItems: 'center', gap: '0.375rem' },
+                      children: [
+                        (0, L.jsx)('span', { style: { color: '#22d3ee' }, children: '🔒' }),
+                        (0, L.jsx)('span', { children: '256-bit Web Crypto SHA-256' })
+                      ]
+                    }),
+                    (0, L.jsxs)('div', {
+                      style: { display: 'flex', alignItems: 'center', gap: '0.375rem', fontSize: '10px' },
+                      children: [
+                        (0, L.jsx)('span', { style: { width: '0.5rem', height: '0.5rem', borderRadius: '9999px', backgroundColor: '#34d399' } }),
+                        (0, L.jsx)('span', { style: { color: '#34d399', fontWeight: 500 }, children: 'H2 Engine Active' })
+                      ]
+                    })
+                  ]
+                })
+              ]
+            })
+          })
+
+        ]
+      }),
+
+      /* Technical Telemetry Footer */
+      (0, L.jsxs)('footer', {
+        className: 'w-full max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] font-mono text-slate-500 py-3 relative z-20 border-t border-slate-800/60',
+        style: { width: '100%', maxWidth: '80rem', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '11px', fontFamily: 'monospace', color: '#64748b', padding: '0.75rem 0', position: 'relative', zIndex: 20, borderTop: '1px solid rgba(30, 41, 59, 0.6)' },
+        children: [
+          (0, L.jsxs)('div', {
+            style: { display: 'flex', alignItems: 'center', gap: '0.5rem' },
+            children: [
+              (0, L.jsx)('span', { style: { width: '0.5rem', height: '0.5rem', borderRadius: '9999px', backgroundColor: '#34d399' } }),
+              (0, L.jsx)('span', { children: 'KRCE RELATIONAL DATASTORE: ACID PERSISTENT' })
+            ]
+          }),
+          (0, L.jsxs)('div', {
+            style: { display: 'flex', alignItems: 'center', gap: '1rem', color: '#94a3b8' },
+            children: [
+              (0, L.jsx)('span', { children: 'UPTIME: 99.98%' }),
+              (0, L.jsx)('span', { style: { color: '#475569' }, children: '·' }),
+              (0, L.jsx)('span', { children: '3-TIER ENTERPRISE ARCHITECTURE' }),
+              (0, L.jsx)('span', { style: { color: '#475569' }, children: '·' }),
+              (0, L.jsx)('span', { children: 'SPRING / H2 ENGINE' })
+            ]
+          })
+        ]
+      })
+    ]
+  });
+}
+
+function AppHeader({ activeTab, setActiveTab, searchQuery, setSearchQuery, currentUser, onUserSwitch, allUsers, onOpenSqlConsole, onOpenJavaArch, onResetDb, onLogout }) {
+  const searchInputRef = (0, w.useRef)(null);
+
+  const navItems = [
+    { id: 'students', label: 'Students', category: 'Academic Registry' },
+    { id: 'courses', label: 'Courses', category: 'Curriculum' },
+    { id: 'grades', label: 'Grades & GPA', category: 'Evaluations' },
+    { id: 'attendance', label: 'Attendance', category: 'Class Monitoring' },
+    { id: 'fees', label: 'Fee Ledger', category: 'Bursar & Accounts' },
+    { id: 'calendar', label: 'Academic Calendar', category: 'Scheduling' },
+  ];
+
+  const currentNav = navItems.find(n => n.id === activeTab) || navItems[0];
+
+  (0, w.useEffect)(() => {
+    const handleKeyDown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+        searchInputRef.current?.select();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  return (0, L.jsxs)('header', {
+    className: 'no-print sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-[#E2E8F0] shadow-xs',
+    children: [
+      (0, L.jsxs)('div', {
+        className: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3',
+        children: [
+          // Brand
+          (0, L.jsxs)('div', {
+            className: 'flex items-center gap-3 shrink-0 cursor-pointer',
+            onClick: () => setActiveTab('students'),
+            children: [
+              (0, L.jsx)('img', { src: He, alt: 'University Seal', className: 'w-9 h-9 rounded-full object-cover border border-[#CBD5E1]', referrerPolicy: 'no-referrer' }),
+              (0, L.jsxs)('div', {
+                children: [
+                  (0, L.jsxs)('div', {
+                    className: 'flex items-center gap-1.5',
+                    children: [
+                      (0, L.jsx)('span', { className: 'text-sm sm:text-base font-bold tracking-tight text-[#0F172A] leading-tight', children: 'State University ERP' }),
+                      (0, L.jsx)('span', { className: 'text-[10px] font-mono font-medium px-1.5 py-0.2 bg-slate-100 text-slate-600 border border-slate-200 rounded', children: 'PROD' })
+                    ]
+                  }),
+                  (0, L.jsx)('span', { className: 'text-[11px] text-slate-500 font-mono tracking-normal block', children: 'Java Enterprise Architecture · H2 Engine' })
+                ]
+              })
+            ]
+          }),
+
+          // Nav
+          (0, L.jsx)('nav', {
+            className: 'hidden lg:flex items-center gap-1',
+            children: navItems.map(item => {
+              const isActive = activeTab === item.id;
+              return (0, L.jsx)('button', {
+                key: item.id,
+                onClick: () => setActiveTab(item.id),
+                className: 'px-3 py-1.5 text-xs font-semibold rounded-md transition-all whitespace-nowrap cursor-pointer ' + (isActive ? 'bg-[#0F172A] text-white' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'),
+                children: item.label
+              });
+            })
+          }),
+
+          // Search + Dev tools + Profile
+          (0, L.jsxs)('div', {
+            className: 'flex items-center gap-2',
+            children: [
+              // Search input with Cmd+K hint
+              (0, L.jsxs)('div', {
+                className: 'relative w-40 sm:w-52 md:w-64',
+                children: [
+                  (0, L.jsx)('span', { className: 'absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs', children: '🔍' }),
+                  (0, L.jsx)('input', {
+                    ref: searchInputRef,
+                    type: 'text',
+                    placeholder: 'Filter records...',
+                    value: searchQuery,
+                    onChange: e => setSearchQuery(e.target.value),
+                    className: 'w-full pl-8 pr-14 py-1.5 text-xs bg-[#F8F9FA] hover:bg-white border border-[#CBD5E1] rounded-md text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-hidden focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition-colors'
+                  }),
+                  searchQuery ? (0, L.jsx)('button', { onClick: () => setSearchQuery(''), className: 'absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 hover:text-slate-600 cursor-pointer', children: '✕' })
+                              : (0, L.jsx)('kbd', { className: 'hidden sm:inline-block absolute right-2 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-[10px] font-mono font-medium text-slate-400 bg-white border border-slate-300 rounded shadow-2xs pointer-events-none', children: '⌘K' })
+                ]
+              }),
+
+              // Dev Buttons
+              (0, L.jsx)('button', { onClick: onOpenJavaArch, className: 'hidden xl:flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-slate-700 bg-white border border-[#E2E8F0] rounded-md hover:bg-slate-50 transition-colors cursor-pointer', children: 'Architecture' }),
+              (0, L.jsx)('button', { onClick: onOpenSqlConsole, className: 'hidden sm:flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-slate-700 bg-white border border-[#E2E8F0] rounded-md hover:bg-slate-50 transition-colors cursor-pointer', children: 'H2 Console' }),
+              (0, L.jsx)('button', { onClick: onResetDb, title: 'Reset seed records', className: 'p-1.5 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-md cursor-pointer', children: '↺' }),
+
+              // User Profile + Switcher
+              (0, L.jsxs)('div', {
+                className: 'relative flex items-center pl-2 border-l border-[#E2E8F0] gap-2',
+                children: [
+                  (0, L.jsx)('div', {
+                    className: 'w-7 h-7 rounded-md text-white flex items-center justify-center text-xs font-bold font-mono ' + (currentUser.role === 'ADMIN' ? 'bg-[#0F172A]' : currentUser.role === 'FACULTY' ? 'bg-indigo-600' : 'bg-emerald-600'),
+                    children: currentUser.role.charAt(0)
+                  }),
+                  (0, L.jsxs)('div', {
+                    className: 'hidden lg:block text-left',
+                    children: [
+                      (0, L.jsx)('span', { className: 'block text-xs font-semibold text-slate-900 leading-tight', children: currentUser.displayName }),
+                      (0, L.jsx)('span', { className: 'block text-[10px] text-slate-500 font-mono', children: currentUser.role + ': ' + (currentUser.department || 'Registrar') })
+                    ]
+                  }),
+                  (0, L.jsx)('select', {
+                    value: currentUser.id,
+                    onChange: e => {
+                      const target = allUsers.find(u => u.id === e.target.value);
+                      if (target) onUserSwitch(target);
+                    },
+                    className: 'text-xs bg-transparent border-0 text-slate-500 hover:text-slate-800 cursor-pointer focus:ring-0 max-w-[90px] truncate',
+                    children: allUsers.map(u => (0, L.jsx)('option', { key: u.id, value: u.id, children: u.role + ': ' + u.displayName }))
+                  }),
+                  onLogout && (0, L.jsx)('button', {
+                    onClick: onLogout,
+                    title: 'Sign out and lock session',
+                    className: 'p-1 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-md transition-colors cursor-pointer text-xs font-semibold',
+                    children: 'Exit ⏻'
+                  })
+                ]
+              })
+            ]
+          })
+        ]
+      }),
+
+      // Live Breadcrumb Strip
+      (0, L.jsxs)('div', {
+        className: 'border-t border-[#E2E8F0] bg-[#FAF9F6]/80 px-4 sm:px-6 lg:px-8 py-1.5 flex items-center justify-between text-xs text-slate-500',
+        children: [
+          (0, L.jsxs)('div', {
+            className: 'flex items-center gap-1.5 overflow-x-auto whitespace-nowrap',
+            children: [
+              (0, L.jsx)('button', { onClick: () => setActiveTab('students'), className: 'text-slate-500 hover:text-slate-900 cursor-pointer font-medium', children: 'Portal' }),
+              (0, L.jsx)('span', { className: 'text-slate-400', children: '›' }),
+              (0, L.jsx)('span', { className: 'text-slate-500 font-medium', children: currentNav.category }),
+              (0, L.jsx)('span', { className: 'text-slate-400', children: '›' }),
+              (0, L.jsx)('span', { className: 'text-blue-700 font-semibold bg-blue-50 px-2 py-0.5 rounded border border-blue-200/60', children: currentNav.label })
+            ]
+          }),
+          (0, L.jsxs)('div', {
+            className: 'hidden sm:flex items-center gap-3 text-[11px] font-mono text-slate-500',
+            children: [
+              (0, L.jsxs)('span', {
+                className: 'flex items-center gap-1',
+                children: [
+                  (0, L.jsx)('span', { className: 'w-1.5 h-1.5 rounded-full bg-emerald-500' }),
+                  (0, L.jsx)('span', { children: 'SESSION: 256-BIT ENCRYPTED' })
+                ]
+              }),
+              (0, L.jsx)('span', { className: 'text-slate-300', children: '·' }),
+              (0, L.jsx)('span', { children: 'TERM: FALL 2024' })
+            ]
+          })
+        ]
+      })
+    ]
+  });
+}
+
+// --- UPGRADED QUICKSTATS WITH MINI SPARKLINES & DELTA BADGES ---
+function AppQuickStats({ summaries, courses, feeLedgers }) {
+  const totalStudents = summaries.length;
+  const activeStudents = summaries.filter(s => s.student.status === 'Active').length;
+  const totalCourses = courses.length;
+  const totalSeatCapacity = courses.reduce((acc, c) => acc + c.capacity, 0);
+  const totalEnrolledSeats = courses.reduce((acc, c) => acc + c.enrolledCount, 0);
+  const seatFill = totalSeatCapacity > 0 ? Math.round((totalEnrolledSeats / totalSeatCapacity) * 100) : 0;
+
+  const studentsWithGpa = summaries.filter(s => s.cgpa > 0);
+  const avgGpa = studentsWithGpa.length > 0 ? (studentsWithGpa.reduce((acc, s) => acc + s.cgpa, 0) / studentsWithGpa.length).toFixed(2) : '0.00';
+  const avgAttendance = summaries.length > 0 ? Math.round(summaries.reduce((acc, s) => acc + s.attendanceRate, 0) / summaries.length) : 100;
+  const lowAttendanceCount = summaries.filter(s => s.attendanceRate < 75).length;
+
+  const overdueEntries = feeLedgers.filter(f => f.status === 'Overdue');
+  const overdueTotal = overdueEntries.reduce((acc, f) => acc + f.balanceAmount, 0);
+  const totalCollected = feeLedgers.reduce((acc, f) => acc + f.paidAmount, 0);
+  const totalBilled = feeLedgers.reduce((acc, f) => acc + f.totalFees, 0);
+  const collectionRate = totalBilled > 0 ? Math.round((totalCollected / totalBilled) * 100) : 0;
+
+  const renderSparkline = (data, strokeColor, fillColor) => {
+    const width = 64, height = 24;
+    const min = Math.min(...data), max = Math.max(...data), range = max - min || 1;
+    const step = width / (data.length - 1);
+    const points = data.map((val, idx) => {
+      const x = idx * step;
+      const y = height - ((val - min) / range) * (height - 6) - 3;
+      return x.toFixed(1) + ',' + y.toFixed(1);
+    }).join(' ');
+
+    return (0, L.jsxs)('svg', {
+      width, height, className: 'overflow-visible inline-block',
+      children: [
+        (0, L.jsx)('polyline', { points, fill: 'none', stroke: strokeColor, strokeWidth: '1.5', strokeLinecap: 'round' }),
+        (0, L.jsx)('circle', { cx: width, cy: height - ((data[data.length - 1] - min) / range) * (height - 6) - 3, r: '2.5', fill: strokeColor })
+      ]
+    });
+  };
+
+  return (0, L.jsxs)('div', {
+    className: 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3.5 mb-6',
+    children: [
+      // 1. Enrolled Students
+      (0, L.jsxs)('div', {
+        className: 'bento-card p-3.5 flex flex-col justify-between',
+        children: [
+          (0, L.jsxs)('div', {
+            children: [
+              (0, L.jsx)('span', { className: 'text-[11px] font-semibold text-slate-500 uppercase tracking-tight block mb-1', children: 'Enrolled Students' }),
+              (0, L.jsxs)('div', {
+                className: 'flex items-baseline justify-between',
+                children: [
+                  (0, L.jsx)('span', { className: 'text-2xl font-bold font-mono tabular-nums text-slate-900 leading-none', children: totalStudents }),
+                  (0, L.jsx)('span', { className: 'text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200', children: '+12.4%' })
+                ]
+              }),
+              (0, L.jsx)('span', { className: 'text-[11px] text-slate-500 mt-1 block', children: activeStudents + ' active · 4 depts' })
+            ]
+          }),
+          (0, L.jsxs)('div', {
+            className: 'pt-2 mt-2 border-t border-[#F1EFEA] flex items-center justify-between',
+            children: [
+              (0, L.jsx)('span', { className: 'text-[10px] font-mono text-slate-400', children: 'Cohort trend' }),
+              renderSparkline([12, 14, 16, 15, 18, 20, 24], '#10B981', '#34D399')
+            ]
+          })
+        ]
+      }),
+
+      // 2. Active Courses
+      (0, L.jsxs)('div', {
+        className: 'bento-card p-3.5 flex flex-col justify-between',
+        children: [
+          (0, L.jsxs)('div', {
+            children: [
+              (0, L.jsx)('span', { className: 'text-[11px] font-semibold text-slate-500 uppercase tracking-tight block mb-1', children: 'Active Courses' }),
+              (0, L.jsxs)('div', {
+                className: 'flex items-baseline justify-between',
+                children: [
+                  (0, L.jsx)('span', { className: 'text-2xl font-bold font-mono tabular-nums text-slate-900 leading-none', children: totalCourses }),
+                  (0, L.jsx)('span', { className: 'text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200', children: seatFill + '% cap' })
+                ]
+              }),
+              (0, L.jsx)('span', { className: 'text-[11px] text-slate-500 mt-1 block font-mono', children: totalEnrolledSeats + '/' + totalSeatCapacity + ' seats filled' })
+            ]
+          }),
+          (0, L.jsxs)('div', {
+            className: 'pt-2 mt-2 border-t border-[#F1EFEA] flex items-center justify-between',
+            children: [
+              (0, L.jsx)('span', { className: 'text-[10px] font-mono text-slate-400', children: 'Capacity load' }),
+              renderSparkline([8, 11, 10, 14, 13, 16, 17], '#2563EB', '#60A5FA')
+            ]
+          })
+        ]
+      }),
+
+      // 3. Average GPA
+      (0, L.jsxs)('div', {
+        className: 'bento-card p-3.5 flex flex-col justify-between',
+        children: [
+          (0, L.jsxs)('div', {
+            children: [
+              (0, L.jsx)('span', { className: 'text-[11px] font-semibold text-slate-500 uppercase tracking-tight block mb-1', children: 'Average GPA' }),
+              (0, L.jsxs)('div', {
+                className: 'flex items-baseline justify-between',
+                children: [
+                  (0, L.jsxs)('div', {
+                    className: 'flex items-baseline gap-1',
+                    children: [
+                      (0, L.jsx)('span', { className: 'text-2xl font-bold font-mono tabular-nums text-slate-900 leading-none', children: avgGpa }),
+                      (0, L.jsx)('span', { className: 'text-[11px] font-mono text-slate-400', children: '/4.00' })
+                    ]
+                  }),
+                  (0, L.jsx)('span', { className: 'text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200', children: '+0.08 pt' })
+                ]
+              }),
+              (0, L.jsx)('span', { className: 'text-[11px] text-slate-500 mt-1 block', children: 'Weighted 4.00 scale' })
+            ]
+          }),
+          (0, L.jsxs)('div', {
+            className: 'pt-2 mt-2 border-t border-[#F1EFEA] flex items-center justify-between',
+            children: [
+              (0, L.jsx)('span', { className: 'text-[10px] font-mono text-slate-400', children: 'GPA curve' }),
+              renderSparkline([3.32, 3.38, 3.42, 3.40, 3.51, 3.58, 3.64], '#F59E0B', '#FBBF24')
+            ]
+          })
+        ]
+      }),
+
+      // 4. Attendance Rate
+      (0, L.jsxs)('div', {
+        className: 'bento-card p-3.5 flex flex-col justify-between',
+        children: [
+          (0, L.jsxs)('div', {
+            children: [
+              (0, L.jsx)('span', { className: 'text-[11px] font-semibold text-slate-500 uppercase tracking-tight block mb-1', children: 'Attendance Rate' }),
+              (0, L.jsxs)('div', {
+                className: 'flex items-baseline justify-between',
+                children: [
+                  (0, L.jsx)('span', { className: 'text-2xl font-bold font-mono tabular-nums leading-none ' + (avgAttendance < 75 ? 'text-rose-700' : 'text-slate-900'), children: avgAttendance + '%' }),
+                  lowAttendanceCount > 0
+                    ? (0, L.jsx)('span', { className: 'text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200', children: lowAttendanceCount + ' <75%' })
+                    : (0, L.jsx)('span', { className: 'text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200', children: 'Optimal' })
+                ]
+              }),
+              (0, L.jsx)('span', { className: 'text-[11px] text-slate-500 mt-1 block', children: 'Semester monitoring log' })
+            ]
+          }),
+          (0, L.jsxs)('div', {
+            className: 'pt-2 mt-2 border-t border-[#F1EFEA] flex items-center justify-between',
+            children: [
+              (0, L.jsx)('span', { className: 'text-[10px] font-mono text-slate-400', children: 'Weekly trend' }),
+              renderSparkline([88, 91, 89, 93, 90, 94, 92], '#6366F1', '#818CF8')
+            ]
+          })
+        ]
+      }),
+
+      // 5. Tuition Collections
+      (0, L.jsxs)('div', {
+        className: 'bento-card p-3.5 flex flex-col justify-between col-span-2 md:col-span-1',
+        children: [
+          (0, L.jsxs)('div', {
+            children: [
+              (0, L.jsx)('span', { className: 'text-[11px] font-semibold text-slate-500 uppercase tracking-tight block mb-1', children: 'Tuition Collections' }),
+              (0, L.jsxs)('div', {
+                className: 'flex items-baseline justify-between',
+                children: [
+                  (0, L.jsx)('span', { className: 'text-xl font-bold font-mono tabular-nums text-slate-900 leading-none', children: '$' + overdueTotal.toLocaleString(undefined, { minimumFractionDigits: 2 }) }),
+                  (0, L.jsx)('span', { className: 'text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200', children: collectionRate + '% recov' })
+                ]
+              }),
+              (0, L.jsx)('span', { className: 'text-[11px] text-slate-500 mt-1 block font-mono', children: overdueEntries.length + ' delinquent accounts' })
+            ]
+          }),
+          (0, L.jsxs)('div', {
+            className: 'pt-2 mt-2 border-t border-[#F1EFEA] flex items-center justify-between',
+            children: [
+              (0, L.jsx)('span', { className: 'text-[10px] font-mono text-slate-400', children: 'Intake flow' }),
+              renderSparkline([14, 18, 22, 28, 35, 41, 48], '#059669', '#34D399')
+            ]
+          })
+        ]
+      })
+    ]
+  });
+}
+
+// --- UPGRADED APP ROOT ROUTER COMPONENT ---
+function FL() {
+  const db = Ve.getInstance();
+  const [session, setSession] = (0, w.useState)(() => getAppSession());
+  const [activeTab, setActiveTab] = (0, w.useState)('students');
+  const [searchQuery, setSearchQuery] = (0, w.useState)('');
+  const [currentUser, setCurrentUser] = (0, w.useState)(() => session ? session.user : db.getCurrentUser());
+  const [allUsers, setAllUsers] = (0, w.useState)([]);
+  const [students, setStudents] = (0, w.useState)([]);
+  const [courses, setCourses] = (0, w.useState)([]);
+  const [enrollments, setEnrollments] = (0, w.useState)([]);
+  const [grades, setGrades] = (0, w.useState)([]);
+  const [attendance, setAttendance] = (0, w.useState)([]);
+  const [feeLedgers, setFeeLedgers] = (0, w.useState)([]);
+  const [receipts, setReceipts] = (0, w.useState)([]);
+  const [academicEvents, setAcademicEvents] = (0, w.useState)([]);
+  const [summaries, setSummaries] = (0, w.useState)([]);
+
+  const [transcriptStudentId, setTranscriptStudentId] = (0, w.useState)(null);
+  const [selectedReceipt, setSelectedReceipt] = (0, w.useState)(null);
+  const [isSqlConsoleOpen, setIsSqlConsoleOpen] = (0, w.useState)(false);
+  const [isJavaArchOpen, setIsJavaArchOpen] = (0, w.useState)(false);
+
+  const refreshData = (0, w.useCallback)(() => {
+    setStudents(db.getAllStudents());
+    setCourses(db.getAllCourses());
+    setEnrollments(db.getAllEnrollments());
+    setGrades(db.getAllGrades());
+    setAttendance(db.getAllAttendance());
+    setFeeLedgers(db.getAllFeeLedger());
+    setReceipts(db.getAllReceipts());
+    setAcademicEvents(db.getAllAcademicEvents());
+    setSummaries(db.getAllStudentSummaries());
+    setAllUsers(db.getUsers());
+  }, [db]);
+
+  (0, w.useEffect)(() => {
+    refreshData();
+  }, [refreshData]);
+
+  const handleLoginSuccess = (newSession) => {
+    setSession(newSession);
+    setCurrentUser(newSession.user);
+    db.setCurrentUser(newSession.user);
+    refreshData();
+    setActiveTab('students');
+  };
+
+  const handleLogout = () => {
+    clearAppSession();
+    setSession(null);
+  };
+
+  const handleUserSwitch = (target) => {
+    db.setCurrentUser(target);
+    setCurrentUser(target);
+    if (session) {
+      const updated = { ...session, user: target, role: target.role };
+      setAppSession(updated);
+      setSession(updated);
+    }
+  };
+
+  const handleAddStudent = (s) => { const r = db.addStudent(s); if (r.success) refreshData(); return r; };
+  const handleUpdateStudent = (s) => { const r = db.updateStudent(s); if (r.success) refreshData(); return r; };
+  const handleDeleteStudent = (id) => { db.deleteStudent(id); refreshData(); };
+  const handleEnrollStudent = (sid, cid) => { const r = db.enrollStudentInCourse(sid, cid); if (r.success) refreshData(); return r; };
+  const handleDropEnrollment = (eid) => { db.dropEnrollment(eid); refreshData(); };
+  const handleAddCourse = (c) => { const r = db.addCourse(c); if (r.success) refreshData(); return r; };
+  const handleSaveGrade = (g) => { db.saveGrade(g); refreshData(); };
+  const handleLogAttendance = (a) => { db.logAttendance(a); refreshData(); };
+  const handleDeleteAttendance = (aid) => { db.deleteAttendance(aid); refreshData(); };
+  const handleRecordPayment = (p) => { const r = db.recordPayment(p); if (r.success) refreshData(); return r; };
+  const handleAddEvent = (e) => { const r = db.addAcademicEvent(e); if (r.success) refreshData(); return r; };
+  const handleDeleteEvent = (eid) => { db.deleteAcademicEvent(eid); refreshData(); };
+  const handleResetDb = () => {
+    if (confirm('Reset entire system to default academic seed records? All changes will be reinitialized.')) {
+      db.resetToDefaults();
+      refreshData();
+    }
+  };
+
+  // If unauthenticated, render LoginView
+  if (!session) {
+    return (0, L.jsx)(AppLoginView, { onLoginSuccess: handleLoginSuccess });
+  }
+
+  const activeStudentProfile = currentUser.studentId
+    ? students.find(s => s.studentId === currentUser.studentId) || students[0]
+    : students[0];
+
+  const transcriptStudent = transcriptStudentId ? students.find(s => s.studentId === transcriptStudentId) : null;
+  const transcriptGrades = transcriptStudentId ? grades.filter(g => g.studentId === transcriptStudentId) : [];
+  const transcriptAttendance = transcriptStudentId ? attendance.filter(a => a.studentId === transcriptStudentId) : [];
+
+  return (0, L.jsxs)('div', {
+    className: 'min-h-screen erp-grid-pattern text-slate-800 flex flex-col font-sans',
+    children: [
+      (0, L.jsx)(AppHeader, {
+        activeTab, setActiveTab,
+        searchQuery, setSearchQuery,
+        currentUser, onUserSwitch: handleUserSwitch, allUsers,
+        onOpenSqlConsole: () => setIsSqlConsoleOpen(true),
+        onOpenJavaArch: () => setIsJavaArchOpen(true),
+        onResetDb: handleResetDb,
+        onLogout: handleLogout
+      }),
+
+      (0, L.jsx)('main', {
+        className: 'flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6',
+        children: currentUser.role === 'STUDENT' && activeStudentProfile && activeTab === 'students' ? (
+          (0, L.jsx)(PL, {
+            currentUser,
+            student: activeStudentProfile,
+            enrollments: enrollments.filter(e => e.studentId === activeStudentProfile.studentId && e.status === 'Enrolled'),
+            courses,
+            grades: grades.filter(g => g.studentId === activeStudentProfile.studentId),
+            attendance: attendance.filter(a => a.studentId === activeStudentProfile.studentId),
+            feeLedger: feeLedgers.find(f => f.studentId === activeStudentProfile.studentId),
+            receipts: receipts.filter(r => r.studentId === activeStudentProfile.studentId),
+            cgpa: db.calculateStudentCGPA(activeStudentProfile.studentId).cgpa,
+            totalCredits: db.calculateStudentCGPA(activeStudentProfile.studentId).totalCredits,
+            attendanceRate: db.calculateStudentAttendanceRate(activeStudentProfile.studentId).rate,
+            onOpenTranscript: (id) => setTranscriptStudentId(id),
+            onViewReceipt: (rcpt) => setSelectedReceipt(rcpt)
+          })
+        ) : (
+          (0, L.jsxs)(L.Fragment, {
+            children: [
+              (0, L.jsx)(AppQuickStats, { summaries, courses, feeLedgers }),
+              activeTab === 'students' && (0, L.jsx)(Ye, { summaries, searchQuery, currentUser, onAddStudent: handleAddStudent, onUpdateStudent: handleUpdateStudent, onDeleteStudent: handleDeleteStudent, onOpenTranscript: (id) => setTranscriptStudentId(id) }),
+              activeTab === 'courses' && (0, L.jsx)(Xe, { courses, enrollments, students, currentUser, onEnrollStudent: handleEnrollStudent, onDropEnrollment: handleDropEnrollment, onAddCourse: handleAddCourse }),
+              activeTab === 'grades' && (0, L.jsx)(Ze, { grades, students, courses, currentUser, onSaveGrade: handleSaveGrade, onOpenTranscript: (id) => setTranscriptStudentId(id) }),
+              activeTab === 'attendance' && (0, L.jsx)(xL, { attendanceRecords: attendance, students, courses, currentUser, onLogAttendance: handleLogAttendance, onDeleteAttendance: handleDeleteAttendance, calculateStudentRate: (sid, cid) => db.calculateStudentAttendanceRate(sid, cid) }),
+              activeTab === 'fees' && (0, L.jsx)(SL, { feeLedgers, receipts, students, currentUser, onRecordPayment: handleRecordPayment, onViewReceipt: (rcpt) => setSelectedReceipt(rcpt) }),
+              activeTab === 'calendar' && (0, L.jsx)(EL, { events: academicEvents, currentUser, onAddEvent: handleAddEvent, onDeleteEvent: handleDeleteEvent })
+            ]
+          })
+        )
+      }),
+
+      transcriptStudent && (0, L.jsx)(DL, { student: transcriptStudent, grades: transcriptGrades, courses, attendance: transcriptAttendance, onClose: () => setTranscriptStudentId(null) }),
+      selectedReceipt && (0, L.jsx)(OL, { receipt: selectedReceipt, ledger: feeLedgers.find(f => f.studentId === selectedReceipt.studentId), onClose: () => setSelectedReceipt(null) }),
+      isJavaArchOpen && (0, L.jsx)(ML, { onClose: () => setIsJavaArchOpen(false) }),
+      isSqlConsoleOpen && (0, L.jsx)(NL, { dbService: db, onClose: () => setIsSqlConsoleOpen(false) }),
+
+      // Corner Badge
+      (0, L.jsxs)('aside', {
+        className: 'no-print fixed bottom-3 right-3 z-40 bg-white/95 backdrop-blur-xs border border-[#CBD5E1] rounded-md px-3 py-1.5 shadow-xs text-xs text-slate-700 flex items-center gap-2',
+        children: [
+          (0, L.jsx)('span', { className: 'text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold', children: 'TEAM:' }),
+          (0, L.jsx)('span', { className: 'text-slate-800 font-medium', children: 'Rishi Aravindh · Sakthi Vignesh · Rohith' })
+        ]
+      }),
+
+      // Footer
+      (0, L.jsx)('footer', {
+        className: 'no-print mt-auto border-t border-[#E2E8F0] py-4 bg-white/80',
+        children: (0, L.jsxs)('div', {
+          className: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-2.5 text-xs text-slate-500',
+          children: [
+            (0, L.jsxs)('div', {
+              children: [
+                (0, L.jsx)('span', { className: 'font-semibold text-slate-700', children: 'Student Management System ERP' }),
+                (0, L.jsx)('span', { className: 'mx-2', children: '·' }),
+                (0, L.jsx)('span', { children: 'Principal Java Architecture & Relational H2 Engine' })
+              ]
+            }),
+            (0, L.jsxs)('div', {
+              className: 'text-[11px] text-slate-600 font-medium',
+              children: [
+                (0, L.jsx)('span', { children: 'Development Team: ' }),
+                (0, L.jsx)('span', { className: 'font-semibold text-slate-800', children: 'Rishi Aravindh · Sakthi Vignesh · Rohith' })
+              ]
+            }),
+            (0, L.jsxs)('div', {
+              className: 'flex items-center gap-4 font-mono text-[11px]',
+              children: [
+                (0, L.jsx)('button', { onClick: () => window.location.href = '/student-management-system.zip', className: 'hover:text-slate-900 text-slate-700 font-semibold cursor-pointer', children: 'Download VS Code (.zip)' }),
+                (0, L.jsx)('button', { onClick: () => setIsJavaArchOpen(true), className: 'hover:text-slate-800 cursor-pointer', children: 'JPA Architecture' }),
+                (0, L.jsx)('button', { onClick: () => setIsSqlConsoleOpen(true), className: 'hover:text-slate-800 cursor-pointer', children: 'H2 Console' }),
+                (0, L.jsx)('span', { children: 'v2.4.0-RELEASE' })
+              ]
+            })
+          ]
+        })
+      })
+    ]
+  });
+}
+
+(0, Ae.createRoot)(document.getElementById('root')).render((0, L.jsx)(FL, {}));

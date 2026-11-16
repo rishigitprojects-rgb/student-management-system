@@ -7,8 +7,25 @@ import {
   INITIAL_GRADES, INITIAL_ATTENDANCE, INITIAL_FEE_LEDGER, 
   INITIAL_RECEIPTS, INITIAL_USERS, INITIAL_ACADEMIC_EVENTS, H2_SQL_DDL 
 } from './schema';
+import { formatINR } from '../utils/currency';
 
 const STORAGE_KEY_PREFIX = 'sms_java_db_v1_';
+const INR_MIGRATION_KEY = 'sms_currency_inr_migrated_v1';
+const LEGACY_STUDENT_IDS = [
+  ...Array.from({ length: 24 }, (_, index) => `STU-2024-${String(index + 1).padStart(3, '0')}`),
+  'STU-2023-014',
+  'STU-2023-028',
+  'STU-2025-003',
+  'STU-2024-041',
+  'STU-2023-055',
+  'STU-2022-005'
+];
+const LEGACY_STUDENT_ID_MAP = new Map(
+  LEGACY_STUDENT_IDS.map((studentId, index) => [
+    studentId,
+    `8115U25AD${String(index + 64).padStart(3, '0')}`
+  ])
+);
 
 export class DatabaseService {
   private static instance: DatabaseService;
@@ -29,7 +46,7 @@ export class DatabaseService {
     this.currentUser = this.users[0] || {
       id: 'USR-ADMIN-1',
       username: 'admin',
-      displayName: 'Dean of Academic Affairs',
+      displayName: 'Dr. K. Muthusamy',
       role: 'ADMIN',
       department: 'Office of the Registrar'
     };
@@ -59,6 +76,7 @@ export class DatabaseService {
         this.users = JSON.parse(localStorage.getItem(STORAGE_KEY_PREFIX + 'users') || '[]');
         const storedEvents = JSON.parse(localStorage.getItem(STORAGE_KEY_PREFIX + 'academicEvents') || '[]');
         this.academicEvents = storedEvents.length > 0 ? storedEvents : JSON.parse(JSON.stringify(INITIAL_ACADEMIC_EVENTS));
+        this.applyTamilAndCurrencyDefaults();
       } else {
         this.resetToDefaults();
       }
@@ -81,6 +99,114 @@ export class DatabaseService {
     this.saveAll();
   }
 
+  private applyTamilAndCurrencyDefaults(): void {
+    const localizedSeedIds = new Set(INITIAL_STUDENTS.map(student => student.studentId));
+    const migrateStudentId = (studentId: string): string => LEGACY_STUDENT_ID_MAP.get(studentId) || studentId;
+    this.students = this.students.map(student => ({
+      ...student,
+      studentId: migrateStudentId(student.studentId)
+    }));
+    this.enrollments = this.enrollments.map(enrollment => ({
+      ...enrollment,
+      studentId: migrateStudentId(enrollment.studentId)
+    }));
+    this.grades = this.grades.map(grade => ({
+      ...grade,
+      studentId: migrateStudentId(grade.studentId)
+    }));
+    this.attendance = this.attendance.map(record => ({
+      ...record,
+      studentId: migrateStudentId(record.studentId)
+    }));
+    this.feeLedger = this.feeLedger.map(ledger => ({
+      ...ledger,
+      studentId: migrateStudentId(ledger.studentId)
+    }));
+    this.receipts = this.receipts.map(receipt => ({
+      ...receipt,
+      studentId: migrateStudentId(receipt.studentId)
+    }));
+    this.users = this.users.map(user => {
+      if (!user.studentId) return user;
+      const studentId = migrateStudentId(user.studentId);
+      return { ...user, studentId, username: studentId };
+    });
+
+    const existingStudents = new Map(this.students.map(student => [student.studentId, student]));
+    this.students = [
+      ...INITIAL_STUDENTS.map(seed => {
+        const existing = existingStudents.get(seed.studentId);
+        return existing
+          ? {
+              ...seed,
+              ...existing,
+              studentId: seed.studentId,
+              fullName: seed.fullName,
+              email: seed.email,
+              phone: seed.phone,
+              address: seed.address,
+              emergencyContact: seed.emergencyContact
+            }
+          : { ...seed };
+      }),
+      ...this.students.filter(student => !localizedSeedIds.has(student.studentId))
+    ];
+
+    const courseDefaults = new Map(INITIAL_COURSES.map(course => [course.courseCode, course]));
+    const existingCourses = new Map(this.courses.map(course => [course.courseCode, course]));
+    this.courses = [
+      ...INITIAL_COURSES.map(seed => {
+        const existing = existingCourses.get(seed.courseCode);
+        return {
+          ...seed,
+          ...existing,
+          faculty: seed.faculty,
+          semesterFee: existing?.semesterFee ?? seed.semesterFee
+        };
+      }),
+      ...this.courses.filter(course => !courseDefaults.has(course.courseCode))
+    ];
+
+    const existingUsers = new Map(this.users.map(user => [user.id, user]));
+    const localizedUserIds = new Set(INITIAL_USERS.map(user => user.id));
+    this.users = [
+      ...INITIAL_USERS.map(seed => ({
+        ...seed,
+        ...existingUsers.get(seed.id),
+        username: seed.username,
+        displayName: seed.displayName
+      })),
+      ...this.users.filter(user => !localizedUserIds.has(user.id))
+    ];
+
+    const studentNames = new Map(this.students.map(student => [student.studentId, student.fullName]));
+    if (localStorage.getItem(INR_MIGRATION_KEY) !== 'true') {
+      this.feeLedger = this.feeLedger.map(ledger => ({
+        ...ledger,
+        totalFees: ledger.totalFees * 10,
+        paidAmount: ledger.paidAmount * 10,
+        balanceAmount: ledger.balanceAmount * 10
+      }));
+      this.receipts = this.receipts.map(receipt => ({
+        ...receipt,
+        amount: receipt.amount * 10
+      }));
+    }
+
+    this.receipts = this.receipts.map(receipt => ({
+      ...receipt,
+      studentName: studentNames.get(receipt.studentId) || receipt.studentName
+    }));
+
+    const ledgerStudentIds = new Set(this.feeLedger.map(ledger => ledger.studentId));
+    this.feeLedger.push(
+      ...INITIAL_FEE_LEDGER
+        .filter(ledger => !ledgerStudentIds.has(ledger.studentId))
+        .map(ledger => ({ ...ledger }))
+    );
+    this.saveAll();
+  }
+
   private saveAll(): void {
     try {
       localStorage.setItem(STORAGE_KEY_PREFIX + 'students', JSON.stringify(this.students));
@@ -92,6 +218,7 @@ export class DatabaseService {
       localStorage.setItem(STORAGE_KEY_PREFIX + 'receipts', JSON.stringify(this.receipts));
       localStorage.setItem(STORAGE_KEY_PREFIX + 'users', JSON.stringify(this.users));
       localStorage.setItem(STORAGE_KEY_PREFIX + 'academicEvents', JSON.stringify(this.academicEvents));
+      localStorage.setItem(INR_MIGRATION_KEY, 'true');
     } catch (e) {
       console.error('Failed to commit state to persistent store', e);
     }
@@ -158,9 +285,9 @@ export class DatabaseService {
       studentId: student.studentId,
       semester: 'Fall 2024',
       academicYear: '2024-2025',
-      totalFees: 4850.00,
+      totalFees: 48500.00,
       paidAmount: 0.00,
-      balanceAmount: 4850.00,
+      balanceAmount: 48500.00,
       dueDate: '2024-10-15',
       status: 'Overdue'
     };
@@ -213,6 +340,9 @@ export class DatabaseService {
   }
 
   public addCourse(course: Course): { success: boolean; error?: string } {
+    if (!Number.isFinite(course.semesterFee) || course.semesterFee < 0) {
+      return { success: false, error: 'Course semester fee must be a non-negative INR amount.' };
+    }
     if (this.courses.some(c => c.courseCode.toUpperCase() === course.courseCode.toUpperCase())) {
       return { success: false, error: `Course code "${course.courseCode}" already exists in the course catalog.` };
     }
@@ -480,9 +610,9 @@ export class DatabaseService {
         studentId: params.studentId,
         semester: 'Fall 2024',
         academicYear: '2024-2025',
-        totalFees: 4850.00,
+        totalFees: 48500.00,
         paidAmount: 0.00,
-        balanceAmount: 4850.00,
+        balanceAmount: 48500.00,
         dueDate: '2024-10-15',
         status: 'Overdue'
       };
@@ -571,8 +701,8 @@ export class DatabaseService {
       }
       if (upper.includes('FROM COURSES')) {
         const data = this.getAllCourses();
-        const columns = ['COURSE_CODE', 'TITLE', 'CREDITS', 'DEPARTMENT', 'FACULTY', 'CAPACITY', 'ENROLLED_COUNT'];
-        const rows = data.map(c => [c.courseCode, c.title, c.credits, c.department, c.faculty, c.capacity, c.enrolledCount]);
+        const columns = ['COURSE_CODE', 'TITLE', 'CREDITS', 'SEMESTER_FEE_INR', 'DEPARTMENT', 'FACULTY', 'CAPACITY', 'ENROLLED_COUNT'];
+        const rows = data.map(c => [c.courseCode, c.title, c.credits, formatINR(c.semesterFee), c.department, c.faculty, c.capacity, c.enrolledCount]);
         return { success: true, columns, rows, message: `${rows.length} rows returned from COURSES.` };
       }
       if (upper.includes('FROM GRADES')) {
@@ -584,7 +714,7 @@ export class DatabaseService {
       if (upper.includes('FROM FEE_LEDGER')) {
         const data = this.getAllFeeLedger();
         const columns = ['LEDGER_ID', 'STUDENT_ID', 'TOTAL_FEES', 'PAID_AMOUNT', 'BALANCE_AMOUNT', 'STATUS', 'DUE_DATE'];
-        const rows = data.map(f => [f.ledgerId, f.studentId, `$${f.totalFees}`, `$${f.paidAmount}`, `$${f.balanceAmount}`, f.status, f.dueDate]);
+        const rows = data.map(f => [f.ledgerId, f.studentId, formatINR(f.totalFees), formatINR(f.paidAmount), formatINR(f.balanceAmount), f.status, f.dueDate]);
         return { success: true, columns, rows, message: `${rows.length} rows returned from FEE_LEDGER.` };
       }
       if (upper.includes('FROM ATTENDANCE')) {
@@ -619,12 +749,12 @@ export class DatabaseService {
 
     script += '\n';
     this.courses.forEach(c => {
-      script += `INSERT INTO courses (course_code, title, credits, department, faculty, capacity, semester, syllabus_summary) VALUES ('${c.courseCode}', '${c.title}', ${c.credits}, '${c.department}', '${c.faculty}', ${c.capacity}, '${c.semester}', '${c.syllabusSummary?.replace(/'/g, "''") || ''}');\n`;
+      script += `INSERT INTO courses (course_code, title, credits, department, faculty, semester_fee, capacity, semester, syllabus_summary) VALUES ('${c.courseCode}', '${c.title}', ${c.credits}, '${c.department}', '${c.faculty}', ${c.semesterFee}, ${c.capacity}, '${c.semester}', '${c.syllabusSummary?.replace(/'/g, "''") || ''}');\n`;
     });
 
     script += '\n';
     this.feeLedger.forEach(f => {
-      script += `INSERT INTO fee_ledger (ledger_id, student_id, semester, academic_year, total_fees, paid_amount, balance_amount, due_date, status, last_payment_date) VALUES ('${f.ledgerId}', '${f.studentId}', '${f.semester}', '${f.academicYear}', ${f.totalFees}, ${f.paidAmount}, ${f.balanceAmount}', '${f.dueDate}', '${f.status}', ${f.lastPaymentDate ? `'${f.lastPaymentDate}'` : 'NULL'});\n`;
+      script += `INSERT INTO fee_ledger (ledger_id, student_id, semester, academic_year, total_fees, paid_amount, balance_amount, due_date, status, last_payment_date) VALUES ('${f.ledgerId}', '${f.studentId}', '${f.semester}', '${f.academicYear}', ${f.totalFees}, ${f.paidAmount}, ${f.balanceAmount}, '${f.dueDate}', '${f.status}', ${f.lastPaymentDate ? `'${f.lastPaymentDate}'` : 'NULL'});\n`;
     });
 
     return script;

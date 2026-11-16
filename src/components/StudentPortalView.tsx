@@ -1,6 +1,7 @@
 import React from 'react';
 import { Student, AppUser, Grade, Course, AttendanceRecord, FeeLedgerEntry, FeeReceipt, Enrollment } from '../types';
-import { Award, BookOpen, CalendarCheck, DollarSign, FileText, Receipt, CheckCircle, AlertTriangle } from 'lucide-react';
+import { Award, BookOpen, CalendarCheck, IndianRupee, FileText, Receipt, CheckCircle, AlertTriangle } from 'lucide-react';
+import { formatINR } from '../utils/currency';
 import { AttendanceTrendChart } from './AttendanceTrendChart';
 
 interface StudentPortalViewProps {
@@ -113,10 +114,10 @@ export const StudentPortalView: React.FC<StudentPortalViewProps> = ({
         <div className="bg-white border border-[#E2E8F0] rounded-md p-4">
           <div className="flex items-center justify-between mb-1">
             <span className="text-xs font-medium text-slate-500">Tuition Balance</span>
-            <DollarSign className="w-4 h-4 text-slate-400" />
+            <IndianRupee className="w-4 h-4 text-slate-400" />
           </div>
           <span className={`text-2xl font-bold font-mono tabular-nums ${feeLedger && feeLedger.balanceAmount > 0 ? 'text-[#9F1239]' : 'text-emerald-700'}`}>
-            ${feeLedger ? feeLedger.balanceAmount.toFixed(2) : '0.00'}
+            {formatINR(feeLedger?.balanceAmount || 0)}
           </span>
           <span className="text-[11px] text-slate-500 mt-1 block">
             Status: {feeLedger?.status || 'Settled'}
@@ -231,7 +232,7 @@ export const StudentPortalView: React.FC<StudentPortalViewProps> = ({
                 receipts.map((r, idx) => (
                   <tr key={r.receiptId} className={idx % 2 === 1 ? 'bg-[#FAF8F5]' : 'bg-white'}>
                     <td className="py-2 px-3 font-mono font-semibold text-slate-900">{r.receiptId}</td>
-                    <td className="py-2 px-3 text-right font-mono font-bold text-emerald-800">${r.amount.toFixed(2)}</td>
+                    <td className="py-2 px-3 text-right font-mono font-bold text-emerald-800">{formatINR(r.amount)}</td>
                     <td className="py-2 px-3 text-slate-700">{r.paymentMethod}</td>
                     <td className="py-2 px-3 font-mono text-[11px] text-slate-500">{r.transactionRef}</td>
                     <td className="py-2 px-3 text-slate-500 text-[11px]">{r.issuedAt}</td>

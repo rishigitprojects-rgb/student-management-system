@@ -20,61 +20,61 @@ const mimeTypes = {
 
 const seedData = {
   users: [
-    { id: 'USR-ADMIN-1', username: 'admin', displayName: 'Dean of Academic Affairs', role: 'ADMIN', department: 'Office of the Registrar' },
-    { id: 'USR-FAC-1', username: 'faculty', displayName: 'Dr. Aisha Khan', role: 'FACULTY', department: 'Computer Science' },
-    { id: 'USR-STU-1', username: 'student', displayName: 'Ava Thompson', role: 'STUDENT', studentId: 'STU-2024-001', department: 'Computer Science' },
+    { id: 'USR-ADMIN-1', username: 'admin', displayName: 'Dr. K. Muthusamy', role: 'ADMIN', department: 'Office of the Registrar' },
+    { id: 'USR-FAC-1', username: 'faculty', displayName: 'Dr. Arulmozhi Selvan', role: 'FACULTY', department: 'Computer Science' },
+    { id: 'USR-STU-1', username: '8115U25AD064', displayName: 'Kavin Rajendran', role: 'STUDENT', studentId: '8115U25AD064', department: 'Computer Science' },
   ],
   students: [
     {
-      studentId: 'STU-2024-001',
-      fullName: 'Ava Thompson',
-      email: 'ava.thompson@campus.edu',
-      phone: '+1-555-0181',
+      studentId: '8115U25AD064',
+      fullName: 'Kavin Rajendran',
+      email: 'kavin.rajendran@krce.edu.in',
+      phone: '+91-9876501001',
       dob: '2003-08-14',
       department: 'Computer Science',
       batch: '2024',
       enrollmentDate: '2024-09-01',
       status: 'Active',
       initialGpa: 3.82,
-      address: '42 Maple Avenue, Boston',
-      emergencyContact: 'Mila Thompson - +1-555-0144',
+      address: 'Trichy Tamil Nadu',
+      emergencyContact: 'Rajendran - +91-9876502001',
       notes: 'Strong in software engineering projects.'
     },
     {
-      studentId: 'STU-2024-002',
-      fullName: 'Lucas Chen',
-      email: 'lucas.chen@campus.edu',
-      phone: '+1-555-0187',
+      studentId: '8115U25AD065',
+      fullName: 'Nithya Ramesh',
+      email: 'nithya.ramesh@krce.edu.in',
+      phone: '+91-9876501002',
       dob: '2002-11-25',
       department: 'Mechanical Engineering',
       batch: '2024',
       enrollmentDate: '2024-09-02',
       status: 'Probation',
       initialGpa: 2.91,
-      address: '18 River Street, Austin',
-      emergencyContact: 'Yun Chen - +1-555-0138',
+      address: 'Thuraiyur Tamil Nadu',
+      emergencyContact: 'Ramesh - +91-9876502002',
       notes: 'Needs academic coaching in applied math.'
     },
     {
-      studentId: 'STU-2024-003',
-      fullName: 'Nora Patel',
-      email: 'nora.patel@campus.edu',
-      phone: '+1-555-0190',
+      studentId: '8115U25AD066',
+      fullName: 'Dharani Raj',
+      email: 'dharani.raj@krce.edu.in',
+      phone: '+91-9876501003',
       dob: '2004-03-09',
       department: 'Business Administration',
       batch: '2024',
       enrollmentDate: '2024-09-03',
       status: 'Active',
       initialGpa: 3.56,
-      address: '29 Cedar Lane, Chicago',
-      emergencyContact: 'Kiran Patel - +1-555-0112',
+      address: 'Musiri Tamil Nadu',
+      emergencyContact: 'Raj - +91-9876502003',
       notes: 'Excellent leadership and presentation skills.'
     }
   ],
   records: [
-    { id: 'REC-101', userId: 'USR-STU-1', studentId: 'STU-2024-001', type: 'student_profile', title: 'Academic profile updated', createdAt: '2026-11-10T09:30:00.000Z' },
-    { id: 'REC-102', userId: 'USR-FAC-1', studentId: 'STU-2024-002', type: 'attendance_alert', title: 'Attendance warning logged', createdAt: '2026-11-10T10:05:00.000Z' },
-    { id: 'REC-103', userId: 'USR-ADMIN-1', studentId: 'STU-2024-003', type: 'fee_record', title: 'Fee ledger reviewed', createdAt: '2026-11-10T11:15:00.000Z' }
+    { id: 'REC-101', userId: 'USR-STU-1', studentId: '8115U25AD064', type: 'student_profile', title: 'Academic profile updated', createdAt: '2026-11-10T09:30:00.000Z' },
+    { id: 'REC-102', userId: 'USR-FAC-1', studentId: '8115U25AD065', type: 'attendance_alert', title: 'Attendance warning logged', createdAt: '2026-11-10T10:05:00.000Z' },
+    { id: 'REC-103', userId: 'USR-ADMIN-1', studentId: '8115U25AD066', type: 'fee_record', title: 'Fee ledger reviewed', createdAt: '2026-11-10T11:15:00.000Z' }
   ]
 };
 
@@ -110,11 +110,13 @@ function sendJson(response, statusCode, payload) {
   response.end(JSON.stringify(payload));
 }
 
-async function parseBody(request) {
+async function parseBody(request, maxBytes = Infinity) {
   return new Promise((resolve, reject) => {
     const chunks = [];
-    request.on('data', chunk => chunks.push(chunk));
+    let totalBytes = 0;
+    let exceededLimit = false;
     request.on('end', () => {
+      if (exceededLimit) return;
       const body = Buffer.concat(chunks).toString('utf8').trim();
       if (!body) return resolve({});
 
@@ -129,8 +131,138 @@ async function parseBody(request) {
         }
       }
     });
+    request.on('data', chunk => {
+      if (exceededLimit) return;
+      totalBytes += chunk.length;
+      if (totalBytes > maxBytes) {
+        exceededLimit = true;
+        reject(Object.assign(new Error('Request body is too large'), { statusCode: 413 }));
+        return;
+      }
+      chunks.push(chunk);
+    });
     request.on('error', reject);
   });
+}
+
+function getProjectAssistantContext(input) {
+  const context = input && typeof input === 'object' && !Array.isArray(input) ? input : {};
+  const courseCatalog = Array.isArray(context.courseCatalog)
+    ? context.courseCatalog.slice(0, 20).flatMap(course => {
+        if (!course || typeof course !== 'object') return [];
+        const title = typeof course.title === 'string' ? course.title.slice(0, 100) : '';
+        const fee = Number(course.semesterFee);
+        return title && Number.isFinite(fee) && fee >= 0
+          ? [{ title, semesterFeeINR: fee }]
+          : [];
+      })
+    : [];
+  const activeSection = typeof context.activeSection === 'string'
+    ? context.activeSection.slice(0, 40)
+    : 'Dashboard';
+  const studentCount = Number.isInteger(context.studentCount) && context.studentCount >= 0
+    ? Math.min(context.studentCount, 10000)
+    : 0;
+  const averageAttendance = Number.isFinite(context.averageAttendance)
+    ? Math.max(0, Math.min(100, context.averageAttendance))
+    : null;
+  const outstandingBalanceINR = Number.isFinite(context.outstandingBalanceINR)
+    ? Math.max(0, context.outstandingBalanceINR)
+    : null;
+
+  return { activeSection, studentCount, courseCatalog, averageAttendance, outstandingBalanceINR };
+}
+
+async function handleProjectAssistant(request, response) {
+  const allowedOrigins = [`http://127.0.0.1:${port}`, `http://localhost:${port}`];
+  if (request.headers.origin && !allowedOrigins.includes(request.headers.origin)) {
+    sendJson(response, 403, { success: false, error: 'The project assistant only accepts requests from this local application.' });
+    return;
+  }
+
+  const apiKey = process.env.OPENROUTER_API_KEY?.trim();
+  if (!apiKey) {
+    sendJson(response, 503, {
+      success: false,
+      error: 'The assistant is not configured. Set OPENROUTER_API_KEY in the local server environment and restart the app.'
+    });
+    return;
+  }
+
+  let payload;
+  try {
+    payload = await parseBody(request, 16 * 1024);
+  } catch (error) {
+    const statusCode = error.statusCode || 400;
+    sendJson(response, statusCode, { success: false, error: statusCode === 413 ? 'Chat request is too large.' : 'Invalid chat request.' });
+    return;
+  }
+
+  if (!payload || typeof payload !== 'object' || Array.isArray(payload) || !Array.isArray(payload.messages) || payload.messages.length < 1 || payload.messages.length > 12) {
+    sendJson(response, 400, { success: false, error: 'Send between 1 and 12 recent chat messages.' });
+    return;
+  }
+
+  const messages = [];
+  for (const message of payload.messages) {
+    if (
+      !message ||
+      !['user', 'assistant'].includes(message.role) ||
+      typeof message.content !== 'string' ||
+      !message.content.trim() ||
+      message.content.length > 1500
+    ) {
+      sendJson(response, 400, { success: false, error: 'Each chat message must contain valid text no longer than 1,500 characters.' });
+      return;
+    }
+    messages.push({ role: message.role, content: message.content.trim() });
+  }
+
+  const context = getProjectAssistantContext(payload.context);
+  const systemPrompt = [
+    'You are the Student Management System ERP project assistant.',
+    'Answer questions only about this local KRCE/State University ERP project, its dashboard, available modules, course catalog, Tamil Nadu demo dataset, INR semester fees, grades, attendance, fee ledger, calendar, and application usage.',
+    'If a request is unrelated to this project, politely say you can only help with this ERP project and suggest a relevant project topic.',
+    'Use only the supplied context and your general knowledge about explaining the listed ERP features. Never claim access to student records, source code, credentials, or data not included here. Do not invent student-specific information.',
+    'Do not ask for or reveal passwords, API keys, or other credentials. Keep answers concise, practical, and clear.',
+    `Current anonymous project summary: ${JSON.stringify(context)}`
+  ].join(' ');
+
+  try {
+    const upstreamResponse = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': `http://127.0.0.1:${port}`,
+        'X-Title': 'Student Management System ERP Assistant'
+      },
+      body: JSON.stringify({
+        model: process.env.OPENROUTER_MODEL || 'openai/gpt-4o-mini',
+        messages: [{ role: 'system', content: systemPrompt }, ...messages],
+        max_tokens: 500,
+        temperature: 0.3
+      }),
+      signal: AbortSignal.timeout(30000)
+    });
+    const result = await upstreamResponse.json();
+    if (!upstreamResponse.ok) {
+      console.error('OpenRouter assistant request failed with status:', upstreamResponse.status);
+      sendJson(response, 502, { success: false, error: 'The AI provider could not complete this request. Check the local server configuration and try again.' });
+      return;
+    }
+
+    const reply = result.choices?.[0]?.message?.content;
+    if (typeof reply !== 'string' || !reply.trim()) {
+      sendJson(response, 502, { success: false, error: 'The AI provider returned an empty reply. Please try again.' });
+      return;
+    }
+
+    sendJson(response, 200, { success: true, reply: reply.trim() });
+  } catch (error) {
+    console.error('OpenRouter assistant connection failed:', error.message);
+    sendJson(response, 502, { success: false, error: 'Could not reach the AI provider. Check the connection and try again.' });
+  }
 }
 
 async function handleApi(request, response) {
@@ -139,6 +271,15 @@ async function handleApi(request, response) {
 
   if (request.method === 'OPTIONS') {
     sendJson(response, 204, {});
+    return;
+  }
+
+  if (pathname === '/api/project-assistant') {
+    if (request.method !== 'POST') {
+      sendJson(response, 405, { success: false, error: 'Use POST to send a chat message.' });
+      return;
+    }
+    await handleProjectAssistant(request, response);
     return;
   }
 

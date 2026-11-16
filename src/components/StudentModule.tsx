@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { exportToCsv } from '../utils/exportCsv';
 import { validateStudentForm } from '../utils/validation';
+import { formatINR } from '../utils/currency';
 
 interface StudentModuleProps {
   summaries: StudentAcademicSummary[];
@@ -141,8 +142,11 @@ export const StudentModule: React.FC<StudentModuleProps> = ({
 
   // Open Drawer in ADD mode
   const handleOpenAdd = () => {
-    const nextNumber = summaries.length + 1;
-    const suggestedId = `STU-2024-${String(nextNumber).padStart(3, '0')}`;
+    const lastAssignedNumber = summaries.reduce((largest, summary) => {
+      const match = summary.student.studentId.match(/^8115U25AD(\d{3})$/i);
+      return match ? Math.max(largest, Number(match[1])) : largest;
+    }, 63);
+    const suggestedId = `8115U25AD${String(lastAssignedNumber + 1).padStart(3, '0')}`;
     setFormData({
       ...initialFormState,
       studentId: suggestedId
@@ -213,7 +217,7 @@ export const StudentModule: React.FC<StudentModuleProps> = ({
       CompletedCredits: item.completedCredits,
       AttendanceRate: `${item.attendanceRate}%`,
       FeeStatus: item.feeStatus,
-      FeeBalance: item.feeBalance,
+      FeeBalanceINR: formatINR(item.feeBalance),
       Status: item.student.status
     }));
 
@@ -479,11 +483,11 @@ export const StudentModule: React.FC<StudentModuleProps> = ({
                           <span className="text-[11px] font-medium text-[#065F46]">Settled</span>
                         ) : item.feeStatus === 'Partial' ? (
                           <span className="text-[11px] font-medium text-[#92400E]">
-                            Partial (${item.feeBalance.toFixed(0)})
+                            Partial ({formatINR(item.feeBalance)})
                           </span>
                         ) : (
                           <span className="text-[11px] font-medium text-[#9F1239]">
-                            Due (${item.feeBalance.toFixed(0)})
+                            Due ({formatINR(item.feeBalance)})
                           </span>
                         )}
                       </td>
@@ -667,7 +671,7 @@ export const StudentModule: React.FC<StudentModuleProps> = ({
                       <input
                         type="text"
                         disabled={drawerMode === 'EDIT'}
-                        placeholder="STU-2024-001"
+                        placeholder="8115U25AD064"
                         value={formData.studentId}
                         onChange={(e) => setFormData({ ...formData, studentId: e.target.value })}
                         className={`w-full px-2.5 py-1.5 font-mono text-xs border rounded-md focus:outline-hidden ${
@@ -686,7 +690,7 @@ export const StudentModule: React.FC<StudentModuleProps> = ({
                       </label>
                       <input
                         type="text"
-                        placeholder="e.g. John A. Doe"
+                        placeholder="e.g. Kavin Rajendran"
                         value={formData.fullName}
                         onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                         className={`w-full px-2.5 py-1.5 text-xs border rounded-md focus:outline-hidden ${

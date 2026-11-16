@@ -1,5 +1,6 @@
 import React from 'react';
 import { FeeReceipt, FeeLedgerEntry } from '../types';
+import { formatINR } from '../utils/currency';
 import { X, Printer, CheckCircle, ShieldCheck } from 'lucide-react';
 import crestImage from '../assets/images/university_crest_1791475297419.jpg';
 
@@ -84,7 +85,7 @@ export const ReceiptModal: React.FC<ReceiptModalProps> = ({
           <div className="p-4 bg-[#FAF8F5] border border-slate-300 rounded-md mb-5 text-center">
             <span className="text-[11px] text-slate-500 font-mono uppercase block">Total Amount Received</span>
             <span className="text-3xl font-extrabold font-mono text-slate-900 mt-1 block">
-              ${receipt.amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              {formatINR(receipt.amount)}
             </span>
             <span className="text-[11px] text-emerald-800 font-semibold mt-1 block">
               Payment Status: Confirmed & Reconciled
@@ -117,7 +118,7 @@ export const ReceiptModal: React.FC<ReceiptModalProps> = ({
               <div className="flex justify-between pt-1 border-t border-slate-100">
                 <span className="text-slate-500">Remaining Term Balance:</span>
                 <span className={`font-bold ${ledger.balanceAmount > 0 ? 'text-[#9F1239]' : 'text-emerald-700'}`}>
-                  ${ledger.balanceAmount.toFixed(2)}
+                  {formatINR(ledger.balanceAmount)}
                 </span>
               </div>
             )}

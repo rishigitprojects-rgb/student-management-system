@@ -31,7 +31,7 @@ public class Student {
 
     @Id
     @Column(name = "student_id", length = 32, nullable = false, updatable = false)
-    @Pattern(regexp = "^STU-\\\\d{4}-\\\\d{3,4}$", message = "Student ID must adhere to STU-YYYY-XXX format")
+    @Pattern(regexp = "^8115U25AD\\\\d{3}$", message = "Student ID must adhere to 8115U25AD### format")
     private String studentId;
 
     @NotBlank(message = "Full Name cannot be blank")
